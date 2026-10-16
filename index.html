@@ -284,9 +284,85 @@ h2{letter-spacing:-.02em;font-weight:800}
 .enter .lp .tkt{animation:up .8s .55s cubic-bezier(.2,.8,.2,1) both}.enter .lp .ban{animation:up .8s .8s both}.enter .lp .trust{animation:fade 1s 1.1s both}
 .lp .conf g>*{animation:sparkle 2.6s ease-in-out infinite}.lp .conf g>*:nth-child(2n){animation-delay:.7s}.lp .conf g>*:nth-child(3n){animation-delay:1.4s}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ===== v9 fun, banners, classy ===== */
+@keyframes typing{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+@keyframes bubin{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes slidein{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:none}}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.5)}100%{transform:scale(1)}}
+@keyframes road{from{background-position:0 0}to{background-position:-24px 0}}
+@keyframes zoomslow{from{transform:scale(1)}to{transform:scale(1.06)}}
+.art .tr{transform:scaleX(-1)}
+.art.a4{background:radial-gradient(70% 90% at 90% 0,#ffb347 0,transparent 55%),radial-gradient(70% 80% at 0 100%,#ff4d8d 0,transparent 55%),linear-gradient(135deg,#7b2ff7,#c4125c)}
+.art .fe{position:absolute;font-size:30px;animation:drift 5s ease-in-out infinite}
+.art .ttl{text-align:center}.art .ttl b{display:block;font-size:26px;font-weight:900;letter-spacing:-.02em}.art .ttl span{font-size:13px;opacity:.92}
+.art .av2{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#fff,#ffe7a8);color:#7b2ff7;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;box-shadow:0 8px 20px rgba(0,0,0,.25);animation:popin .6s .1s both}
+.chat{background:linear-gradient(180deg,#f3ebdd,#ece3d2);border-radius:18px;padding:14px;margin:12px 0;position:relative}
+.chat .me{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#6b5a3a;margin-bottom:8px}.chat .me i{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#f0c354,#e1a62b);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;color:#3a2600;font-weight:800}
+.chat .tp{display:inline-flex;gap:4px;background:#fff;padding:10px 12px;border-radius:14px 14px 14px 4px}.chat .tp b{width:6px;height:6px;border-radius:50%;background:#8a8a8a;animation:typing 1.1s infinite}.chat .tp b:nth-child(2){animation-delay:.15s}.chat .tp b:nth-child(3){animation-delay:.3s}
+.chat .bb{background:#dcf8c6;border-radius:14px 14px 4px 14px;padding:12px 14px;font-size:14.5px;line-height:1.5;box-shadow:0 2px 6px rgba(0,0,0,.08);margin-left:20px;animation:bubin .5s 1s both;opacity:0}
+.chat .tp{animation:fade .3s both,fade .3s 1s reverse forwards;position:absolute;left:14px;top:44px}
+.chat .bb .link{color:#0a58ca;font-weight:700;word-break:break-all}.chat .bb .tm{display:block;text-align:right;font-size:11px;color:#6b7d5e;margin-top:4px}
+.codechip{display:flex;align-items:center;justify-content:space-between;gap:10px;border:2px dashed #cdb6f5;background:#f8f3ff;border-radius:14px;padding:10px 14px;margin:2px 0 4px}.codechip b{letter-spacing:.16em;font-size:18px;color:#6b2fd6}.codechip span{font-size:12px;color:var(--mute);font-weight:600}
+#overlay.fresh .sendb{animation:popin .5s both}#overlay.fresh .sendb:nth-child(1){animation-delay:.9s}#overlay.fresh .sendb:nth-child(2){animation-delay:1.0s}#overlay.fresh .sendb:nth-child(3){animation-delay:1.1s}
+.sendb{transition:transform .15s,box-shadow .15s}.sendb:hover{transform:translateY(-2px);box-shadow:var(--sh1)}.sendb i{box-shadow:0 6px 14px rgba(0,0,0,.2)}
+/* banner carousel */
+.bnr{display:grid;margin:12px var(--gx);position:relative}
+.bnr .banner{grid-area:1/1;margin:0!important;opacity:0;transform:scale(.97);transition:opacity .7s,transform .7s;pointer-events:none;overflow:hidden;position:relative}
+.bnr .banner.on{opacity:1;transform:none;pointer-events:auto}
+.bnr .banner.s1{background:linear-gradient(115deg,#e30613 0%,#b1055f 55%,#0b4ea2 100%)!important}
+.bnr .banner.s2{background:linear-gradient(115deg,#0f9d58,#0a5a8f)!important}
+.bnr .banner.s3{background:linear-gradient(115deg,#7b2ff7,#c4125c 70%,#ff8a3d)!important;cursor:pointer}
+.bnr .banner em{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-style:normal;font-size:64px;filter:drop-shadow(0 8px 14px rgba(0,0,0,.3));animation:drift 5s ease-in-out infinite;z-index:1}
+.bnr .banner b,.bnr .banner span,.bnr .banner i{position:relative;z-index:2;max-width:68%}
+.bnr .banner::after{display:none!important}
+.bnr .banner::before{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 65%);animation:drift 7s ease-in-out infinite}
+.dots{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:6px;z-index:3}.dots u{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.5);transition:all .3s}.dots u.on{width:18px;background:#fff}
+@media(min-width:900px){.bnr .banner em{font-size:120px;right:6%}.bnr .banner b,.bnr .banner span,.bnr .banner i{max-width:60%}}
+/* order tracking */
+.track{position:relative;height:30px;margin:12px 0 2px}.track .ln{position:absolute;left:0;right:0;bottom:6px;height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,#c9d6f2 0 12px,transparent 12px 20px);animation:road 1s linear infinite}
+.track .tt{position:absolute;bottom:8px;font-size:24px;transform:scaleX(-1);animation:truck 5s linear infinite}
+.track .dst{position:absolute;right:0;bottom:4px;font-size:18px}
+.badge.bump{animation:bump .45s}
+.prod{transition:background .2s}.prod:hover{background:#f7f9fe}
+.qty button{transition:transform .12s,background .12s}.qty button:active{transform:scale(.85)}
+.ok{position:relative;overflow:hidden}.ok::after{content:"";position:absolute;top:0;left:-60%;width:30%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);animation:shine 5s ease-in-out infinite}
+.card{transition:transform .2s,box-shadow .2s}@media(hover:hover){.card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(16,28,60,.1)}}
+.mode{transition:transform .2s}.mode:hover{transform:translateY(-3px)}
+.slide.one{padding:14px 16px}
+
+/* ===== v10 finishing touches ===== */
+@keyframes splashout{0%,70%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+@keyframes loadbar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes type{from{opacity:0;transform:translateY(8px) scale(.8)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes gradmove{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+#splash{position:fixed;inset:0;z-index:999;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#fff;background:radial-gradient(80% 60% at 50% 0,#2f78db55 0,transparent 60%),linear-gradient(160deg,#0a3d8f,#061f4d);animation:splashout 1.5s .2s both}
+#splash b{font-size:40px;font-weight:900;letter-spacing:-.03em;animation:popin .8s .1s both}
+#splash i{display:block;width:120px;height:3px;border-radius:3px;background:rgba(255,255,255,.2);overflow:hidden}#splash i::after{content:"";display:block;height:100%;background:#f0c354;transform-origin:left;animation:loadbar 1.1s .2s ease-out both}
+#splash small{opacity:.8;letter-spacing:.2em;font-weight:700;font-size:11px}
+#phone{background:linear-gradient(180deg,#f6f7fb,#edf1fa)}
+.steps2{display:flex;align-items:center;gap:6px;margin:4px 2px 16px}
+.steps2 .s{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--mute)}
+.steps2 .s b{width:24px;height:24px;border-radius:50%;background:#dfe6f4;color:#6b7a99;display:flex;align-items:center;justify-content:center;font-size:12px}
+.steps2 .s.on{color:var(--blue)}.steps2 .s.on b{background:var(--blue);color:#fff;box-shadow:0 0 0 5px rgba(10,61,143,.12)}.steps2 .s.dn b{background:var(--green);color:#fff}
+.steps2 .ln{flex:1;height:2px;background:#dfe6f4;border-radius:2px;position:relative;overflow:hidden}.steps2 .ln.fill::after{content:"";position:absolute;inset:0;background:var(--green);animation:grow 1s both;transform-origin:left}
+.ribbon{position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;border-radius:20px;padding:14px 16px;margin-bottom:12px;color:#fff;background:linear-gradient(120deg,#0a3d8f,#7b2ff7 60%,#c4125c);background-size:200% 200%;animation:gradmove 6s ease-in-out infinite alternate;box-shadow:var(--sh2)}
+.ribbon em{font-style:normal;font-size:38px;animation:drift 4s ease-in-out infinite}.ribbon b{display:block;font-size:17px}.ribbon span{font-size:12.5px;opacity:.9}
+.otp{display:flex;justify-content:center;gap:10px;margin:14px 0 6px}.otp b{width:54px;height:62px;border-radius:14px;border:2px solid #cfd9ee;background:#f7f9ff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:var(--blue);animation:type .4s both}
+.otp b:nth-child(1){animation-delay:.2s}.otp b:nth-child(2){animation-delay:.5s}.otp b:nth-child(3){animation-delay:.8s}.otp b:nth-child(4){animation-delay:1.1s}
+.wcard{position:relative;overflow:hidden;border-radius:24px;padding:20px;color:#fff;background:radial-gradient(90% 120% at 100% 0,#3f8cf0 0,transparent 55%),radial-gradient(70% 90% at 0 100%,#7b2ff7aa 0,transparent 60%),linear-gradient(145deg,#0a3d8f,#061f4d);box-shadow:var(--sh2);margin-bottom:12px}
+.wcard::after{content:"";position:absolute;top:0;left:-60%;width:35%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-20deg);animation:shine 5s ease-in-out infinite}
+.wcard .wh{display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.9;font-weight:600}.wcard .chipic{width:34px;height:26px;border-radius:6px;background:linear-gradient(135deg,#f6dd96,#d9a93b)}
+.wcard .bal{font-size:40px;font-weight:900;letter-spacing:-.03em;margin:14px 0 2px}.wcard .bal small{font-size:20px;font-weight:700;opacity:.85}
+.hero[data-a=refer]{transition:transform .2s}.hero[data-a=refer]:active{transform:scale(.985)}
+.hero[data-a=refer]::after{content:"🎁";position:absolute;right:14px;top:10px;font-size:34px;animation:drift 4.5s ease-in-out infinite}
+.empty{font-size:64px;display:inline-block;animation:drift 3.5s ease-in-out infinite}
+.pic{transition:transform .2s}.fl:hover .pic{transform:scale(1.08) rotate(-4deg)}
+.chip.on,.cat.on{animation:popin .4s both}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></head>
-<body>
+<body><div id="splash" aria-hidden="true"><b>Carrefour</b><i></i><small>REFER &amp; EARN</small></div>
 <div id="phone" role="application" aria-label="Refer and Earn prototype">
   <div id="top"></div>
   <div id="main"></div>
@@ -395,10 +471,13 @@ function homeHeader(){const modes=[['Scheduled','truck','','#e8f0fb','#0b4ea2'],
  <div class="srow"><div class="search">${ic('search',20)}<span>Search 50,000+ items</span></div><div class="buyagain">${ic('clock')}<span>Buy<br>Again</span></div><div class="dsk acct"><span class="flag"></span>${ic('user',20)}<span>${S.who==='aisha'?'Aisha':'Omar'}</span></div><div class="dsk cartb" data-a="tab" data-v="cart">${ic('cart',20)}<b>${cartCount()}</b></div></div></div>
  <div class="promo"><b>Partner bank</b> 20% off up to AED 100 with covered cards</div>
  <div class="cats">${[['All Categories','grid'],['Fresh Food','bag'],['Fruits & Veg','bag'],['Food Cupboard','box'],['Beverages','box'],['Baby Products','user'],['Smartphones & Wearables','user'],['Electronics & Appliances','zap']].map(([c,i],k)=>`<span class="cat ${k===0?'on':''}">${ic(i)}${c}</span>`).join('')}</div>
- <div class="banner"><b>Fresh deals.<br>Less effort.</b><span>Up to 35% off on your weekly essentials</span><i class="code">Code: WEEKLY35</i></div>`}
+ <div class="bnr"><div class="banner s1 ${(S.bn||0)===0?'on':''}"><em>🛒</em><b>Fresh deals.<br>Less effort.</b><span>Up to 35% off on your weekly essentials</span><i class="code">Code: WEEKLY35</i></div>
+ <div class="banner s2 ${S.bn===1?'on':''}"><em>🥬</em><b>Fresh from the farm,<br>at your door.</b><span>Fruit, veg, meat and more</span></div>
+ ${S.who==='aisha'?`<div class="banner s3 ${S.bn===2?'on':''}" data-a="refer"><em>🎁</em><b>Invite a friend.<br>You both get AED ${CFG.reward}.</b><span>Tap to open Refer &amp; Earn</span></div>`:`<div class="banner s3 ${S.bn===2?'on':''}"><em>⚡</em><b>Reorder your<br>favourites in one tap.</b><span>After your first order</span></div>`}
+ <div class="dots"><u class="${(S.bn||0)===0?'on':''}"></u><u class="${S.bn===1?'on':''}"></u><u class="${S.bn===2?'on':''}"></u></div></div>`}
 function productList(){const c=cur().cart;return `<div class="sect"><div class="card plist">${PRODUCTS.map(p=>`<div class="prod"><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty">${c[p.id]?`<button data-a="dec" data-v="${p.id}" aria-label="Remove one">−</button><b>${c[p.id]}</b>`:''}<button data-a="inc" data-v="${p.id}" aria-label="Add one">+</button></div></div>`).join('')}</div></div>`}
 function orderCard(orders,deliverAct){const l=orders[orders.length-1];if(!l)return '';
- if(l.status==='placed')return `<div class="sect"><div class="card"><div class="row"><div><b>Your order is on its way</b><div class="mute">Order #${l.id}</div></div><button class="btn sm" data-a="${deliverAct}">Mark delivered</button></div><div class="small" style="margin-top:6px">Demo control</div></div></div>`;
+ if(l.status==='placed')return `<div class="sect"><div class="card"><div class="row"><div><b>Your order is on its way</b><div class="mute">Order #${l.id}</div></div><button class="btn sm" data-a="${deliverAct}">Mark delivered</button></div><div class="track"><div class="ln"></div><span class="tt">🚚</span><span class="dst">🏠</span></div><div class="small" style="margin-top:2px">Demo control</div></div></div>`;
  return ''}
 
 function aishaHome(){const a=S.a,l=a.orders[a.orders.length-1];
@@ -407,18 +486,17 @@ function omarHome(){const o=S.o,l=o.orders[o.orders.length-1];let h=homeHeader()
   if(!o.existing){if(!o.revealed)h+=`<button class="reveal" data-a="oreveal"><small>REWARD UNLOCKED</small><div>tap to reveal</div></button>`;
     else h+=`<div class="won"><small>REWARD UNLOCKED</small><div class="wa">AED <span data-count="${CFG.reward}" data-id="oreveal">${CFG.reward}</span></div><div>added to your Carrefour Wallet.</div><div class="small" style="color:#7a5a10;margin-top:4px">${REDEEM}</div></div>`}
   h+='</div>'+orderCard(o.orders,'deliver');
-  if(l&&l.status==='delivered'&&o.orders.length===1)h+=`<div class="sect"><div class="card"><b>✓ Delivered</b><div class="mute" style="margin:2px 0 10px">${bal(o.ledger)>=CFG.minUse?`You still have ${aedI(bal(o.ledger))}. ${REDEEM}`:'Thanks for ordering with us.'}</div><button class="btn" data-a="reorder">Reorder in one tap</button></div></div>`;
+  if(l&&l.status==='delivered'&&o.orders.length===1)h+=`<div class="sect"><div class="card"><b>✓ Delivered</b><div class="mute" style="margin:2px 0 10px">${bal(o.ledger)>0?`You still have ${aedI(bal(o.ledger))}. ${REDEEM}`:'Thanks for ordering with us.'}</div><button class="btn" data-a="reorder">Reorder in one tap</button></div></div>`;
   h+=`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList();return h}
 
 function cartView(){
   const A=S.who==='aisha',o=cur(),sub=subtotal(),sav=wasTotal()-sub;
-  if(!cartCount())return `<div class="page center"><h2>Cart</h2><p class="mute">Your cart is empty.</p><button class="btn" style="margin-top:14px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`;
+  if(!cartCount())return `<div class="page center"><div class="empty">🛒</div><h2>Cart</h2><p class="mute">Your cart is empty.</p><button class="btn" style="margin-top:14px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`;
   const first=o.orders.length===0;let c='',credit=0,welc=0;
   if(!A){fixSel();const ops=options(),b=bal(o.ledger);credit=o.sel||0;
     if(b>0){
       if(sub<CFG.minBasket)c+=`<div class="note">Add ${aed(CFG.minBasket-sub)} more (minimum basket ${aedI(CFG.minBasket)}) to use your ${aedI(b)} referral credit.</div>`;
-      else if(!ops.length)c+=`<div class="note">Your remaining credit is below ${aedI(CFG.minUse)} and can't be used.</div>`;
-      else c+=`<div class="ok">Your ${aedI(b)} referral credit can be used on this order.</div><div class="mute">${REDEEM}</div><div class="slide"><div class="sh"><span>Use referral credit</span><b id="slv">AED ${o.sel}</b></div><input type="range" id="crd" min="0" max="${ops.length-1}" step="1" value="${ops.indexOf(o.sel)}" style="--p:${ops.length>1?ops.indexOf(o.sel)/(ops.length-1)*100:100}%" aria-label="Referral credit to use"><div class="tk">${ops.map(v=>`<span class="${v===o.sel?'on':''}">${v}</span>`).join('')}</div></div>`}
+      else c+=`<div class="ok">Your ${aedI(b)} referral credit can be used on this order.</div><div class="mute">${REDEEM}</div>${ops.length>1?`<div class="slide"><div class="sh"><span>Use referral credit</span><b id="slv">AED ${o.sel}</b></div><input type="range" id="crd" min="0" max="${ops.length-1}" step="1" value="${ops.indexOf(o.sel)}" style="--p:${ops.indexOf(o.sel)/(ops.length-1)*100}%" aria-label="Referral credit to use"><div class="tk">${ops.map(v=>`<span class="${v===o.sel?'on':''}">${v}</span>`).join('')}</div></div>`:`<div class="slide one"><div class="sh" style="margin:0"><span>Use your remaining credit</span><b id="slv">AED ${o.sel}</b></div></div>`}`}
     if(first&&o.existing){welc=Math.round(sub*CFG.welcomePct)/100;c+=`<div class="card row"><span>Welcome offer ${CFG.welcomePct}%</span><b style="color:var(--green)">- ${aed(welc)}</b></div>`}
     else if(first)c+=`<div class="card row grey"><span>Welcome offer ${CFG.welcomePct}%</span><span class="small">Replaced by referral credit</span></div>`}
   const total=sub+CFG.fee-credit-welc;
@@ -454,7 +532,7 @@ function levelsList(){const pr=progress(),cl=curLevel();
 function walletView(){
   const A=S.who==='aisha',L=A?S.a.ledger:S.o.ledger,b=bal(L),p=pend(L);
   const exp=!A?L.find(e=>e.exp&&e.amt>0):null;
-  return `${appBar('Carrefour Wallet')}<div class="page"><div class="g2"><div class="gc"><div class="hero"><div style="opacity:.85;font-size:13px">Balance</div><div style="font-size:34px;font-weight:800">${aed(b)}</div>
+  return `${appBar('Carrefour Wallet')}<div class="page"><div class="g2"><div class="gc"><div class="wcard"><div class="wh"><span>Carrefour Wallet</span><span class="chipic"></span></div><div style="font-size:12.5px;opacity:.8;margin-top:14px">Balance</div><div class="bal">${Number.isInteger(b)?`<small>AED</small> <span data-count="${b}" data-id="wb${S.who}${b}">${b}</span><small>.00</small>`:aed(b)}</div>
   ${p?`<div style="margin-top:6px;font-weight:600">Pending ${aedI(p)}</div><div style="font-size:12.5px;opacity:.9;margin-top:2px">Paid within ${CFG.holdWorkingDays} working days of your friend's first order.</div>`:''}
   ${!A&&b>0?`<div style="font-size:12.5px;opacity:.95;margin-top:8px">${REDEEM}</div>${exp?`<div style="font-size:12.5px;opacity:.95;margin-top:2px">Valid until ${exp.exp}.</div>`:''}`:''}</div>
   ${A?`<h3>Referral levels</h3><div class="card" style="padding:4px 14px">${levelsList()}</div><div class="card"><div class="small" style="margin-bottom:6px">${progress()} of ${nextLevel().target} friends toward Level ${nextLevel().n}</div><div class="pbar dark" style="margin:0"><b style="width:${Math.min(100,progress()/nextLevel().target*100)}%"></b></div></div>`:''}
@@ -484,8 +562,8 @@ function omarFlow(){const o=S.o;
   <button class="btn cta" data-a="join">Join and claim AED ${CFG.reward}</button><div class="center" style="margin-top:12px"><button class="lnk" style="color:var(--blue)" data-a="terms">Terms</button></div></div>
   <div class="ban"><div class="b b1"><em>🥬</em><b>Fresh groceries, delivered to your door</b><span>Fruit, veg, meat and more</span></div><div class="b b2"><em>🛍️</em><b>Everyday essentials, all in one basket</b><span>Pantry to household</span></div><div class="b b3"><em>⚡</em><b>Reorder your favourites in one tap</b><span>After your first order</span></div></div>
   <div class="trust"><span>${ic('check',13)} Trusted Carrefour quality</span><span>${ic('check',13)} Secure checkout</span></div></div>`;
-  if(o.stage==='signup')return `${appBar('Create your account')}<div class="page narrow"><div class="card"><div class="mute">Mobile number</div><div style="font-size:19px;font-weight:700;margin:4px 0 12px">+971 50 123 4567</div><span class="chip">${ic('check',14)} Code applied: AISHA35</span></div><button class="btn" data-a="otp">Send verification code</button></div>`;
-  if(o.stage==='otp')return `${appBar('Verify your phone')}<div class="page narrow"><div class="card center"><div class="mute">Code sent to +971 50 123 4567</div><div style="font-size:32px;letter-spacing:.5em;margin:14px 0 6px;font-weight:800;padding-left:.5em">1234</div></div><button class="btn" data-a="verify">Verify and continue</button></div>`;
+  if(o.stage==='signup')return `${appBar('Create your account')}<div class="page narrow"><div class="steps2"><div class="s on"><b>1</b>Join</div><div class="ln "></div><div class="s "><b>2</b>Verify</div><div class="ln "></div><div class="s "><b>3</b>Claim</div></div><div class="ribbon"><em>🎁</em><div><b>AED ${CFG.reward} is waiting for you</b><span>Verify your number to unlock it</span></div></div><div class="card"><div class="mute">Mobile number</div><div style="font-size:19px;font-weight:700;margin:4px 0 12px">+971 50 123 4567</div><span class="chip">${ic('check',14)} Code applied: AISHA35</span></div><button class="btn" data-a="otp">Send verification code</button></div>`;
+  if(o.stage==='otp')return `${appBar('Verify your phone')}<div class="page narrow"><div class="steps2"><div class="s dn"><b>✓</b>Join</div><div class="ln fill"></div><div class="s on"><b>2</b>Verify</div><div class="ln "></div><div class="s "><b>3</b>Claim</div></div><div class="card center"><div class="mute">Code sent to +971 50 123 4567</div><div class="otp"><b>1</b><b>2</b><b>3</b><b>4</b></div></div><button class="btn" data-a="verify">Verify and continue</button></div>`;
   return ''}
 function welcomeView(){const b=bal(S.o.ledger),first=S.o.orders.length<2;return `<div class="page narrow center" style="padding-top:64px"><div class="tick">${ic('check',32)}</div><h2>${first?'Welcome to Carrefour':'Hope you like your journey'}</h2><p class="mute" style="margin:6px 0 20px">${first?'Your first order is on its way, Omar.':'Continue shopping with us, Omar.'}</p><div class="card"><div class="mute">Wallet balance</div><b style="font-size:24px">${aed(b)}</b></div><button class="btn" style="margin-top:6px" data-a="wdone">${first?'Continue':'Continue shopping'}</button></div>`}
 
@@ -507,14 +585,14 @@ function sheetView(){const s=S.sheet,d=S.sd;if(!s)return '';
   if(s==='nudge1')return `<div class="sheet">${X}<div class="art a1"><div class="road"></div><span class="tr">🚚</span><div class="okc">✓</div><span class="sp" style="left:18%;top:22px">✨</span><span class="sp" style="right:16%;top:38px;animation-delay:.8s">✨</span></div><div class="eyebrow">DELIVERED ON TIME</div><h2>Order delivered on time. Would you like to refer a friend?</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
   if(s==='nudge2')return `<div class="sheet">${X}<div class="art a2"><span class="sp" style="left:16%;top:24px">✨</span><span class="sp" style="right:14%;top:30px;animation-delay:.7s">✨</span><span class="sp" style="left:26%;bottom:20px;animation-delay:1.3s">✨</span><div><div class="big gold"><span data-count="${d}" data-id="n2${d}">${d}</span><small>%</small></div><div class="lb">SAVED ON THIS ORDER</div></div></div><h2>You saved ${d}%. Share the saving with a friend.</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
   if(s==='reward')return `<div class="sheet">${X}<div class="art a3"><span class="cn" style="left:14%">🪙</span><span class="cn" style="left:34%;animation-delay:.9s">🪙</span><span class="cn" style="left:62%;animation-delay:.4s">🪙</span><span class="cn" style="left:82%;animation-delay:1.3s">🪙</span><div><div class="big gold"><small style="margin:0 4px 0 0">+AED</small><span data-count="${CFG.reward}" data-id="rw${progress()}">${CFG.reward}</span></div><div class="lb">REWARD CREDITED</div></div></div><h2>AED ${CFG.reward} credited to your Carrefour Wallet. Invite another friend.</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="close">Maybe later</button></div></div>`;
-  if(s==='invite')return `<div class="sheet">${X}<h2>Invite your friends</h2><div class="bubble">${MSG}<br><span class="link">carrefour.digital/join/AISHA35</span></div><b>Send with</b>${sendRow('')}</div>`;
-  if(s==='contact')return `<div class="sheet">${X}<h2>Invite ${d}</h2><div class="bubble">${MSG}</div><b>Send with</b>${sendRow(d)}</div>`;
-  if(s==='confirm')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">${d}</h2><p class="mute" style="margin:6px 0 16px">Your friend will show as Invited in your list.</p><button class="btn" data-a="done">Done</button></div>`;
+  if(s==='invite')return `<div class="sheet">${X}<div class="art a4"><span class="fe" style="left:10%;top:18px">🎉</span><span class="fe" style="right:12%;top:24px;animation-delay:.8s">💌</span><span class="fe" style="left:20%;bottom:16px;animation-delay:1.4s">🎁</span><span class="fe" style="right:22%;bottom:18px;font-size:22px;animation-delay:.4s">✨</span><div class="ttl"><b>Invite your friends</b><span>Share the love, you both win</span></div></div><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="chat"><div class="me"><i>A</i>You, to your friend</div><div class="tp"><b></b><b></b><b></b></div><div class="bb">${MSG}<br><span class="link">carrefour.digital/join/AISHA35</span><span class="tm">now ✓✓</span></div></div><div class="codechip"><div><span>Your code</span><br><b>AISHA35</b></div>${ic('check',18)}</div><b style="display:block;margin:12px 0 0">Send with</b>${sendRow('')}</div>`;
+  if(s==='contact')return `<div class="sheet">${X}<div class="art a4"><span class="fe" style="left:12%;top:20px">🎉</span><span class="fe" style="right:12%;top:26px;animation-delay:.8s">💌</span><div class="ttl"><div class="av2" style="margin:0 auto 6px">${d[0]}</div><b style="font-size:20px">Invite ${d}</b></div></div><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="chat"><div class="me"><i>A</i>You, to ${d}</div><div class="tp"><b></b><b></b><b></b></div><div class="bb">${MSG}<span class="tm">now ✓✓</span></div></div><b style="display:block;margin:8px 0 0">Send with</b>${sendRow(d)}</div>`;
+  if(s==='confirm')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">${d} 🎉</h2><p class="mute" style="margin:6px 0 16px">Nice one! Your friend will show as Invited in your list.</p><button class="btn" data-a="done">Done</button></div>`;
   if(s==='lvl'){const l=CFG.levels.find(x=>x.n===d);return `<div class="sheet">${X}<h2>Level ${l.n}</h2><p class="mute" style="margin:6px 0 12px">Refer ${l.target} friends to unlock. We'll reveal what it includes when you get there.</p><div class="pbar dark"><b style="width:${Math.min(100,progress()/l.target*100)}%"></b></div><div class="small">${progress()} of ${l.target} friends so far</div></div>`}
   if(s==='info')return `<div class="sheet">${X}<h2>How it works</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>Share your link with a friend.</li><li>They join and get AED ${CFG.reward} in their wallet.</li><li>After their first delivered order, you get AED ${CFG.reward} within ${CFG.holdWorkingDays} working days.</li></ol></div>`;
   if(s==='inelig')return `<div class="sheet center"><div style="font-size:38px">👋</div><h2 style="padding:0">You're already with us</h2><p class="mute" style="margin:8px 0 16px">This referral is for new Carrefour customers, so the AED ${CFG.reward} credit isn't available on your account. You still get the standard welcome offer: ${CFG.welcomePct}% off your first order.</p><button class="btn" data-a="close">Continue</button></div>`;
-  if(s==='terms')return `<div class="sheet">${X}<h2>Terms</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>You get AED ${CFG.reward} in your Carrefour Wallet when you join.</li><li>Use AED 10 to ${CFG.maxUse} on one order with the slider; keep the rest for your next order.</li><li>${REDEEM}</li><li>AED ${CFG.minBasket} minimum basket each time you use it.</li><li>The referral offer replaces the welcome offer and can't be combined with other offers.</li><li>New customers only.</li><li>Rewards can be held or reversed if an order is cancelled, returned or looks unusual.</li></ol></div>`;
-  if(s==='placed')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">Order placed</h2>${d.aisha?'':`<div class="card sum" style="text-align:left;margin-top:12px"><div class="l"><span>Credit used</span><b>${aedI(d.used)}</b></div><div class="l"><span>Credit left</span><b>${aedI(d.left)}</b></div></div>${d.left>=CFG.minUse?`<p class="mute" style="margin-bottom:12px">${REDEEM}</p>`:d.left>0?`<p class="mute" style="margin-bottom:12px">Credit under AED ${CFG.minUse} can't be redeemed.</p>`:''}`}<button class="btn" style="margin-top:12px" data-a="placedOk">Continue</button></div>`;
+  if(s==='terms')return `<div class="sheet">${X}<h2>Terms</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>You get AED ${CFG.reward} in your Carrefour Wallet when you join.</li><li>Use up to AED ${CFG.maxUse} on one order with the slider; keep the rest for your next order.</li><li>${REDEEM}</li><li>AED ${CFG.minBasket} minimum basket each time you use it.</li><li>The referral offer replaces the welcome offer and can't be combined with other offers.</li><li>New customers only.</li><li>Rewards can be held or reversed if an order is cancelled, returned or looks unusual.</li></ol></div>`;
+  if(s==='placed')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">Order placed</h2>${d.aisha?'':`<div class="card sum" style="text-align:left;margin-top:12px"><div class="l"><span>Credit used</span><b>${aedI(d.used)}</b></div><div class="l"><span>Credit left</span><b>${aedI(d.left)}</b></div></div>${d.left>0?`<p class="mute" style="margin-bottom:12px">${REDEEM}</p>`:''}`}<button class="btn" style="margin-top:12px" data-a="placedOk">Continue</button></div>`;
   if(s==='story')return `<div class="sheet">${X}<h2>Story</h2><b>Aisha, referrer</b><ol style="margin:6px 0 12px 18px;line-height:1.6"><li>Nudge 1 on Home: order delivered on time.</li><li>Nudge 2: after an order with a saving of ${CFG.savingPct}% or more.</li><li>Refer &amp; Earn: levels, friends, invite, contacts.</li><li>Her reward is Pending, then AED ${CFG.reward} in her wallet.</li><li>Nudge 3: reward credited, invite another friend.</li></ol><b>Omar, invitee</b><ol style="margin:6px 0 12px 18px;line-height:1.6"><li>Link and landing.</li><li>Sign-up and phone verification.</li><li>AED ${CFG.reward} in his wallet.</li><li>Basket of AED ${CFG.minBasket} or more.</li><li>Credit slider: 10 to 35.</li><li>Order placed: used and left.</li><li>Delivered: Reorder in one tap.</li><li>Second order follows the live balance.</li><li>Welcome to Carrefour after the first order; a thank-you after the second.</li></ol>
    <b>Demo controls</b><div class="opts"><button class="opt ${S.issue?'on':''}" data-a="tglIssue">Order had an issue: ${S.issue?'ON':'OFF'}</button><button class="opt ${S.o.existing?'on':''}" data-a="tglExisting">Omar is an existing customer: ${S.o.existing?'ON':'OFF'}</button></div>
    <b>Nudge log</b><div class="log" style="margin:4px 0 12px">${S.log.length?S.log.map(l=>`<span class="${l.ok?'yes':'no'}">${l.ok?'✓ shown':'✗ suppressed'}</span> · ${l.n}${l.ok?'':' ('+l.why+')'}`).join('<br>'):'Nothing fired yet.'}</div>
@@ -529,6 +607,7 @@ function render(){
   const ov=$('#overlay'),sv=sheetView(),sk=S.sheet?S.sheet+(S.sd||''):'',fresh=!!sk&&render.sk!==sk;render.sk=sk;
   ov.style.display=sv?'flex':'none';ov.innerHTML=sv;ov.classList.toggle('fresh',fresh);
   if(fresh&&S.sheet==='reward')burst(64);if(fresh&&S.sheet==='confirm')burst(34);if(newKey&&S.sub==='welcome')burst(54);
+  const cc=cartCount();if(render.cc!==undefined&&cc>render.cc)document.querySelectorAll('.badge').forEach(b=>b.classList.add('bump'));render.cc=cc;
   countUps()}
 
 /* ============ ACTIONS ============ */
@@ -584,13 +663,15 @@ function act(a,d){const A=S.a,O=S.o;
   }
   render()}
 
-function credSteps(){const b=bal(S.o.ledger),m=Math.min(b,CFG.maxUse);if(subtotal()<CFG.minBasket||m<CFG.minUse)return[];const s=CFG.options.filter(v=>v<=m);if(!s.includes(m))s.push(m);return s.sort((a,c)=>a-c)}
+function credSteps(){const b=bal(S.o.ledger),m=Math.min(b,CFG.maxUse);if(subtotal()<CFG.minBasket||m<=0)return[];const s=CFG.options.filter(v=>v<=m);if(!s.includes(m))s.push(m);return s.sort((a,c)=>a-c)}
 document.addEventListener('input',e=>{if(e.target.id!=='crd')return;const ops=credSteps(),i=+e.target.value;S.o.sel=ops[i];const v=$('#slv');if(v)v.textContent='AED '+S.o.sel;e.target.style.setProperty('--p',(ops.length>1?i/(ops.length-1)*100:100)+'%');document.querySelectorAll('.slide .tk span').forEach((x,j)=>x.classList.toggle('on',j===i))});
 document.addEventListener('change',e=>{if(e.target.id==='crd')render()});
 
 function burst(n){const h=$('#phone');if(!h||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const c=document.createElement('div');c.className='cf';const cols=['#f0c354','#ffffff','#e8458a','#6fd1ff','#7bd88f','#a78bfa'];let s='';for(let i=0;i<(n||46);i++){const a=Math.random()*Math.PI*2,d=90+Math.random()*200;s+=`<i style="--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d-90}px;--r:${Math.random()*720-360}deg;--c:${cols[i%6]};--w:${5+Math.random()*7}px;--t:${1.2+Math.random()*.9}s;--dl:${Math.random()*.18}s"></i>`}c.innerHTML=s;h.appendChild(c);setTimeout(()=>c.remove(),2600)}
 function countUps(){document.querySelectorAll('[data-count]').forEach(el=>{const id=el.dataset.id;if(id){if(S.anim[id])return;S.anim[id]=1}const to=+el.dataset.count,t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/1000),e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e);if(k<1)requestAnimationFrame(f)};el.textContent=0;requestAnimationFrame(f)})}
 setInterval(()=>{const b=document.querySelector('.lp .ban');if(!b||!b.firstElementChild)return;const w=b.firstElementChild.offsetWidth+12;b.scrollTo({left:(b.scrollLeft+w>b.scrollWidth-b.clientWidth+4)?0:b.scrollLeft+w,behavior:'smooth'})},3200);
+
+setInterval(()=>{const w=document.querySelector('.bnr');if(!w)return;const s=[...w.querySelectorAll('.banner')],d=[...w.querySelectorAll('.dots u')];let i=s.findIndex(x=>x.classList.contains('on'));i=(i+1)%s.length;S.bn=i;s.forEach((x,k)=>x.classList.toggle('on',k===i));d.forEach((x,k)=>x.classList.toggle('on',k===i))},3600);
 document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;e.preventDefault();act(el.dataset.a,el.dataset)});
 act('reset',{});
 </script>
