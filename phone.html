@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b4ea2">
+<title>Refer and Earn Prototype</title>
+<style>
+:root{--blue:#0b4ea2;--blue-d:#08397a;--blue-l:#e8f0fb;--red:#e30613;--ink:#0f1b33;--mute:#667391;--bg:#f3f5f9;--line:#e1e6ef;--green:#1b7f3a;--green-l:#e5f4ea;--amber:#fff6dd;--gut:16px;--gx:16px;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:#cdd5e3;color:var(--ink);display:flex;justify-content:center;font-size:15px;line-height:1.4}
+button{font:inherit;color:inherit}
+svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#phone{width:100%;max-width:430px;height:100dvh;background:var(--bg);position:relative;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+#top{background:#0c1a33;padding:10px var(--gx);display:flex;gap:8px;align-items:center;flex:none}
+.pill{border:1.5px solid rgba(255,255,255,.85);color:#fff;background:transparent;border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.pill.on{background:#fff;color:#0c1a33;border-color:#fff}
+.lnk{color:#fff;background:none;border:0;font-weight:600;font-size:13.5px;cursor:pointer;padding:6px 4px;white-space:nowrap}
+#main{flex:1;overflow-y:auto;overflow-x:hidden;position:relative;min-height:0;scroll-behavior:smooth}
+#nav{flex:none;display:flex;background:#fff;border-top:1px solid var(--line);padding:4px var(--gx) calc(6px + env(safe-area-inset-bottom))}
+#nav button{flex:1;background:none;border:0;color:var(--mute);font-size:11.5px;padding:7px 0 4px;cursor:pointer;position:relative;display:flex;flex-direction:column;align-items:center;gap:3px}
+#nav button svg{font-size:22px}
+#nav button.on{color:var(--blue);font-weight:700}
+#nav button.on::before{content:"";position:absolute;top:-5px;left:22%;right:22%;height:3px;border-radius:0 0 3px 3px;background:var(--blue)}
+.badge{position:absolute;top:1px;left:calc(50% + 6px);background:var(--red);color:#fff;border-radius:10px;font-size:10.5px;padding:1px 6px;font-weight:700}
+.page{padding:16px var(--gx) 28px}
+.narrow{max-width:560px;margin:0 auto;padding-left:16px!important;padding-right:16px!important}
+.g2{display:block}.gc{min-width:0}
+.bar{display:flex;align-items:center;gap:8px;padding:12px var(--gx);background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.bar h1{font-size:17px;flex:1;font-weight:700}
+.iconbtn{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;color:var(--ink)}
+h2{font-size:20px;font-weight:800;margin:4px 0 10px}
+h3{font-size:15px;font-weight:700;margin:18px 0 8px;color:var(--ink)}
+.card{background:#fff;border-radius:var(--r);padding:14px;margin-bottom:12px;border:1px solid var(--line)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:14px;padding:14px 16px;font-size:16px;font-weight:700;cursor:pointer;background:var(--blue);color:#fff;text-align:center}
+.btn.white{background:#fff;color:var(--blue)}
+.btn.ghost{background:#fff;color:var(--mute);border:1.5px solid var(--line)}
+.btn.sm{width:auto;display:inline-flex;padding:9px 16px;font-size:14px;border-radius:12px}
+.btn:active,.opt:active,.ibtn:active{transform:scale(.98)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.mute{color:var(--mute);font-size:13px}.small{font-size:12px;color:var(--mute)}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--green-l);color:#175f2d;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700}
+.chip.blue{background:var(--blue-l);color:var(--blue)}
+/* home header */
+.hdr{background:linear-gradient(180deg,#0b4ea2 0%,#2a6fc9 70%,#3b7fd6 100%);padding:14px var(--gx) 16px;color:#fff}
+.modes{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;padding:8px 2px 4px;scrollbar-width:none}.modes::-webkit-scrollbar{display:none}
+.mode{flex:none;width:74px;height:86px;border-radius:18px;background:#fff;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:7px;padding-bottom:10px;font-size:12px;font-weight:700;scroll-snap-align:start;position:relative;box-shadow:0 6px 16px rgba(5,30,80,.22)}
+.mode .ico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:23px}
+.mode.on{outline:3px solid #0c1a33;outline-offset:1px}
+.mb{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#0c1a33;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;letter-spacing:.2px}
+.mb.new{background:var(--red)}.mb.sav{background:#0f8a4b}
+.srow{display:flex;gap:10px;align-items:stretch}
+.srow .search{flex:1;min-width:0}
+.buyagain{flex:none;background:#fff;color:var(--red);border:1.5px solid var(--red);border-radius:14px;padding:0 12px;font-weight:800;font-size:12.5px;line-height:1.1;display:flex;align-items:center;gap:6px;text-align:left}
+.buyagain svg{font-size:18px}
+.cat{display:inline-flex;align-items:center;gap:6px}.cat svg{font-size:16px}
+.cats{padding-top:14px}
+.shareorb{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#e8458a,#c4125c);color:#fff;display:flex;align-items:center;justify-content:center;margin-top:-26px;box-shadow:0 8px 18px rgba(196,18,92,.4);border:4px solid #fff;flex:none;pointer-events:none}
+.shareorb svg{font-size:24px}
+.navc{flex:1;display:flex;justify-content:center;align-items:flex-start}
+.card{box-shadow:0 1px 2px rgba(15,27,51,.04),0 8px 22px rgba(15,27,51,.05)}
+body{background:radial-gradient(1200px 700px at 20% 0%,#e8eefb 0%,#c9d3e6 60%,#bcc8de 100%)}
+.slot{display:flex;align-items:center;gap:10px;margin:12px 0}
+.slotpill{background:#0c1a33;color:#fff;border-radius:10px;padding:8px 11px;font-weight:700;font-size:13.5px;display:flex;gap:6px;align-items:center;white-space:nowrap}
+.addr{display:flex;gap:6px;align-items:center;font-size:13.5px;font-weight:600;min-width:0;flex:1}.addr span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:12px 14px;color:var(--mute);font-size:14.5px}
+.cats{display:flex;gap:6px;overflow-x:auto;padding:12px var(--gx) 4px;scrollbar-width:none;background:var(--bg)}.cats::-webkit-scrollbar{display:none}
+.cat{flex:none;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--ink)}.cat.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.banner{margin:12px var(--gx);border-radius:var(--r);padding:18px;color:#fff;background:linear-gradient(115deg,#e30613 0%,#b1055f 55%,#0b4ea2 100%);min-height:96px;display:flex;flex-direction:column;justify-content:center}
+.banner b{font-size:19px}.banner span{font-size:13px;opacity:.95;margin-top:4px}
+.sect{padding:0 var(--gx)}
+
+
+.prod{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}.prod:last-child{border:0}
+.prod .pn{font-weight:600;min-width:0}.prod s{color:var(--mute);font-size:12px;margin-left:4px}
+.qty{display:flex;align-items:center;gap:10px;flex:none}.qty button{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--blue);background:#fff;color:var(--blue);font-size:19px;cursor:pointer;line-height:1}
+/* reward */
+.reveal{background:linear-gradient(120deg,#d10f61,#e8458a);color:#fff;border-radius:var(--r);padding:16px;margin-bottom:12px;cursor:pointer;display:block;width:100%;text-align:left;border:0}
+.reveal small{letter-spacing:.16em;font-weight:700;font-size:11.5px;display:block}.reveal div{font-size:21px;font-weight:800;margin-top:4px}
+.revealed{background:var(--green-l);color:#175f2d;border-radius:var(--r);padding:14px;margin-bottom:12px;font-weight:600}
+/* refer hero + levels */
+.hero{background:linear-gradient(160deg,#0b4ea2,#2a6fc9);color:#fff;border-radius:20px;padding:16px;margin-bottom:12px}
+.hero .big{font-size:24px;font-weight:800;line-height:1.2;margin:2px 0 6px}
+.lvls{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:14px -16px 0;padding:0 16px 4px;scrollbar-width:none}.lvls::-webkit-scrollbar{display:none}
+.lvl{flex:none;width:78%;scroll-snap-align:start;border-radius:16px;padding:12px 14px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);text-align:left;color:#fff;min-height:128px;display:flex;flex-direction:column;gap:5px}
+.lvl.lock{background:rgba(8,30,70,.35);border-color:rgba(255,255,255,.18);cursor:pointer}
+.lvl .lh{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:#cfe1ff}
+.lvl .blur{filter:blur(4.5px);font-weight:700;font-size:15px;user-select:none;pointer-events:none}
+.lvl .un{font-size:13px;font-weight:700}
+.lvl .tg{font-size:13px;color:#dbe8ff}
+.pbar{height:8px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden;margin:12px 0 6px}.pbar b{display:block;height:100%;background:#fff;border-radius:6px;transition:width .4s}
+.pbar.dark{background:#e3e9f3}.pbar.dark b{background:var(--blue)}
+.st{font-size:12.5px;font-weight:700;white-space:nowrap}.st.paid{color:var(--green)}.st.way{color:#a85d00}.st.joined{color:var(--blue)}.st.invited{color:var(--mute)}
+.fl{padding:11px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.fl:last-child{border:0}.fl b{font-weight:600}
+.ibtn{background:var(--blue);color:#fff;border:0;border-radius:999px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:14px}
+/* sheets */
+#overlay{position:absolute;inset:0;background:rgba(10,20,45,.55);display:flex;align-items:flex-end;z-index:30}
+.sheet{background:#fff;width:100%;border-radius:24px 24px 0 0;padding:20px var(--gut) calc(22px + env(safe-area-inset-bottom));max-height:90%;overflow-y:auto;position:relative}
+.sheet .x{position:absolute;top:14px;right:14px;width:34px;height:34px;border:0;background:var(--bg);border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sheet h2{padding-right:38px;font-size:19px;line-height:1.3}
+.bubble{background:#dff3c9;border-radius:14px;padding:14px;font-size:14.5px;line-height:1.5;margin:12px 0}
+.link{display:inline-block;background:#fff;color:var(--blue);padding:5px 11px;border-radius:999px;font-weight:700;font-size:13px;margin-top:8px}
+.send{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.sendb{border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:14px 6px;display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:700;font-size:13.5px;cursor:pointer}
+.sendb i{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;font-style:normal}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.opt{border:2px solid var(--line);background:#fff;border-radius:14px;padding:11px 14px;font-weight:700;cursor:pointer;font-size:14px}.opt.on{border-color:var(--blue);background:var(--blue-l);color:var(--blue)}
+.note{background:var(--amber);border-radius:12px;padding:10px 12px;font-size:13px;margin:8px 0}
+.ok{background:var(--green-l);color:#175f2d;border-radius:12px;padding:11px 12px;font-weight:600;margin:10px 0 6px}
+.grey{opacity:.5}
+.sum .l{display:flex;justify-content:space-between;padding:5px 0}.sum .l.t{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-size:16px}
+.center{text-align:center}
+.tick{width:56px;height:56px;border-radius:50%;background:var(--green-l);color:var(--green);display:flex;align-items:center;justify-content:center;margin:2px auto 10px;font-size:30px}
+.log{font-size:12.5px;line-height:1.6;color:var(--ink)}.log .no{color:#a85d00}.log .yes{color:var(--green)}
+.lv4{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.lv4:last-child{border:0}
+.dot{width:26px;height:26px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--mute);flex:none}.dot.cur{background:var(--blue);color:#fff}
+.entry{padding:10px 0;border-bottom:1px solid var(--line)}.entry:last-child{border:0}.entry .a{font-weight:700}.entry .a.neg{color:#b3261e}.entry .a.pos{color:var(--green)}.entry .a.pen{color:#a85d00}
+.prof{display:flex;gap:14px;align-items:center;margin:4px 0 14px}.av{width:56px;height:56px;border-radius:50%;background:#0b4ea2;color:#fff;font-weight:800;font-size:24px;display:grid;place-items:center;flex:none}.pic{width:36px;height:36px;border-radius:10px;background:#eef3fb;color:#0b4ea2;display:grid;place-items:center;flex:none}.pic svg{width:20px;height:20px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}.stats div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center}.stats b{display:block;font-size:15px}.stats span{font-size:11.5px;color:var(--mute)}
+.promo{background:#0f4d2e;color:#fff;font-size:13px;font-weight:600;padding:9px var(--gx)}
+.dsk{display:none}
+#main{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+html,body{height:100%}
+
+
+.logo{display:none}.flag{display:none}.banner .code{display:none}
+
+@media(min-width:600px){body{align-items:center}#phone{max-width:430px;height:min(880px,calc(100dvh - 24px));border-radius:36px;box-shadow:0 24px 70px rgba(10,25,60,.38)}}
+</style>
+</head>
+<body>
+<div id="phone" role="application" aria-label="Refer and Earn prototype">
+  <div id="top"></div>
+  <div id="main"></div>
+  <div id="nav"></div>
+  <div id="overlay" style="display:none" role="dialog" aria-modal="true"></div>
+</div>
+<script>
+/* ============ CONFIG (all business rules live here) ============ */
+const CFG={
+  reward:35, minBasket:120, maxUse:35, minUse:10, options:[10,25,35], fee:8,
+  expiryDays:30, holdWorkingDays:7, savingPct:20, maxDismiss:2, welcomePct:5,
+  levels:[
+    {n:1,target:0,title:'Invite your first friend',line:'Earn AED 35 when they order'},
+    {n:2,target:3,hint:'A little extra for you'},
+    {n:3,target:6,hint:'Something special for top referrers'},
+    {n:4,target:10,hint:'Our biggest referrer perks'}]
+};
+const REDEEM="Use your remaining credit on your next order or within 30 days, whichever comes first.";
+const MSG=`Hey! I shop for my groceries on the Carrefour app and love it. Join with my code AISHA35 and get AED ${CFG.reward} in your Carrefour Wallet. Min basket AED ${CFG.minBasket}. T&Cs apply.`;
+const PRODUCTS=[
+  {id:1,n:'Basmati rice 5kg',p:44.5,w:59.9},{id:2,n:'Fresh tomatoes 1kg',p:5.5,w:6.5},
+  {id:3,n:'Full-fat milk 2L',p:11.9,w:13.5},{id:4,n:'Olive oil 1L',p:38,w:52},
+  {id:5,n:'Chicken breast 1kg',p:27.5,w:33},{id:6,n:'Eggs, tray of 30',p:17.9,w:21},
+  {id:7,n:'Bananas 1kg',p:6.5,w:6.5},{id:8,n:'Laundry liquid 3L',p:34.9,w:49.9}];
+const STARTER={1:1,4:1,5:1,3:1,6:1};
+const STATUS={paid:'Reward paid',way:'Reward on its way',joined:'Joined',invited:'Invited'};
+const CONTACTS=['Fatima A.','Hassan B.','Leena C.','Mohammed D.','Priya E.','Zainab F.','Tariq G.'];
+const CONTACT0={'Fatima A.':'invited','Leena C.':'carrefour','Zainab F.':'carrefour'};
+
+/* ============ ICONS ============ */
+const IC={
+ gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8c-2-4-6-3-5 0 .5 1.500 5 0 5 0zM12 8c2-4 6-3 5 0-.5 1.500-5 0-5 0z"/>',
+ bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+ help:'<circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 1 1 3.500 2.300c-.7.400-1 .9-1 1.700M12 17h.01"/>',
+ home:'<path d="M3 10.5 12 3l9 7.5V21H3z"/><path d="M9 21v-6h6v6"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',cart:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11L21 7H6"/>',
+ search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',pin:'<path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+ check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',back:'<path d="m15 5-7 7 7 7"/>',x:'<path d="M6 6l12 12M18 6 6 18"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+ chat:'<path d="M4 5h16v11H9l-5 4z"/>',link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+ truck:'<path d="M2 6h11v10H2zM13 9h5l3 3v4h-8"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/>',zap:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+ box:'<path d="M3 8l9-5 9 5v8l-9 5-9-5zM3 8l9 5 9-5M12 13v8"/>',bag:'<path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/>',store:'<path d="M3 9l2-5h14l2 5M4 9v11h16V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/>',
+ sms:'<path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/>',wallet:'<rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M16 14.5h2"/>'};
+const ic=(n,s)=>`<svg viewBox="0 0 24 24"${s?` style="font-size:${s}px"`:''} aria-hidden="true">${IC[n]}</svg>`;
+
+/* ============ STATE ============ */
+const today=()=>new Date();
+const fmtDate=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+const inDays=n=>fmtDate(new Date(Date.now()+n*864e5));
+function seed(){return{
+ who:'aisha',tab:'home',sub:null,sheet:null,sd:null,issue:false,log:[],events:[],
+ a:{cart:{},orders:[],ledger:[{id:'L1',t:'Referral reward · Sara K.',amt:CFG.reward,st:'ok',note:'Friend\'s first order delivered'}],
+    friends:[{n:'Sara K.',s:'paid',ph:'+971 50 ••• 2193'},{n:'Noor A.',s:'way',ph:'+971 52 ••• 7745'},{n:'Rashid M.',s:'joined',ph:'+971 55 ••• 3306'},{n:'Layla H.',s:'invited',ph:'+971 56 ••• 9120'}],
+    nudge1:true,nudge2:null,rewardPrompt:false,revealed:false,contacts:false,cst:{...CONTACT0},dismiss:0},
+ o:{existing:false,stage:'landing',cart:{},orders:[],ledger:[],sel:null,revealed:false}
+}}
+let S=seed();
+
+/* ============ DOMAIN HELPERS ============ */
+const $=s=>document.querySelector(s);
+const aed=v=>'AED '+(Math.round(v*100)/100).toFixed(2), aedI=v=>'AED '+v;
+const bal=L=>L.filter(e=>e.st==='ok').reduce((t,e)=>t+e.amt,0);
+const pend=L=>L.filter(e=>e.st==='pending').reduce((t,e)=>t+e.amt,0);
+const cur=()=>S.who==='aisha'?S.a:S.o;
+const priceOf=id=>PRODUCTS.find(p=>p.id==id);
+const subtotal=()=>Object.entries(cur().cart).reduce((t,[id,q])=>t+priceOf(id).p*q,0);
+const wasTotal=()=>Object.entries(cur().cart).reduce((t,[id,q])=>t+priceOf(id).w*q,0);
+const cartCount=()=>Object.values(cur().cart).reduce((a,b)=>a+b,0);
+const progress=()=>S.a.friends.filter(f=>f.s==='paid').length;
+const nextLevel=()=>CFG.levels.find(l=>l.target>progress())||CFG.levels[CFG.levels.length-1];
+const curLevel=()=>[...CFG.levels].reverse().find(l=>progress()>=l.target)||CFG.levels[0];
+function options(){const o=S.o,b=bal(o.ledger);return subtotal()>=CFG.minBasket?CFG.options.filter(v=>v<=b&&v<=CFG.maxUse):[]}
+function fixSel(){const ops=options();if(!ops.length){S.o.sel=0;return}if(S.o.sel!==0&&!ops.includes(S.o.sel))S.o.sel=ops[ops.length-1]}
+function setFriend(n,s){const f=S.a.friends.find(x=>x.n===n);if(f)f.s=s;else S.a.friends.push({n,s})}
+function track(name,props){S.events.unshift({name,props:props||''})}
+
+/* ============ NUDGE ENGINE: one prompt at a time, each at most once ============ */
+function fire(name,sheet,data,isMoment){
+  let why=null;
+  if(isMoment&&S.issue)why='an issue was reported on the order';
+  else if(S.sheet)why='another prompt is already on screen';
+  else if(S.a.dismiss>=CFG.maxDismiss)why='paused after '+CFG.maxDismiss+' dismissals';
+  S.log.unshift({n:name,ok:!why,why});
+  if(!why){S.sheet=sheet;S.sd=data;track('nudge_shown',name);return true}
+  track('nudge_suppressed',name+' ('+why+')');return false}
+function maybePrompt(){
+  if(S.who!=='aisha'||S.sheet)return;const a=S.a;
+  if(a.rewardPrompt){a.rewardPrompt=false;fire('Nudge 3: reward credited','reward',null,false)}
+  else if(a.nudge2!==null){const p=a.nudge2;a.nudge2=null;fire('Nudge 2: saved '+p+'%','nudge2',p,true)}
+  else if(a.nudge1){fire('Nudge 1: order delivered on time','nudge1',null,true)}
+}
+
+/* ============ VIEWS ============ */
+function topBar(){return `<button class="pill ${S.who==='aisha'?'on':''}" data-a="who" data-v="aisha">Aisha, referrer</button><button class="pill ${S.who==='omar'?'on':''}" data-a="who" data-v="omar">Omar, invitee</button><span style="flex:1"></span><button class="lnk" data-a="story">Story</button><button class="lnk" data-a="reset">⟲ Reset</button>`}
+function navBar(){
+  if(S.who==='omar'&&S.o.stage!=='app')return '';
+  const t=[['home','home','Home'],['cat','grid','Categories'],['profile','user','Profile'],['cart','cart','Cart']];
+  const b=([k,i,l])=>`<button class="${S.tab===k&&!S.sub?'on':''}" data-a="tab" data-v="${k}">${ic(i)}<span>${l}</span>${k==='cart'&&cartCount()?`<span class="badge">${cartCount()}</span>`:''}</button>`;
+  return b(t[0])+b(t[1])+`<div class="navc" aria-hidden="true"><div class="shareorb">${ic('wallet')}</div></div>`+b(t[2])+b(t[3])}
+function appBar(title,right){return `<div class="bar"><button class="iconbtn" data-a="back" aria-label="Back">${ic('back')}</button><h1>${title}</h1>${right||''}</div>`}
+
+function homeHeader(){const modes=[['Scheduled','truck','','#e8f0fb','#0b4ea2'],['NOW','clock','60 mins','#e8f0fb','#0b4ea2'],['Rapid','zap','24 mins','#fdeaec','#e30613'],['Bulk','box','Savings','#e5f4ea','#1b7f3a','sav'],['Shops','bag','NEW','#e6f6f8','#0f7c8a','new'],['Instore','store','','#eceff6','#1c2a4d']];
+ return `<div class="hdr"><div class="modes">${modes.map(([l,i,b,bg,fg,cl],k)=>`<div class="mode ${k===0?'on':''}">${b?`<span class="mb ${cl||''}">${b}</span>`:''}<span class="ico" style="background:${bg};color:${fg}">${ic(i)}</span><span>${l}</span></div>`).join('')}</div>
+ <div class="logo"><span class="lm"></span><b>Carrefour</b></div><div class="slot"><div class="slotpill">${ic('truck',16)} Today 8:30 PM</div><div class="addr">${ic('pin',16)}<span>Apartment - 515 - four points by Sheraton</span></div></div>
+ <div class="srow"><div class="search">${ic('search',20)}<span>Search 50,000+ items</span></div><div class="buyagain">${ic('clock')}<span>Buy<br>Again</span></div><div class="dsk acct"><span class="flag"></span>${ic('user',20)}<span>${S.who==='aisha'?'Aisha':'Omar'}</span></div><div class="dsk cartb" data-a="tab" data-v="cart">${ic('cart',20)}<b>${cartCount()}</b></div></div></div>
+ <div class="promo"><b>Partner bank</b> 20% off up to AED 100 with covered cards</div>
+ <div class="cats">${[['All Categories','grid'],['Fresh Food','bag'],['Fruits & Veg','bag'],['Food Cupboard','box'],['Beverages','box'],['Baby Products','user'],['Smartphones & Wearables','user'],['Electronics & Appliances','zap']].map(([c,i],k)=>`<span class="cat ${k===0?'on':''}">${ic(i)}${c}</span>`).join('')}</div>
+ <div class="banner"><b>Fresh deals.<br>Less effort.</b><span>Up to 35% off on your weekly essentials</span><i class="code">Code: WEEKLY35</i></div>`}
+function productList(){const c=cur().cart;return `<div class="sect"><div class="card plist">${PRODUCTS.map(p=>`<div class="prod"><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty">${c[p.id]?`<button data-a="dec" data-v="${p.id}" aria-label="Remove one">−</button><b>${c[p.id]}</b>`:''}<button data-a="inc" data-v="${p.id}" aria-label="Add one">+</button></div></div>`).join('')}</div></div>`}
+function orderCard(orders,deliverAct){const l=orders[orders.length-1];if(!l)return '';
+ if(l.status==='placed')return `<div class="sect"><div class="card"><div class="row"><div><b>Your order is on its way</b><div class="mute">Order #${l.id}</div></div><button class="btn sm" data-a="${deliverAct}">Mark delivered</button></div><div class="small" style="margin-top:6px">Demo control</div></div></div>`;
+ return ''}
+
+function aishaHome(){const a=S.a,l=a.orders[a.orders.length-1];
+ return homeHeader()+orderCard(a.orders,'adeliver')+(l&&l.status==='delivered'?`<div class="sect"><div class="card row"><div><b>✓ Delivered ${S.issue?'with an issue reported':'on time'}</b><div class="mute">Order #${l.id}</div></div></div></div>`:'')+`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">Add starter basket</button></div>`+productList()}
+function omarHome(){const o=S.o,l=o.orders[o.orders.length-1];let h=homeHeader()+'<div class="sect">';
+  if(!o.existing){if(!o.revealed)h+=`<button class="reveal" data-a="oreveal"><small>REWARD UNLOCKED</small><div>tap to reveal</div></button>`;
+    else h+=`<div class="revealed">AED ${CFG.reward} added to your Carrefour Wallet.<div class="small" style="color:#175f2d;margin-top:3px">${REDEEM}</div></div>`}
+  h+='</div>'+orderCard(o.orders,'deliver');
+  if(l&&l.status==='delivered'&&o.orders.length===1)h+=`<div class="sect"><div class="card"><b>✓ Delivered</b><div class="mute" style="margin:2px 0 10px">${bal(o.ledger)>=CFG.minUse?`You still have ${aedI(bal(o.ledger))}. ${REDEEM}`:'Thanks for ordering with us.'}</div><button class="btn" data-a="reorder">Reorder in one tap</button></div></div>`;
+  h+=`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">Add starter basket</button></div>`+productList();return h}
+
+function cartView(){
+  const A=S.who==='aisha',o=cur(),sub=subtotal(),sav=wasTotal()-sub;
+  if(!cartCount())return `<div class="page center"><h2>Cart</h2><p class="mute">Your cart is empty.</p><button class="btn" style="margin-top:14px" data-a="starter">Add starter basket</button></div>`;
+  const first=o.orders.length===0;let c='',credit=0,welc=0;
+  if(!A){fixSel();const ops=options(),b=bal(o.ledger);credit=o.sel||0;
+    if(b>0){
+      if(sub<CFG.minBasket)c+=`<div class="note">Add ${aed(CFG.minBasket-sub)} more (minimum basket ${aedI(CFG.minBasket)}) to use your ${aedI(b)} referral credit.</div>`;
+      else if(!ops.length)c+=`<div class="note">Your remaining credit is below ${aedI(CFG.minUse)} and can't be used.</div>`;
+      else c+=`<div class="ok">Your ${aedI(b)} referral credit can be used on this order.</div><div class="mute">${REDEEM}</div><div class="opts">${ops.map(v=>`<button class="opt ${o.sel===v?'on':''}" data-a="sel" data-v="${v}">Use AED ${v}</button>`).join('')}<button class="opt ${o.sel===0?'on':''}" data-a="sel" data-v="0">Don't use</button></div>`}
+    if(first&&o.existing){welc=Math.round(sub*CFG.welcomePct)/100;c+=`<div class="card row"><span>Welcome offer ${CFG.welcomePct}%</span><b style="color:var(--green)">- ${aed(welc)}</b></div>`}
+    else if(first)c+=`<div class="card row grey"><span>Welcome offer ${CFG.welcomePct}%</span><span class="small">Replaced by referral credit</span></div>`}
+  const total=sub+CFG.fee-credit-welc;
+  return `<div class="page"><h2>Cart</h2><div class="g2"><div class="gc"><div class="card">${PRODUCTS.filter(p=>o.cart[p.id]).map(p=>`<div class="prod"><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty"><button data-a="dec" data-v="${p.id}">−</button><b>${o.cart[p.id]}</b><button data-a="inc" data-v="${p.id}">+</button></div></div>`).join('')}</div>
+  ${sav>0.01?`<div class="ok" style="margin-top:0">You saved ${aed(sav)} with this cart!</div>`:''}${c}
+  </div><div class="gc"><div class="card sum"><b>Order summary</b><div class="l"><span>Subtotal</span><span>${aed(sub)}</span></div><div class="l"><span>Delivery fee</span><span>${aed(CFG.fee)}</span></div>${welc?`<div class="l"><span>Welcome offer ${CFG.welcomePct}%</span><span>- ${aed(welc)}</span></div>`:''}${credit?`<div class="l"><span>Referral credit</span><span>- ${aed(credit)}</span></div>`:''}<div class="l t"><b>Total</b><b>${aed(total)}</b></div></div>
+  <button class="btn" data-a="checkout">Checkout (${aed(total)})</button></div></div></div>`}
+
+function profileView(){const A=S.who==='aisha',L=A?S.a.ledger:S.o.ledger,nm=A?'Aisha':'Omar';
+ const row=(icn,t,sub,act,right)=>`<div class="fl" ${act?`data-a="${act}" style="cursor:pointer"`:''}><div style="display:flex;gap:12px;align-items:center;min-width:0"><span class="pic">${ic(icn)}</span><div style="min-width:0"><b>${t}</b>${sub?`<div class="mute" style="font-size:12.5px">${sub}</div>`:''}</div></div>${right||''}</div>`;
+ const chev=ic('back').replace('<svg','<svg style="transform:rotate(180deg)"');
+ const nl=nextLevel();
+ return `<div class="page"><div class="prof"><div class="av">${nm[0]}</div><div><h2 style="margin:0">${nm}</h2><div class="mute">${A?'+971 50 ••• 4821':'+971 55 ••• 0937'} · Carrefour member</div></div></div>
+ <div class="g2"><div class="gc">
+ ${A?`<div class="hero" data-a="refer" style="cursor:pointer"><div class="row"><b style="font-size:17px">Refer &amp; Earn</b><span class="chip" style="background:#fff;color:#0b4ea2">Level ${curLevel().n}</span></div><div style="font-size:13.5px;opacity:.92;margin-top:4px">Give AED ${CFG.reward}, get AED ${CFG.reward}. ${progress()} of ${nl.target} friends toward Level ${nl.n}.</div><div class="pbar" style="margin:10px 0 0"><b style="width:${Math.min(100,progress()/nl.target*100)}%"></b></div></div>`:''}
+ <div class="card"><div class="row"><b>Apartment</b><span class="chip blue">Default</span></div><div class="mute">Apartment - 515 - four points by Sheraton</div></div>
+ <div class="card" style="padding:4px 14px">
+  ${row('wallet','Wallet &amp; Saved Cards','Balance and history','wallet',`<span class="chip">${aed(bal(L))}</span>`)}
+  ${A?row('gift','Refer &amp; Earn','Levels, friends and rewards','refer',chev):''}
+  ${row('clock','My Orders','Track, reorder, invoices','',chev)}
+  ${row('pin','Saved Addresses','1 saved','',chev)}</div></div>
+ <div class="gc"><div class="card" style="padding:4px 14px">
+  ${row('bell','Notifications','Offers, delivery updates','',chev)}
+  ${row('globe','Language','English','',chev)}
+  ${row('help','Customer Service','Chat, call, help centre','',chev)}
+  ${row('lock','Reset Password','','',chev)}
+  <div class="fl"><b style="color:#b3261e">Log Out</b></div></div>
+ <div class="small mute" style="text-align:center;margin-top:8px">Carrefour app prototype · v1.0</div></div></div></div>`}
+
+function levelsList(){const pr=progress(),cl=curLevel();
+ return CFG.levels.map(l=>`<div class="lv4"><div class="dot ${l.n===cl.n?'cur':''}">${l.n}</div><div style="flex:1;min-width:0"><div class="row"><b>Level ${l.n}</b><span class="st ${l.n===cl.n?'paid':'invited'}">${l.n===cl.n?'You are here':'Locked'}</span></div><div class="mute">${l.n===1?'Invite your first friend':`Refer ${l.target} friends · reward revealed when you unlock`}</div></div></div>`).join('')}
+
+function walletView(){
+  const A=S.who==='aisha',L=A?S.a.ledger:S.o.ledger,b=bal(L),p=pend(L);
+  const exp=!A?L.find(e=>e.exp&&e.amt>0):null;
+  return `${appBar('Carrefour Wallet')}<div class="page"><div class="g2"><div class="gc"><div class="hero"><div style="opacity:.85;font-size:13px">Balance</div><div style="font-size:34px;font-weight:800">${aed(b)}</div>
+  ${p?`<div style="margin-top:6px;font-weight:600">Pending ${aedI(p)}</div><div style="font-size:12.5px;opacity:.9;margin-top:2px">Paid within ${CFG.holdWorkingDays} working days of your friend's first order.</div>`:''}
+  ${!A&&b>0?`<div style="font-size:12.5px;opacity:.95;margin-top:8px">${REDEEM}</div>${exp?`<div style="font-size:12.5px;opacity:.95;margin-top:2px">Valid until ${exp.exp}.</div>`:''}`:''}</div>
+  ${A?`<h3>Referral levels</h3><div class="card" style="padding:4px 14px">${levelsList()}</div><div class="card"><div class="small" style="margin-bottom:6px">${progress()} of ${nextLevel().target} friends toward Level ${nextLevel().n}</div><div class="pbar dark" style="margin:0"><b style="width:${Math.min(100,progress()/nextLevel().target*100)}%"></b></div></div>`:''}
+  </div><div class="gc"><h3 style="margin-top:0">History</h3><div class="card" style="padding:4px 14px">${L.length?L.map(e=>`<div class="entry"><div class="row"><span>${e.t}</span><span class="a ${e.st==='pending'?'pen':e.amt<0?'neg':'pos'}">${e.amt<0?'-':'+'}${aed(Math.abs(e.amt))}</span></div><div class="small">${e.st==='pending'?'Pending · ':''}${e.note||''}</div></div>`).join(''):'<div class="mute" style="padding:10px 0">No transactions yet.</div>'}</div></div></div></div>`}
+
+function referView(){
+  const a=S.a,pr=progress(),nl=nextLevel(),cl=curLevel();
+  return `${appBar('Refer &amp; Earn',`<button class="iconbtn" data-a="info" aria-label="Info">${ic('info')}</button>`)}<div class="page"><div class="g2"><div class="gc">
+  <div class="hero"><div class="small" style="color:#cfe1ff;font-weight:700">YOU ARE AT LEVEL ${cl.n}</div><div class="big">Invite a friend, you both get AED ${CFG.reward}</div>
+   <div class="lvls">${CFG.levels.map(l=>l.n===cl.n?`<div class="lvl"><div class="lh"><span>Level ${l.n}</span><span>${ic('check',15)} you are here</span></div><b style="font-size:17px">${l.title}</b><span class="tg">${l.line}</span></div>`:l.n<cl.n?'':`<button class="lvl lock" data-a="lvlprev" data-v="${l.n}"><div class="lh"><span>Level ${l.n}</span>${ic('lock',15)}</div><div class="blur">${l.hint}</div><div class="un">Unlock to know more</div><div class="tg">Refer ${l.target} friends</div></button>`).join('')}</div>
+   <div class="pbar"><b style="width:${Math.min(100,pr/nl.target*100)}%"></b></div><div style="font-size:13px;color:#dbe8ff;margin-bottom:12px">${pr} of ${nl.target} friends toward Level ${nl.n}</div>
+   <button class="btn white" data-a="invite">${ic('chat',20)} Invite your friends</button>
+   <div style="font-size:12.5px;color:#dbe8ff;text-align:center;margin-top:10px">1,240 people joined Carrefour with a friend's invite this month</div></div>
+  <button class="reveal" data-a="areveal"><small>REWARD UNLOCKED</small><div>${a.revealed?`Earn AED ${CFG.reward} per friend`:'tap to reveal'}</div></button>
+  <h3>What you get / what your friend gets</h3><div class="card"><div style="font-size:21px;font-weight:800">Earn AED ${CFG.reward}</div><p style="margin:6px 0">Your friend gets AED ${CFG.reward} in their Carrefour Wallet when they join.</p><div class="mute">Paid into your Carrefour Wallet within ${CFG.holdWorkingDays} working days of your friend's first order.</div></div>
+  </div><div class="gc">
+  <div class="stats"><div><b>${a.friends.length}</b><span>Invited</span></div><div><b>${a.friends.filter(f=>f.s!=='invited').length}</b><span>Joined</span></div><div><b>${aed(bal(a.ledger))}</b><span>Earned</span></div><div><b>${aed(pend(a.ledger))}</b><span>Pending</span></div></div>
+  <h3 style="margin-top:0">Your friends on Carrefour</h3><div class="card" style="padding:4px 14px">${a.friends.map(f=>`<div class="fl"><div><b>${f.n}</b><div class="mute" style="font-size:12px">${f.ph||'On Carrefour'}</div></div><span class="st ${f.s}">${STATUS[f.s]}</span></div>`).join('')}</div>
+  <h3>See who to invite</h3><div class="card">${a.contacts?`<div style="margin:-4px 0">${CONTACTS.map(n=>{const s=a.cst[n];return `<div class="fl"><b>${n}</b>${s==='invited'?'<span class="st paid">Invited</span>':s==='carrefour'?'<span class="small">On Carrefour</span>':`<button class="ibtn" data-a="cinvite" data-v="${n}">Invite</button>`}</div>`}).join('')}</div><div class="small" style="margin-top:8px">Optional. Rewards never depend on this.</div>`:`<div class="mute">Optional. Rewards never depend on this.</div><button class="btn sm ghost" style="margin-top:10px" data-a="contacts">Show my contacts</button>`}</div>
+  <h3>Fine print</h3><div class="card small" style="color:var(--ink);line-height:1.6"><ol style="margin-left:18px"><li>You earn AED ${CFG.reward} in your Carrefour Wallet within ${CFG.holdWorkingDays} working days of your friend placing their first order.</li><li>Your friend gets AED ${CFG.reward} in their Carrefour Wallet when they join.</li><li>Your friend can use up to AED ${CFG.maxUse} on their first order and keep the rest for their next order, within ${CFG.expiryDays} days.</li><li>The referral offer can't be combined with other offers.</li><li>New customers only.</li><li>Rewards can be held or reversed if an order is cancelled, returned or looks unusual.</li></ol></div></div></div></div>`}
+
+function omarFlow(){const o=S.o;
+  if(o.stage==='landing')return `<div class="page narrow" style="padding-top:22px"><div class="hero" style="padding:20px"><div style="color:#cfe1ff;font-size:14px;font-weight:600">Aisha invited you</div><div style="font-size:29px;font-weight:800;line-height:1.15;margin:8px 0 10px">AED ${CFG.reward} in your Carrefour Wallet</div><div style="color:#ffd763;font-weight:700;font-size:13.5px">Min basket ${aedI(CFG.minBasket)} · New customers only</div></div>
+   <div style="margin:4px 0 16px"><span class="chip">${ic('check',14)} Code applied: AISHA35</span></div><button class="btn" data-a="join">Join and claim</button><div class="center" style="margin-top:16px"><button class="lnk" style="color:var(--blue)" data-a="terms">Terms</button></div></div>`;
+  if(o.stage==='signup')return `${appBar('Create your account')}<div class="page narrow"><div class="card"><div class="mute">Mobile number</div><div style="font-size:19px;font-weight:700;margin:4px 0 12px">+971 50 123 4567</div><span class="chip">${ic('check',14)} Code applied: AISHA35</span></div><button class="btn" data-a="otp">Send verification code</button></div>`;
+  if(o.stage==='otp')return `${appBar('Verify your phone')}<div class="page narrow"><div class="card center"><div class="mute">Code sent to +971 50 123 4567</div><div style="font-size:32px;letter-spacing:.5em;margin:14px 0 6px;font-weight:800;padding-left:.5em">1234</div></div><button class="btn" data-a="verify">Verify and continue</button></div>`;
+  return ''}
+function welcomeView(){const b=bal(S.o.ledger);return `<div class="page narrow center" style="padding-top:70px"><div class="tick">${ic('check',32)}</div><h2>Welcome to Carrefour</h2><p class="mute" style="margin:6px 0 20px">Thanks for ordering again, Omar.</p><div class="card"><div class="mute">Wallet balance</div><b style="font-size:24px">${aed(b)}</b></div></div>`}
+
+function screen(){
+  if(S.who==='omar'&&S.o.stage!=='app')return omarFlow();
+  if(S.sub==='welcome')return welcomeView();
+  if(S.sub==='wallet')return walletView();
+  if(S.who==='aisha'&&S.sub==='refer')return referView();
+  if(S.tab==='home')return S.who==='aisha'?aishaHome():omarHome();
+  if(S.tab==='cat')return `<div class="page"><h2>Categories</h2><div class="card" style="padding:4px 14px">${['Grocery','Fresh','Household','Bulk','Appliances','Phones','Electronics'].map(x=>`<div class="fl"><b>${x}</b></div>`).join('')}</div></div>`;
+  if(S.tab==='cart')return cartView();
+  if(S.tab==='profile')return profileView();
+  return ''}
+
+/* ============ SHEETS ============ */
+function sendRow(who){return `<div class="send">${[['WhatsApp','#25a244','chat'],['SMS','#1c3a8a','sms'],['Copy link','#4b5a78','link']].map(([l,c,i])=>`<button class="sendb" data-a="send" data-v="${l}" data-w="${who}"><i style="background:${c}">${ic(i)}</i>${l}</button>`).join('')}</div>`}
+const X=`<button class="x" data-a="close" aria-label="Close">${ic('x')}</button>`;
+function sheetView(){const s=S.sheet,d=S.sd;if(!s)return '';
+  if(s==='nudge1')return `<div class="sheet">${X}<h2>Order delivered on time. Would you like to refer a friend?</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
+  if(s==='nudge2')return `<div class="sheet">${X}<h2>You saved ${d}%. Share the saving with a friend.</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
+  if(s==='reward')return `<div class="sheet">${X}<h2>AED ${CFG.reward} credited to your Carrefour Wallet. Invite another friend.</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="refer">Refer now</button><button class="btn ghost" data-a="close">Maybe later</button></div></div>`;
+  if(s==='invite')return `<div class="sheet">${X}<h2>Invite your friends</h2><div class="bubble">${MSG}<br><span class="link">carrefour.digital/join/AISHA35</span></div><b>Send with</b>${sendRow('')}</div>`;
+  if(s==='contact')return `<div class="sheet">${X}<h2>Invite ${d}</h2><div class="bubble">${MSG}</div><b>Send with</b>${sendRow(d)}</div>`;
+  if(s==='confirm')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">${d}</h2><p class="mute" style="margin:6px 0 16px">Your friend will show as Invited in your list.</p><button class="btn" data-a="done">Done</button></div>`;
+  if(s==='lvl'){const l=CFG.levels.find(x=>x.n===d);return `<div class="sheet">${X}<h2>Level ${l.n}</h2><p class="mute" style="margin:6px 0 12px">Refer ${l.target} friends to unlock. We'll reveal what it includes when you get there.</p><div class="pbar dark"><b style="width:${Math.min(100,progress()/l.target*100)}%"></b></div><div class="small">${progress()} of ${l.target} friends so far</div></div>`}
+  if(s==='info')return `<div class="sheet">${X}<h2>How it works</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>Share your link with a friend.</li><li>They join and get AED ${CFG.reward} in their wallet.</li><li>After their first delivered order, you get AED ${CFG.reward} within ${CFG.holdWorkingDays} working days.</li></ol></div>`;
+  if(s==='inelig')return `<div class="sheet center"><div style="font-size:38px">👋</div><h2 style="padding:0">You're already with us</h2><p class="mute" style="margin:8px 0 16px">This referral is for new Carrefour customers, so the AED ${CFG.reward} credit isn't available on your account. You still get the standard welcome offer: ${CFG.welcomePct}% off your first order.</p><button class="btn" data-a="close">Continue</button></div>`;
+  if(s==='terms')return `<div class="sheet">${X}<h2>Terms</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>You get AED ${CFG.reward} in your Carrefour Wallet when you join.</li><li>Use AED 10, 25 or 35 on one order, up to AED ${CFG.maxUse}; keep the rest for your next order.</li><li>${REDEEM}</li><li>AED ${CFG.minBasket} minimum basket each time you use it.</li><li>The referral offer replaces the welcome offer and can't be combined with other offers.</li><li>New customers only.</li><li>Rewards can be held or reversed if an order is cancelled, returned or looks unusual.</li></ol></div>`;
+  if(s==='placed')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">Order placed</h2>${d.aisha?'':`<div class="card sum" style="text-align:left;margin-top:12px"><div class="l"><span>Credit used</span><b>${aedI(d.used)}</b></div><div class="l"><span>Credit left</span><b>${aedI(d.left)}</b></div></div>${d.left>=CFG.minUse?`<p class="mute" style="margin-bottom:12px">${REDEEM}</p>`:d.left>0?`<p class="mute" style="margin-bottom:12px">Credit under AED ${CFG.minUse} can't be redeemed.</p>`:''}`}<button class="btn" style="margin-top:12px" data-a="placedOk">Continue</button></div>`;
+  if(s==='story')return `<div class="sheet">${X}<h2>Story</h2><b>Aisha, referrer</b><ol style="margin:6px 0 12px 18px;line-height:1.6"><li>Nudge 1 on Home: order delivered on time.</li><li>Nudge 2: after an order with a saving of ${CFG.savingPct}% or more.</li><li>Refer &amp; Earn: levels, friends, invite, contacts.</li><li>Her reward is Pending, then AED ${CFG.reward} in her wallet.</li><li>Nudge 3: reward credited, invite another friend.</li></ol><b>Omar, invitee</b><ol style="margin:6px 0 12px 18px;line-height:1.6"><li>Link and landing.</li><li>Sign-up and phone verification.</li><li>AED ${CFG.reward} in his wallet.</li><li>Basket of AED ${CFG.minBasket} or more.</li><li>Credit choice: 10, 25 or 35.</li><li>Order placed: used and left.</li><li>Delivered: Reorder in one tap.</li><li>Second order follows the live balance.</li><li>Welcome to Carrefour.</li></ol>
+   <b>Demo controls</b><div class="opts"><button class="opt ${S.issue?'on':''}" data-a="tglIssue">Order had an issue: ${S.issue?'ON':'OFF'}</button><button class="opt ${S.o.existing?'on':''}" data-a="tglExisting">Omar is an existing customer: ${S.o.existing?'ON':'OFF'}</button></div>
+   <b>Nudge log</b><div class="log" style="margin:4px 0 12px">${S.log.length?S.log.map(l=>`<span class="${l.ok?'yes':'no'}">${l.ok?'✓ shown':'✗ suppressed'}</span> · ${l.n}${l.ok?'':' ('+l.why+')'}`).join('<br>'):'Nothing fired yet.'}</div>
+   <b>Event log</b><div class="log" style="margin-top:4px">${S.events.length?S.events.slice(0,14).map(e=>`${e.name}${e.props?' · '+e.props:''}`).join('<br>'):'No events yet.'}</div></div>`;
+  return ''}
+
+/* ============ RENDER ============ */
+function render(){
+  $('#top').innerHTML=topBar();const nb=navBar();$('#nav').innerHTML=nb;$('#nav').style.display=nb?'flex':'none';
+  const m=$('#main'),st=m.scrollTop,key=S.who+S.tab+S.sub+(S.o.stage);
+  m.innerHTML=screen();if(render.k!==key){m.scrollTop=0;render.k=key}else m.scrollTop=st;
+  const ov=$('#overlay'),sv=sheetView();ov.style.display=sv?'flex':'none';ov.innerHTML=sv}
+
+/* ============ ACTIONS ============ */
+function placeOmar(){const o=S.o,sub=subtotal(),used=o.sel||0,first=o.orders.length===0,id=1000+o.orders.length+1;
+  if(used)o.ledger.unshift({id:'U'+id,t:'Used on order #'+id,amt:-used,st:'ok',note:'Referral credit'});
+  o.orders.push({id,status:'placed',sub});o.cart={};
+  S.sheet='placed';S.sd={used,left:bal(o.ledger)};
+  track(first?'first_order_placed':'second_order_placed','credit used '+used);
+  if(first){setFriend('Omar R.','way');S.a.ledger.unshift({id:'L2',t:'Referral reward · Omar R.',amt:CFG.reward,st:'pending',note:'Waiting for delivery and a short hold'});track('reward_pending','AED '+CFG.reward)}
+  else{const e=S.a.ledger.find(x=>x.id==='L2');if(e&&e.st==='pending'){e.st='ok';e.note="Friend's first order delivered";setFriend('Omar R.','paid');S.a.rewardPrompt=true;track('reward_credited','AED '+CFG.reward+' (hold cleared, demo)')}o.orders[o.orders.length-1].status='delivered'}}
+function placeAisha(){const a=S.a,sub=subtotal(),was=wasTotal(),pct=was>0?Math.round((was-sub)/was*100):0;
+  a.orders.push({id:2000+a.orders.length+1,status:'placed',pct});if(pct>=CFG.savingPct)a.nudge2=pct;else S.log.unshift({n:'Nudge 2: saving under '+CFG.savingPct+'%',ok:false,why:'saving was '+pct+'%'});a.cart={};S.sheet='placed';S.sd={aisha:true};track('aisha_order_placed','saving '+pct+'%')}
+function act(a,d){const A=S.a,O=S.o;
+  switch(a){
+  case 'who':S.who=d.v;S.tab='home';S.sub=null;S.sheet=null;S.sd=null;if(d.v==='omar'){if(!A.friends.find(f=>f.n==='Omar R.'))setFriend('Omar R.','invited');if(O.stage==='landing')track('referral_link_opened','AISHA35')}maybePrompt();break;
+  case 'tab':S.tab=d.v;S.sub=null;break;
+  case 'back':if(S.sub==='wallet'||S.sub==='refer'){S.sub=null;S.tab='profile'}else if(S.who==='omar'&&O.stage==='signup')O.stage='landing';else if(S.who==='omar'&&O.stage==='otp')O.stage='signup';else S.sub=null;break;
+  case 'story':S.sheet='story';break;
+  case 'tglIssue':S.issue=!S.issue;break;
+  case 'tglExisting':if(O.stage==='landing')O.existing=!O.existing;break;
+  case 'reset':S=seed();maybePrompt();break;
+  case 'close':if(S.sheet==='nudge1'||S.sheet==='nudge2')A.dismiss++;if(S.sheet==='nudge1')A.nudge1=false;S.sheet=null;S.sd=null;break;
+  case 'later':if(S.sheet==='nudge1')A.nudge1=false;S.sheet=null;A.dismiss++;break;
+  case 'nreferX':A.nudge1=false;A.dismiss=0;S.sheet=null;S.tab='profile';S.sub='refer';track('nudge_tapped','Refer now');break;
+  case 'refer':S.sheet=null;S.tab='profile';S.sub='refer';break;
+  case 'info':S.sheet='info';break;
+  case 'wallet':S.sub='wallet';break;
+  case 'lvlprev':S.sheet='lvl';S.sd=+d.v;break;
+  case 'invite':S.sheet='invite';break;
+  case 'contacts':A.contacts=true;break;
+  case 'cinvite':S.sheet='contact';S.sd=d.v;break;
+  case 'send':if(d.w)A.cst[d.w]='invited';S.sheet='confirm';S.sd=d.v==='Copy link'?'Link copied':'Invite sent';track('invite_sent',d.v);break;
+  case 'done':S.sheet=null;S.sd=null;S.tab='home';S.sub=null;break;
+  case 'areveal':A.revealed=true;break;
+  case 'oreveal':O.revealed=true;break;
+  case 'terms':S.sheet='terms';break;
+  case 'join':O.stage='signup';break;
+  case 'otp':O.stage='otp';break;
+  case 'verify':O.stage='app';S.tab='home';track('signup_verified','');
+    if(O.existing){O.revealed=true;S.sheet='inelig';track('referral_ineligible','existing customer')}
+    else{O.ledger.unshift({id:'W1',t:'Referral welcome credit',amt:CFG.reward,st:'ok',exp:inDays(CFG.expiryDays),note:'Valid until '+inDays(CFG.expiryDays)});setFriend('Omar R.','joined');track('wallet_credited','AED '+CFG.reward)}break;
+  case 'starter':cur().cart={...STARTER};S.tab='home';break;
+  case 'inc':{const c=cur().cart;c[d.v]=(c[d.v]||0)+1;break}
+  case 'dec':{const c=cur().cart;c[d.v]=(c[d.v]||0)-1;if(c[d.v]<=0)delete c[d.v];break}
+  case 'sel':O.sel=+d.v;break;
+  case 'checkout':if(S.who==='aisha')placeAisha();else placeOmar();break;
+  case 'placedOk':S.sheet=null;S.sd=null;if(S.who==='omar'&&O.orders.length>=2)S.sub='welcome';else S.tab='home';maybePrompt();break;
+  case 'deliver':O.orders[O.orders.length-1].status='delivered';track('first_order_delivered','');break;
+  case 'adeliver':{const l=A.orders[A.orders.length-1];l.status='delivered';
+    maybePrompt();break}
+  case 'reorder':O.cart={...STARTER};O.sel=null;S.tab='cart';track('reorder_one_tap','');break;
+  }
+  render()}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;e.preventDefault();act(el.dataset.a,el.dataset)});
+act('reset',{});
+</script>
+</body>
+</html>
