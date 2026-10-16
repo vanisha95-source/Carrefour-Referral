@@ -425,6 +425,37 @@ svg.ill{width:100%;height:100%;stroke:none;stroke-width:0;overflow:visible}svg.i
 .art .av2{position:relative;overflow:hidden}.art .av2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .dl em b{font-size:46px!important;min-height:0!important;line-height:1}
 .dl s{display:block;margin:0!important}.dl strong{display:block}
+
+/* ===== v14 final polish: tinted canvas, product cards, glass, bands ===== */
+#phone{background:radial-gradient(900px 420px at 100% -4%,rgba(11,78,162,.13),transparent 62%),radial-gradient(760px 420px at -8% 30%,rgba(240,195,84,.20),transparent 60%),radial-gradient(700px 400px at 105% 78%,rgba(232,69,138,.07),transparent 60%),linear-gradient(180deg,#eaf1fb 0%,#f8f4ea 55%,#eaf0fa 100%)}
+#main{background:transparent}.cats{background:transparent!important}
+.card{background:linear-gradient(180deg,#fff,#f9fbff);border:1px solid rgba(207,218,238,.8)}
+#nav,.bar{background:rgba(255,255,255,.82)!important;-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4)}
+.sh2{position:relative;padding-left:12px}.sh2::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:4px;background:linear-gradient(180deg,var(--blue),#e8458a)}
+.pe{background:linear-gradient(110deg,#eef3ff 30%,#fff 50%,#eef3ff 70%);background-size:200% 100%;animation:shim 1.6s linear infinite}@keyframes shim{to{background-position:-200% 0}}
+.plist.card{background:transparent;border:0;box-shadow:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plist .prod.pc{position:relative;flex-direction:column;align-items:stretch;gap:0;padding:0;border:1px solid rgba(207,218,238,.85);border-radius:20px;background:#fff;overflow:visible;box-shadow:0 2px 4px rgba(15,27,51,.04),0 12px 26px rgba(15,27,51,.07);transition:transform .25s,box-shadow .25s}
+.plist .prod.pc:hover{background:#fff;transform:translateY(-4px);box-shadow:0 18px 36px rgba(15,27,51,.13)}
+.prod.pc .pe{width:100%;height:112px;border-radius:19px 19px 0 0;font-size:46px}
+.prod.pc .pe img{transition:transform .6s}.prod.pc:hover .pe img{transform:scale(1.08)}
+.prod.pc .pn{padding:12px 12px 6px;font-size:14px;line-height:1.25;flex:1}.prod.pc .pn .mute{margin-top:4px;color:var(--ink);font-weight:800;font-size:15px}.prod.pc .pn s{font-weight:500}
+.prod.pc .qty{position:absolute;top:92px;right:10px;background:#fff;border-radius:99px;padding:3px;box-shadow:0 6px 16px rgba(15,27,51,.2);gap:8px}
+.prod.pc .qty button{width:30px;height:30px}.prod.pc .qty b{min-width:14px;text-align:center}
+.prod.pc .qty:not(:has(b)) button{background:var(--blue);color:#fff;border-color:var(--blue)}
+.prod.pc .tg{position:absolute;top:8px;left:8px;z-index:2;background:#e30613;color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:99px;box-shadow:0 4px 10px rgba(227,6,19,.35)}
+.prod.pc .tg.f{background:#1b7f3a;box-shadow:0 4px 10px rgba(27,127,58,.35)}
+.prod:not(.pc) .pe{width:58px;height:58px;border-radius:16px}
+.perks{margin:22px var(--gx) 12px;border-radius:22px;padding:18px 14px;color:#fff;background:linear-gradient(135deg,#08397a,#0b4ea2 55%,#2a6fd0);position:relative;overflow:hidden;box-shadow:0 16px 34px rgba(11,78,162,.28)}
+.perks::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(240,195,84,.5),transparent 70%)}
+.perks h3{font-size:16px;margin-bottom:12px;position:relative;z-index:1}.perks .pg{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1}
+.perks .pk{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px;font-size:12.5px;line-height:1.3;backdrop-filter:blur(6px)}.perks .pk em{font-style:normal;font-size:22px;display:block;margin-bottom:4px}.perks .pk b{display:block;font-size:13px}
+.ftr{text-align:center;color:var(--mute);font-size:12px;padding:6px 16px 90px}.ftr b{color:var(--blue)}
+.mc{position:sticky;bottom:10px;margin:0 var(--gx);z-index:4;display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:18px;color:#fff;cursor:pointer;background:linear-gradient(135deg,#0b4ea2,#08397a);box-shadow:0 14px 30px rgba(8,57,122,.4);animation:mcin .5s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes mcin{from{opacity:0;transform:translateY(30px) scale(.94)}}
+.mc .n{background:#f0c354;color:#0f1b33;font-weight:800;border-radius:99px;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.mc span{flex:1;font-weight:700;font-size:14px}.mc b{font-size:15px}.mc i{font-style:normal;font-weight:800;opacity:.9}
+@media(min-width:900px){.plist.card{grid-template-columns:repeat(4,1fr)!important;column-gap:16px!important}.prod.pc .pe{height:150px}.prod.pc .qty{top:130px}.perks .pg{grid-template-columns:repeat(4,1fr)}}
+@media(prefers-reduced-motion:reduce){.pe,.mc{animation:none}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></head>
 <body><div id="splash" aria-hidden="true"><b>Carrefour</b><i></i><small>REFER &amp; EARN</small></div>
@@ -552,7 +583,8 @@ function homeHeader(){const modes=[['Scheduled','truck','','#e8f0fb','#0b4ea2'],
  <div class="banner s2 ${S.bn===1?'on':''}"><em class="svg">${ILL.scooter}</em>${PH("vegetables,market",32,600,300,"bimg")}<b>Fresh from the farm,<br>at your door.</b><span>Fruit, veg, meat and more</span></div>
  ${S.who==='aisha'?`<div class="banner s3 ${S.bn===2?'on':''}" data-a="refer"><em class="svg">${ILL.gift}</em>${PH("friends,celebration",33,600,300,"bimg")}<b>Invite a friend.<br>You both get AED ${CFG.reward}.</b><span>Tap to open Refer &amp; Earn</span></div>`:`<div class="banner s3 ${S.bn===2?'on':''}"><em class="svg">${ILL.basket}</em>${PH("grocery,basket",34,600,300,"bimg")}<b>Reorder your<br>favourites in one tap.</b><span>After your first order</span></div>`}
  <div class="dots"><u class="${(S.bn||0)===0?'on':''}"></u><u class="${S.bn===1?'on':''}"></u><u class="${S.bn===2?'on':''}"></u></div></div>`+homeExtras()}
-function productList(){const c=cur().cart;return `<div class="sect"><div class="card plist">${PRODUCTS.map(p=>`<div class="prod"><span class="pe"><b>${EMO[p.id]}</b>${PH(PK[p.id],p.id,96,96)}</span><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty">${c[p.id]?`<button data-a="dec" data-v="${p.id}" aria-label="Remove one">−</button><b>${c[p.id]}</b>`:''}<button data-a="inc" data-v="${p.id}" aria-label="Add one">+</button></div></div>`).join('')}</div></div>`}
+function productList(){const c=cur().cart;return `<div class="sect"><div class="sh2"><b>Fresh picks for you</b><span>Handpicked</span></div><div class="card plist">${PRODUCTS.map(p=>`<div class="prod pc">${p.w>p.p?`<i class="tg">-${Math.round((p.w-p.p)/p.w*100)}%</i>`:(p.id===2||p.id===7?'<i class="tg f">Fresh</i>':'')}<span class="pe"><b>${EMO[p.id]}</b>${PH(PK[p.id],p.id,320,240)}</span><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty">${c[p.id]?`<button data-a="dec" data-v="${p.id}" aria-label="Remove one">\u2212</button><b>${c[p.id]}</b>`:''}<button data-a="inc" data-v="${p.id}" aria-label="Add one">+</button></div></div>`).join('')}</div></div>`}
+function homeTail(){const n=cartCount();return `<div class="perks"><h3>Why shoppers love Carrefour</h3><div class="pg"><div class="pk"><em>🚚</em><b>Fast delivery</b>Rapid in 24 mins</div><div class="pk"><em>🥬</em><b>Farm fresh</b>Picked daily</div><div class="pk"><em>🔒</em><b>Secure pay</b>Wallet and cards</div><div class="pk"><em>🎁</em><b>Refer and earn</b>AED ${CFG.reward} each</div></div></div><div class="ftr"><b>Carrefour</b> · Fresh, every day</div>${n?`<div class="mc" data-a="tab" data-v="cart"><i class="n">${n}</i><span>View cart</span><b>${aed(subtotal())}</b><i>›</i></div>`:''}`}
 const CK=['vegetables','fruits','dairy,milk','meat','rice,pantry','juice','cleaning,supplies','baby,toys'];
 function homeExtras(){const cats=[['🥬','Fresh Food','#e5f6ea'],['🍎','Fruits & Veg','#ffeaea'],['🥛','Dairy & Eggs','#e8f0fb'],['🍗','Meat & Fish','#fff1e6'],['🍚','Pantry','#fff8dd'],['🥤','Beverages','#e6f6fa'],['🧴','Household','#efe9ff'],['👶','Baby','#ffe9f3']];
  return `<div class="sect"><div class="sh2"><b>Shop by category</b><span>See all</span></div><div class="cgrid">${cats.map(([e,n,bg],i)=>`<div class="ct" style="background:${bg};animation-delay:${i*.05}s"><em>${e}</em>${PH(CK[i],20+i,200,200)}<span>${n}</span></div>`).join('')}</div></div><div class="sect"><div class="sh2"><b>Deals ending soon</b><span class="cd">--:--:--</span></div><div class="dls">${PRODUCTS.filter(p=>p.w>p.p).map(p=>`<div class="dl"><i class="off">-${Math.round((p.w-p.p)/p.w*100)}%</i><em><b>${EMO[p.id]}</b>${PH(PK[p.id],p.id,240,180)}</em><b>${p.n}</b><div><strong>${aed(p.p)}</strong><s>${aed(p.w)}</s></div><button data-a="inc" data-v="${p.id}" aria-label="Add">+</button></div>`).join('')}</div></div>`}
@@ -564,13 +596,13 @@ function orderCard(orders,deliverAct){const l=orders[orders.length-1];if(!l)retu
  return ''}
 
 function aishaHome(){const a=S.a,l=a.orders[a.orders.length-1];
- return homeHeader()+orderCard(a.orders,'adeliver')+rewardCard()+(l&&l.status==='delivered'?`<div class="sect"><div class="card row"><div><b>✓ Delivered ${S.issue?'with an issue reported':'on time'}</b><div class="mute">Order #${l.id}</div></div></div></div>`:'')+`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList()}
+ return homeHeader()+orderCard(a.orders,'adeliver')+rewardCard()+(l&&l.status==='delivered'?`<div class="sect"><div class="card row"><div><b>✓ Delivered ${S.issue?'with an issue reported':'on time'}</b><div class="mute">Order #${l.id}</div></div></div></div>`:'')+`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList()+homeTail()}
 function omarHome(){const o=S.o,l=o.orders[o.orders.length-1];let h=homeHeader()+'<div class="sect">';
   if(!o.existing){if(!o.revealed)h+=`<button class="reveal" data-a="oreveal"><small>REWARD UNLOCKED</small><div>tap to reveal</div></button>`;
     else h+=`<div class="won"><small>REWARD UNLOCKED</small><div class="wa">AED <span data-count="${CFG.reward}" data-id="oreveal">${CFG.reward}</span></div><div>added to your Carrefour Wallet.</div><div class="small" style="color:#7a5a10;margin-top:4px">${REDEEM}</div></div>`}
   h+='</div>'+orderCard(o.orders,'deliver');
   if(l&&l.status==='delivered'&&o.orders.length===1)h+=`<div class="sect"><div class="card"><b>✓ Delivered</b><div class="mute" style="margin:2px 0 10px">${bal(o.ledger)>0?`You still have ${aedI(bal(o.ledger))}. ${REDEEM}`:'Thanks for ordering with us.'}</div><button class="btn" data-a="reorder">Reorder in one tap</button></div></div>`;
-  h+=`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList();return h}
+  h+=`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList()+homeTail();return h}
 
 function cartView(){
   const A=S.who==='aisha',o=cur(),sub=subtotal(),sav=wasTotal()-sub;
