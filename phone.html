@@ -641,6 +641,22 @@ input,.search{transition:box-shadow .2s,border-color .2s}.search:focus-within{bo
 
 .cbn{align-items:flex-start!important;padding-top:12px!important}.cbn b{margin:0!important}.cbn span{margin:0 0 0 auto!important}
 .cbn .fl:nth-of-type(1){left:40%;top:48px}.cbn .fl:nth-of-type(2){left:58%;top:52px}.cbn .fl:nth-of-type(3){left:76%;top:46px}.cbn .fl{font-size:22px}
+
+/* ===== v30 categories page, toast, extra polish ===== */
+.cgx{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.cgx div{position:relative;overflow:hidden;height:112px;border-radius:20px;padding:12px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 12px 24px rgba(15,27,51,.16);cursor:pointer;transition:transform .25s,box-shadow .25s;animation:up .55s cubic-bezier(.2,.8,.2,1) backwards}
+.cgx div:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 34px rgba(15,27,51,.24)}
+.cgx img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;transition:transform .8s}.cgx div:hover img{transform:scale(1.12)}
+.cgx div::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(0,0,0,.62))}
+.cgx em{position:absolute;right:10px;top:6px;z-index:2;font-style:normal;font-size:36px;filter:drop-shadow(0 4px 5px rgba(0,0,0,.3));animation:mfloat 3.2s ease-in-out infinite}
+.cgx b{position:relative;z-index:2;font-family:Georgia,serif;font-size:17px;text-shadow:0 2px 8px rgba(0,0,0,.45)}.cgx small{position:relative;z-index:2;font-size:11px;font-weight:700;opacity:.92}
+.toast{position:fixed;left:50%;bottom:150px;z-index:97;transform:translateX(-50%);background:#0f1b33;color:#fff;font-weight:700;font-size:13px;padding:9px 16px;border-radius:99px;box-shadow:0 12px 28px rgba(0,0,0,.35);pointer-events:none;animation:tst 1.7s ease both;white-space:nowrap}
+@keyframes tst{0%{opacity:0;transform:translate(-50%,16px) scale(.9)}12%,80%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-10px)}}
+.prof .av{box-shadow:0 0 0 4px #fff,0 0 0 7px rgba(11,78,162,.25);animation:glow 3.4s ease-in-out infinite}
+.fl:hover{background:rgba(11,78,162,.05)}
+.sheet h2{letter-spacing:-.2px}
+@media(prefers-reduced-motion:reduce){.cgx div,.cgx em,.toast,.prof .av{animation:none!important}}
+.cgx div:last-child:nth-child(odd){grid-column:span 2}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></head>
 <body><div id="splash" aria-hidden="true"><b>Carrefour</b><i></i><small>REFER &amp; EARN</small></div>
@@ -779,7 +795,7 @@ function homeExtras(){const cats=[['🥬','Fresh Food','#e5f6ea'],['🍎','Fruit
  return `<div class="sect"><div class="sh2"><b>Shop by category</b><span>See all</span></div><div class="cgrid">${cats.map(([e,n,bg],i)=>`<div class="ct" style="background:${bg};animation-delay:${i*.05}s"><em>${e}</em>${PH(CK[i],20+i,200,200)}<span>${n}</span></div>`).join('')}</div></div><div class="sect"><div class="sh2"><b>Deals ending soon</b><span class="cd">--:--:--</span></div><div class="dls">${PRODUCTS.filter(p=>p.w>p.p).map(p=>`<div class="dl"><i class="off">-${Math.round((p.w-p.p)/p.w*100)}%</i><em><b>${EMO[p.id]}</b>${PH(PK[p.id],p.id,240,180)}</em><b>${p.n}</b><div><strong>${aed(p.p)}</strong><s>${aed(p.w)}</s></div><button data-a="inc" data-v="${p.id}" aria-label="Add">+</button></div>`).join('')}</div></div>`}
 function rewardSheet(d){const pd=d==='pending',cn=[14,30,46,62,78,90].map((l,i)=>`<span class="cn" style="left:${l}%;animation-delay:${(i*.55).toFixed(2)}s">🪙</span>`).join('');
  return `<div class="sheet">${X}<div class="art a3">${cn}<div><div class="big gold"><small style="margin:0 4px 0 0">${pd?'AED':'+AED'}</small><span data-count="${CFG.reward}" data-id="rw${pd?'p':progress()}">${CFG.reward}</span></div><div class="lb">${pd?'ON ITS WAY':'REWARD CREDITED'}</div></div><span class="hint">✦ TAP THE COINS ✦</span></div><h2>${pd?`Omar placed his first order. Your AED ${CFG.reward} is on its way. Invite another friend?`:`AED ${CFG.reward} credited to your Carrefour Wallet. Invite another friend.`}</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="close">Maybe later</button></div></div>`}
-function rewardCard(){const e=S.a.ledger.find(x=>x.id==='L2');if(!e)return '';return e.st==='pending'?`<div class="sect"><div class="card rwc"><span class="rwi">🪙</span><div><b>AED ${CFG.reward} on its way</b><div class="mute">Omar placed his first order. It lands in your wallet after delivery.</div></div></div></div>`:`<div class="sect"><div class="card rwc ok2"><span class="rwi">✅</span><div><b>AED ${CFG.reward} credited</b><div class="mute">Omar's first order was delivered. Invite another friend any time from Profile.</div></div></div></div>`}
+function rewardCard(){const e=S.a.ledger.find(x=>x.id==='L2');if(!e)return '';return e.st==='pending'?`<div class="sect"><div class="card rwc"><span class="rwi">🪙</span><div><b>AED ${CFG.reward} on its way</b><div class="mute">Omar placed his first order. It will be credited within ${CFG.holdWorkingDays} working days.</div></div></div></div>`:`<div class="sect"><div class="card rwc ok2"><span class="rwi">✅</span><div><b>AED ${CFG.reward} credited</b><div class="mute">Omar's first order was delivered. Invite another friend any time from Profile.</div></div></div></div>`}
 function orderCard(orders,deliverAct){const l=orders[orders.length-1];if(!l)return '';
  if(l.status==='placed')return `<div class="sect"><div class="card"><div class="row"><div><b>Your order is on its way</b><div class="mute">Order #${l.id}</div></div><button class="btn sm" data-a="${deliverAct}">Mark delivered</button></div><div class="otl"><span class="dn">✓ Placed</span><i></i><span class="cur">Packing</span><i></i><span>On the way</span></div><div class="track"><div class="ln"></div><span class="tt">🚚</span><span class="dst">🏠</span></div><div class="small" style="margin-top:2px">Demo: tap Mark delivered to simulate delivery</div></div></div>`;
  return ''}
@@ -870,7 +886,9 @@ function omarFlow(){const o=S.o;
   if(o.stage==='signup')return `${appBar('Create your account')}<div class="page narrow"><div class="steps2"><div class="s on"><b>1</b>Join</div><div class="ln "></div><div class="s "><b>2</b>Verify</div><div class="ln "></div><div class="s "><b>3</b>Claim</div></div><div class="ribbon"><em>🎁</em><div><b>AED ${CFG.reward} is waiting for you</b><span>Verify your number to unlock it</span></div></div><div class="card"><div class="mute">Mobile number</div><div style="font-size:19px;font-weight:700;margin:4px 0 12px">+971 50 123 4567</div><span class="chip">${ic('check',14)} Code applied: AISHA35</span></div><button class="btn" data-a="otp">Send verification code</button></div>`;
   if(o.stage==='otp')return `${appBar('Verify your phone')}<div class="page narrow"><div class="steps2"><div class="s dn"><b>✓</b>Join</div><div class="ln fill"></div><div class="s on"><b>2</b>Verify</div><div class="ln "></div><div class="s "><b>3</b>Claim</div></div><div class="card center"><div class="mute">Code sent to +971 50 123 4567</div><div class="otp"><b>1</b><b>2</b><b>3</b><b>4</b></div></div><button class="btn" data-a="verify">Verify and continue</button></div>`;
   return ''}
-function welcomeView(){const b=bal(S.o.ledger),first=S.o.orders.length<2;return `<div class="page narrow center" style="padding-top:18px"><div class="wimg">${PH(first?"grocery,fresh":"market,produce",62,1000,600)}<i class="fl">🥬</i><i class="fl">🍅</i><i class="fl">🥖</i><i class="fl">🍎</i></div><div class="rainw">${['🎉','🪙','✨','🛒','🎁','🥬','🪙','🎉'].map((e,i)=>`<i style="left:${8+i*12}%;animation-delay:${(i*.25).toFixed(2)}s">${e}</i>`).join('')}</div><div class="tick">${ic('check',32)}</div><h2>${first?'Welcome to Carrefour':'Hope you like your journey'}</h2><p class="mute" style="margin:6px 0 8px">${first?'Your first order is on its way, Omar.':'Continue shopping with us, Omar.'}</p>${first?'<div class="route"><i class="rd"></i><em class="sc">🛵</em><em class="hs">🏠</em><span class="eta">⏱ Arriving today 8:30 PM</span><span class="stars">✨</span></div>':''}<div class="card"><div class="mute">Wallet balance</div><b style="font-size:24px">${aed(b)}</b></div><button class="btn" style="margin-top:6px" data-a="wdone">${first?'Continue':'Continue shopping'}</button></div>`}
+function welcomeView(){const b=bal(S.o.ledger),k=S.wk?'hello':(S.o.orders.length<2?'first':'second');
+ const T={hello:['Welcome to Carrefour','Your gift is waiting for you, Omar.','Start exploring'],first:['Happy shopping with us!','Your first order is on its way, Omar.','Continue'],second:['Hope you like your journey','Continue shopping with us, Omar.','Continue shopping']}[k];
+ return `<div class="page narrow center" style="padding-top:18px"><div class="wimg">${PH(k==='second'?"market,produce":"grocery,fresh",62,1000,600)}<i class="fl">🥬</i><i class="fl">🍅</i><i class="fl">🥖</i><i class="fl">🍎</i></div><div class="rainw">${['🎉','🪙','✨','🛒','🎁','🥬','🪙','🎉'].map((e,i)=>`<i style="left:${8+i*12}%;animation-delay:${(i*.25).toFixed(2)}s">${e}</i>`).join('')}</div><div class="tick">${ic('check',32)}</div><h2>${T[0]}</h2><p class="mute" style="margin:6px 0 8px">${T[1]}</p>${k==='first'?'<div class="route"><i class="rd"></i><em class="sc">🛵</em><em class="hs">🏠</em><span class="eta">⏱ Arriving today 8:30 PM</span><span class="stars">✨</span></div>':''}${k==='hello'?`<div class="card thx" style="justify-content:center;text-align:center"><span style="font-size:34px">🎁</span><div><b>AED ${CFG.reward} is waiting in your wallet</b><div class="mute">Tap to reveal it on Home</div></div></div><div style="height:12px"></div>`:`<div class="card"><div class="mute">Wallet balance</div><b style="font-size:24px">${aed(b)}</b></div>`}<button class="btn${k==='hello'?' cta':''}" style="margin-top:6px" data-a="wdone">${T[2]}</button></div>`}
 
 function screen(){
   if(S.who==='omar'&&S.o.stage!=='app')return omarFlow();
@@ -878,7 +896,7 @@ function screen(){
   if(S.sub==='wallet')return walletView();
   if(S.sub==='refer')return referView();
   if(S.tab==='home')return S.who==='aisha'?aishaHome():omarHome();
-  if(S.tab==='cat')return `<div class="page"><h2>Categories</h2><div class="card" style="padding:4px 14px">${['Grocery','Fresh','Household','Bulk','Appliances','Phones','Electronics'].map(x=>`<div class="fl"><b>${x}</b></div>`).join('')}</div></div>`;
+  if(S.tab==='cat')return `<div class="page"><h2>Categories</h2><div class="cgx">${[['Grocery','🧺','pantry,grocery','Pantry and more'],['Fresh','🥬','vegetables,fresh','Farm to door'],['Household','🧴','cleaning,household','Home essentials'],['Bulk','📦','warehouse,bulk','Save more'],['Appliances','🍳','kitchen,appliance','Home tech'],['Phones','📱','smartphone','Latest models'],['Electronics','💻','laptop,electronics','Gadgets']].map(([n,e,k,t],i)=>`<div style="background:linear-gradient(135deg,${['#0f9d58,#0a5a8f','#e8913a,#c4125c','#7a3fe0,#143a78','#0b4ea2,#2a6fd0','#e30613,#a30210','#0f7c8a,#143a78','#143a78,#7a3fe0'][i%7]});animation-delay:${i*.06}s">${PH(k,80+i,500,300)}<em>${e}</em><b>${n}</b><small>${t}</small></div>`).join('')}</div></div>`;
   if(S.tab==='cart')return cartView();
   if(S.tab==='profile')return profileView();
   return ''}
@@ -922,7 +940,7 @@ function placeOmar(){const o=S.o,sub=subtotal(),used=o.sel||0,first=o.orders.len
   o.orders.push({id,status:'placed',sub});o.cart={};
   S.sheet='placed';S.sd={used,left:bal(o.ledger)};
   track(first?'first_order_placed':'second_order_placed','credit used '+used);
-  if(first){setFriend('Omar R.','way');S.a.pendingPrompt=true;S.a.ledger.unshift({id:'L2',t:'Referral reward · Omar R.',amt:CFG.reward,st:'pending',note:'Waiting for delivery and a short hold'});track('reward_pending','AED '+CFG.reward)}
+  if(first){setFriend('Omar R.','way');S.a.pendingPrompt=true;S.a.ledger.unshift({id:'L2',t:'Referral reward · Omar R.',amt:CFG.reward,st:'pending',note:'Will be credited within '+CFG.holdWorkingDays+' working days'});track('reward_pending','AED '+CFG.reward)}
   else{o.orders[o.orders.length-1].status='delivered'}}
 function placeAisha(){const a=S.a,sub=subtotal(),was=wasTotal(),pct=was>0?Math.round((was-sub)/was*100):0;
   a.orders.push({id:2000+a.orders.length+1,status:'placed',pct});if(pct>=CFG.savingPct)a.nudge2=pct;else S.log.unshift({n:'Nudge 2: saving under '+CFG.savingPct+'%',ok:false,why:'saving was '+pct+'%'});a.cart={};S.sheet='placed';S.sd={aisha:true};track('aisha_order_placed','saving '+pct+'%')}
@@ -953,7 +971,7 @@ function act(a,d){const A=S.a,O=S.o;
   case 'terms':S.sheet='terms';break;
   case 'join':O.stage='signup';break;
   case 'otp':O.stage='otp';break;
-  case 'verify':O.stage='app';S.tab='home';track('signup_verified','');
+  case 'verify':O.stage='app';S.tab='home';S.sub='welcome';S.wk=1;track('signup_verified','');
     if(O.existing){O.revealed=true;S.sheet='inelig';track('referral_ineligible','existing customer')}
     else{O.ledger.unshift({id:'W1',t:'Referral welcome credit',amt:CFG.reward,st:'ok',exp:inDays(CFG.expiryDays),note:'Valid until '+inDays(CFG.expiryDays)});setFriend('Omar R.','joined');track('wallet_credited','AED '+CFG.reward)}break;
   case 'starter':cur().cart={...STARTER};break;
@@ -962,7 +980,7 @@ function act(a,d){const A=S.a,O=S.o;
   case 'sel':O.sel=+d.v;break;
   case 'checkout':if(S.who==='aisha')placeAisha();else placeOmar();break;
   case 'placedOk':S.sheet=null;S.sd=null;if(S.who==='omar')S.sub='welcome';else S.tab='home';maybePrompt();break;
-  case 'wdone':S.sub=null;S.tab='home';break;
+  case 'wdone':S.sub=null;S.wk=0;S.tab='home';break;
   case 'deliver':{O.orders[O.orders.length-1].status='delivered';track('first_order_delivered','');const e=A.ledger.find(x=>x.id==='L2');if(e&&e.st==='pending'){e.st='ok';e.note="Friend's first order delivered";setFriend('Omar R.','paid');A.rewardPrompt=true;setTimeout(()=>burst(40),60);track('reward_credited','AED '+CFG.reward+' (hold cleared, demo)')}break}
   case 'adeliver':{const l=A.orders[A.orders.length-1];l.status='delivered';
     maybePrompt();break}
@@ -1011,6 +1029,8 @@ if(matchMedia('(hover:hover)').matches&&!red){let last=0;document.addEventListen
 
 (function(){let hold=0;const d=()=>document.querySelector('.dls');document.addEventListener('pointerdown',e=>{if(e.target.closest&&e.target.closest('.dls'))hold=Date.now()+6000});
 setInterval(()=>{const x=d();if(!x||!x.firstElementChild||Date.now()<hold||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const w=x.firstElementChild.offsetWidth+12;x.scrollTo({left:(x.scrollLeft+w>x.scrollWidth-x.clientWidth+4)?0:x.scrollLeft+w,behavior:'smooth'})},3000)})();
+
+(function(){let n=0;document.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('[data-a=inc]');if(!b)return;const t=document.createElement('div');t.className='toast';const m=['Added to cart \uD83D\uDED2','Nice pick \u2728','Fresh choice \uD83E\uDD6C','Added \uD83C\uDF89'];t.textContent=m[n++%m.length];document.querySelectorAll('.toast').forEach(x=>x.remove());document.body.appendChild(t);setTimeout(()=>t.remove(),1700)})})();
 </script>
 </body>
 </html>
