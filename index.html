@@ -360,6 +360,26 @@ h2{letter-spacing:-.02em;font-weight:800}
 .empty{font-size:64px;display:inline-block;animation:drift 3.5s ease-in-out infinite}
 .pic{transition:transform .2s}.fl:hover .pic{transform:scale(1.08) rotate(-4deg)}
 .chip.on,.cat.on{animation:popin .4s both}
+
+/* ===== v11 live objects ===== */
+@keyframes wiggle{0%,100%{transform:translateY(-50%) rotate(-8deg)}50%{transform:translateY(-50%) rotate(10deg) scale(1.08)}}
+@keyframes livedot{0%{box-shadow:0 0 0 0 rgba(52,210,123,.7)}100%{box-shadow:0 0 0 9px rgba(52,210,123,0)}}
+@keyframes toastin{0%{transform:translate(-50%,-120%);opacity:0}12%,88%{transform:translate(-50%,0);opacity:1}100%{transform:translate(-50%,-120%);opacity:0}}
+@keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.pe{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#f3f6ff,#e1eafb);display:flex;align-items:center;justify-content:center;font-size:25px;flex:none;box-shadow:inset 0 0 0 1px rgba(10,61,143,.06)}
+.prod .pn{flex:1}.prod{gap:12px}
+.reveal{padding-right:74px}.reveal::before{content:"🎁";position:absolute;right:18px;top:50%;font-size:40px;animation:wiggle 2.2s ease-in-out infinite;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
+.slotpill{position:relative}.slotpill::after{content:"";width:7px;height:7px;border-radius:50%;background:#34d27b;margin-left:6px;animation:livedot 1.8s infinite}
+.prof .av{position:relative}.prof .av::after{content:"";position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(#f0c354,#e8458a,#6fd1ff,#7bd88f,#f0c354);-webkit-mask:radial-gradient(circle,transparent 62%,#000 65%);mask:radial-gradient(circle,transparent 62%,#000 65%);animation:spin 7s linear infinite}
+.hero:not([data-a])::after{content:"";position:absolute;left:10%;bottom:20%;width:6px;height:6px;border-radius:50%;background:#fff;opacity:.55;box-shadow:70px -46px 0 #f0c354,170px -14px 0 #fff,250px -56px 0 #e8458a,300px -8px 0 #6fd1ff;animation:sparkle 3.2s infinite;pointer-events:none}
+.wcard::before{content:"";position:absolute;left:12%;bottom:16%;width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:90px -50px 0 #f0c354,200px -10px 0 #fff,260px -60px 0 #6fd1ff;animation:sparkle 3s infinite;pointer-events:none}
+.toast{position:absolute;left:50%;top:70px;z-index:80;max-width:88%;width:340px;background:rgba(10,25,60,.96);color:#fff;border-radius:18px;padding:12px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 14px 34px rgba(0,0,0,.35);animation:toastin 4.6s cubic-bezier(.2,.9,.3,1) both;font-size:14px;line-height:1.35}
+.toast em{font-style:normal;font-size:26px;animation:pulse2 1.2s infinite}.toast b{display:block;font-size:11px;letter-spacing:.14em;color:#f0c354}
+.otl{display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:12px;font-weight:700;color:var(--mute)}.otl span{display:flex;align-items:center;gap:5px}.otl i{flex:1;height:2px;background:#dfe6f4;border-radius:2px}
+.otl .dn{color:var(--green)}.otl .cur{color:var(--blue)}.otl .cur::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue);animation:livedot 1.4s infinite;box-shadow:0 0 0 0 rgba(10,61,143,.6)}
+.note .pbar{margin:10px 0 0}
+.rwc{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#fff8e1,#fff);border:1px solid #f0d78a}.rwc.ok2{background:linear-gradient(135deg,#e8f7ee,#fff);border-color:#bfe6cc}.rwi{font-size:34px;animation:drift 3.5s ease-in-out infinite}
+.hero[data-a=refer]{padding-right:60px}.hero[data-a=refer]::after{top:auto!important;bottom:14px;right:14px;font-size:30px!important}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></head>
 <body><div id="splash" aria-hidden="true"><b>Carrefour</b><i></i><small>REFER &amp; EARN</small></div>
@@ -381,7 +401,7 @@ const CFG={
     {n:4,target:10,hint:'Our biggest referrer perks'}]
 };
 const REDEEM="Use your remaining credit on your next order within 30 days.";
-const MSG=`Hey! I shop for my groceries on the Carrefour app and love it. Join with my code AISHA35 and get AED ${CFG.reward} in your Carrefour Wallet. Min basket AED ${CFG.minBasket}. T&Cs apply.`;
+const MSG=()=>`Hey! I shop for my groceries on the Carrefour app and love it. Join with my code ${code()} and get AED ${CFG.reward} in your Carrefour Wallet. Min basket AED ${CFG.minBasket}. T&Cs apply.`;
 const PRODUCTS=[
   {id:1,n:'Basmati rice 5kg',p:44.5,w:59.9},{id:2,n:'Fresh tomatoes 1kg',p:5.5,w:6.5},
   {id:3,n:'Full-fat milk 2L',p:11.9,w:13.5},{id:4,n:'Olive oil 1L',p:38,w:52},
@@ -390,6 +410,7 @@ const PRODUCTS=[
 const STARTER={1:1,4:1,5:1,3:1,6:1};
 const STATUS={paid:'Reward paid',way:'Reward on its way',joined:'Joined',invited:'Invited'};
 const CONTACTS=['Omar R.','Fatima A.','Hassan B.','Leena C.','Mohammed D.','Priya E.','Zainab F.','Tariq G.'];
+const CONTACTS_O=['Hassan T.','Maryam S.','Yousef B.','Dina F.','Karim L.','Sana W.'];
 const CONTACT0={'Fatima A.':'invited','Leena C.':'carrefour','Zainab F.':'carrefour'};
 
 /* ============ ICONS ============ */
@@ -418,7 +439,7 @@ function seed(){return{anim:{},
  a:{cart:{},orders:[],ledger:[{id:'L1',t:'Referral reward · Sara K.',amt:CFG.reward,st:'ok',note:'Friend\'s first order delivered'}],
     friends:[{n:'Sara K.',s:'paid',ph:'+971 50 ••• 2193'},{n:'Noor A.',s:'way',ph:'+971 52 ••• 7745'},{n:'Rashid M.',s:'joined',ph:'+971 55 ••• 3306'},{n:'Layla H.',s:'invited',ph:'+971 56 ••• 9120'}],
     nudge1:true,nudge2:null,rewardPrompt:false,revealed:false,contacts:false,cst:{...CONTACT0},dismiss:0},
- o:{existing:false,stage:'landing',cart:{},orders:[],ledger:[],sel:null,revealed:false}
+ o:{existing:false,stage:'landing',cart:{},orders:[],ledger:[],sel:null,revealed:false,friends:[],contacts:false,cst:{},rrev:false}
 }}
 let S=seed();
 
@@ -432,7 +453,11 @@ const priceOf=id=>PRODUCTS.find(p=>p.id==id);
 const subtotal=()=>Object.entries(cur().cart).reduce((t,[id,q])=>t+priceOf(id).p*q,0);
 const wasTotal=()=>Object.entries(cur().cart).reduce((t,[id,q])=>t+priceOf(id).w*q,0);
 const cartCount=()=>Object.values(cur().cart).reduce((a,b)=>a+b,0);
-const progress=()=>S.a.friends.filter(f=>f.s==='paid').length;
+const R=()=>S.who==='omar'?S.o:S.a;
+const code=()=>S.who==='omar'?'OMAR35':'AISHA35';
+const EMO={1:'🍚',2:'🍅',3:'🥛',4:'🫒',5:'🍗',6:'🥚',7:'🍌',8:'🧴'};
+const earnedR=l=>l.filter(e=>String(e.t).startsWith('Referral reward')&&e.st==='ok').reduce((x,e)=>x+e.amt,0),pendR=l=>l.filter(e=>String(e.t).startsWith('Referral reward')&&e.st==='pending').reduce((x,e)=>x+e.amt,0);
+const progress=()=>R().friends.filter(f=>f.s==='paid').length;
 const nextLevel=()=>CFG.levels.find(l=>l.target>progress())||CFG.levels[CFG.levels.length-1];
 const curLevel=()=>[...CFG.levels].reverse().find(l=>progress()>=l.target)||CFG.levels[0];
 function options(){return credSteps()}
@@ -445,7 +470,7 @@ function fire(name,sheet,data,isMoment){
   let why=null;
   if(isMoment&&S.issue)why='an issue was reported on the order';
   else if(S.sheet)why='another prompt is already on screen';
-  else if(S.a.dismiss>=CFG.maxDismiss)why='paused after '+CFG.maxDismiss+' dismissals';
+  else if(isMoment&&S.a.dismiss>=CFG.maxDismiss)why='paused after '+CFG.maxDismiss+' dismissals';
   S.log.unshift({n:name,ok:!why,why});
   if(!why){S.sheet=sheet;S.sd=data;track('nudge_shown',name);return true}
   track('nudge_suppressed',name+' ('+why+')');return false}
@@ -475,13 +500,14 @@ function homeHeader(){const modes=[['Scheduled','truck','','#e8f0fb','#0b4ea2'],
  <div class="banner s2 ${S.bn===1?'on':''}"><em>🥬</em><b>Fresh from the farm,<br>at your door.</b><span>Fruit, veg, meat and more</span></div>
  ${S.who==='aisha'?`<div class="banner s3 ${S.bn===2?'on':''}" data-a="refer"><em>🎁</em><b>Invite a friend.<br>You both get AED ${CFG.reward}.</b><span>Tap to open Refer &amp; Earn</span></div>`:`<div class="banner s3 ${S.bn===2?'on':''}"><em>⚡</em><b>Reorder your<br>favourites in one tap.</b><span>After your first order</span></div>`}
  <div class="dots"><u class="${(S.bn||0)===0?'on':''}"></u><u class="${S.bn===1?'on':''}"></u><u class="${S.bn===2?'on':''}"></u></div></div>`}
-function productList(){const c=cur().cart;return `<div class="sect"><div class="card plist">${PRODUCTS.map(p=>`<div class="prod"><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty">${c[p.id]?`<button data-a="dec" data-v="${p.id}" aria-label="Remove one">−</button><b>${c[p.id]}</b>`:''}<button data-a="inc" data-v="${p.id}" aria-label="Add one">+</button></div></div>`).join('')}</div></div>`}
+function productList(){const c=cur().cart;return `<div class="sect"><div class="card plist">${PRODUCTS.map(p=>`<div class="prod"><span class="pe">${EMO[p.id]}</span><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty">${c[p.id]?`<button data-a="dec" data-v="${p.id}" aria-label="Remove one">−</button><b>${c[p.id]}</b>`:''}<button data-a="inc" data-v="${p.id}" aria-label="Add one">+</button></div></div>`).join('')}</div></div>`}
+function rewardCard(){const e=S.a.ledger.find(x=>x.id==='L2');if(!e)return '';return e.st==='pending'?`<div class="sect"><div class="card rwc"><span class="rwi">🪙</span><div><b>AED ${CFG.reward} on its way</b><div class="mute">Omar placed his first order. It lands in your wallet after delivery.</div></div></div></div>`:`<div class="sect"><div class="card rwc ok2"><span class="rwi">✅</span><div><b>AED ${CFG.reward} credited</b><div class="mute">Omar's first order was delivered. Invite another friend any time from Profile.</div></div></div></div>`}
 function orderCard(orders,deliverAct){const l=orders[orders.length-1];if(!l)return '';
- if(l.status==='placed')return `<div class="sect"><div class="card"><div class="row"><div><b>Your order is on its way</b><div class="mute">Order #${l.id}</div></div><button class="btn sm" data-a="${deliverAct}">Mark delivered</button></div><div class="track"><div class="ln"></div><span class="tt">🚚</span><span class="dst">🏠</span></div><div class="small" style="margin-top:2px">Demo control</div></div></div>`;
+ if(l.status==='placed')return `<div class="sect"><div class="card"><div class="row"><div><b>Your order is on its way</b><div class="mute">Order #${l.id}</div></div><button class="btn sm" data-a="${deliverAct}">Mark delivered</button></div><div class="otl"><span class="dn">✓ Placed</span><i></i><span class="cur">Packing</span><i></i><span>On the way</span></div><div class="track"><div class="ln"></div><span class="tt">🚚</span><span class="dst">🏠</span></div><div class="small" style="margin-top:2px">Demo: tap Mark delivered to simulate delivery</div></div></div>`;
  return ''}
 
 function aishaHome(){const a=S.a,l=a.orders[a.orders.length-1];
- return homeHeader()+orderCard(a.orders,'adeliver')+(l&&l.status==='delivered'?`<div class="sect"><div class="card row"><div><b>✓ Delivered ${S.issue?'with an issue reported':'on time'}</b><div class="mute">Order #${l.id}</div></div></div></div>`:'')+`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList()}
+ return homeHeader()+orderCard(a.orders,'adeliver')+rewardCard()+(l&&l.status==='delivered'?`<div class="sect"><div class="card row"><div><b>✓ Delivered ${S.issue?'with an issue reported':'on time'}</b><div class="mute">Order #${l.id}</div></div></div></div>`:'')+`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList()}
 function omarHome(){const o=S.o,l=o.orders[o.orders.length-1];let h=homeHeader()+'<div class="sect">';
   if(!o.existing){if(!o.revealed)h+=`<button class="reveal" data-a="oreveal"><small>REWARD UNLOCKED</small><div>tap to reveal</div></button>`;
     else h+=`<div class="won"><small>REWARD UNLOCKED</small><div class="wa">AED <span data-count="${CFG.reward}" data-id="oreveal">${CFG.reward}</span></div><div>added to your Carrefour Wallet.</div><div class="small" style="color:#7a5a10;margin-top:4px">${REDEEM}</div></div>`}
@@ -495,12 +521,12 @@ function cartView(){
   const first=o.orders.length===0;let c='',credit=0,welc=0;
   if(!A){fixSel();const ops=options(),b=bal(o.ledger);credit=o.sel||0;
     if(b>0){
-      if(sub<CFG.minBasket)c+=`<div class="note">Add ${aed(CFG.minBasket-sub)} more (minimum basket ${aedI(CFG.minBasket)}) to use your ${aedI(b)} referral credit.</div>`;
+      if(sub<CFG.minBasket)c+=`<div class="note">Add ${aed(CFG.minBasket-sub)} more (minimum basket ${aedI(CFG.minBasket)}) to use your ${aedI(b)} referral credit.<div class="pbar dark"><b style="width:${Math.min(100,sub/CFG.minBasket*100)}%"></b></div></div>`;
       else c+=`<div class="ok">Your ${aedI(b)} referral credit can be used on this order.</div><div class="mute">${REDEEM}</div>${ops.length>1?`<div class="slide"><div class="sh"><span>Use referral credit</span><b id="slv">AED ${o.sel}</b></div><input type="range" id="crd" min="0" max="${ops.length-1}" step="1" value="${ops.indexOf(o.sel)}" style="--p:${ops.indexOf(o.sel)/(ops.length-1)*100}%" aria-label="Referral credit to use"><div class="tk">${ops.map(v=>`<span class="${v===o.sel?'on':''}">${v}</span>`).join('')}</div></div>`:`<div class="slide one"><div class="sh" style="margin:0"><span>Use your remaining credit</span><b id="slv">AED ${o.sel}</b></div></div>`}`}
     if(first&&o.existing){welc=Math.round(sub*CFG.welcomePct)/100;c+=`<div class="card row"><span>Welcome offer ${CFG.welcomePct}%</span><b style="color:var(--green)">- ${aed(welc)}</b></div>`}
     else if(first)c+=`<div class="card row grey"><span>Welcome offer ${CFG.welcomePct}%</span><span class="small">Replaced by referral credit</span></div>`}
   const total=sub+CFG.fee-credit-welc;
-  return `<div class="page"><h2>Cart</h2><div class="g2"><div class="gc"><div class="card">${PRODUCTS.filter(p=>o.cart[p.id]).map(p=>`<div class="prod"><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty"><button data-a="dec" data-v="${p.id}">−</button><b>${o.cart[p.id]}</b><button data-a="inc" data-v="${p.id}">+</button></div></div>`).join('')}</div>
+  return `<div class="page"><h2>Cart</h2><div class="g2"><div class="gc"><div class="card">${PRODUCTS.filter(p=>o.cart[p.id]).map(p=>`<div class="prod"><span class="pe">${EMO[p.id]}</span><div class="pn">${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty"><button data-a="dec" data-v="${p.id}">−</button><b>${o.cart[p.id]}</b><button data-a="inc" data-v="${p.id}">+</button></div></div>`).join('')}</div>
   ${sav>0.01?`<div class="ok" style="margin-top:0">You saved ${aed(sav)} with this cart!</div>`:''}${c}
   </div><div class="gc"><div class="card sum"><b>Order summary</b><div class="l"><span>Subtotal</span><span>${aed(sub)}</span></div><div class="l"><span>Delivery fee</span><span>${aed(CFG.fee)}</span></div>${welc?`<div class="l"><span>Welcome offer ${CFG.welcomePct}%</span><span>- ${aed(welc)}</span></div>`:''}${credit?`<div class="l"><span>Referral credit</span><span>- ${aed(credit)}</span></div>`:''}<div class="l t"><b>Total</b><b>${aed(total)}</b></div></div>
   <button class="btn" data-a="checkout">Checkout (${aed(total)})</button></div></div></div>`}
@@ -511,11 +537,11 @@ function profileView(){const A=S.who==='aisha',L=A?S.a.ledger:S.o.ledger,nm=A?'A
  const nl=nextLevel();
  return `<div class="page"><div class="prof"><div class="av">${nm[0]}</div><div><h2 style="margin:0">${nm}</h2><div class="mute">${A?'+971 50 ••• 4821':'+971 55 ••• 0937'} · Carrefour member</div></div></div>
  <div class="g2"><div class="gc">
- ${A?`<div class="hero" data-a="refer" style="cursor:pointer"><div class="row"><b style="font-size:17px">Refer &amp; Earn</b><span class="chip" style="background:#fff;color:#0b4ea2">Level ${curLevel().n}</span></div><div style="font-size:13.5px;opacity:.92;margin-top:4px">Give AED ${CFG.reward}, get AED ${CFG.reward}. ${progress()} of ${nl.target} friends toward Level ${nl.n}.</div><div class="pbar" style="margin:10px 0 0"><b style="width:${Math.min(100,progress()/nl.target*100)}%"></b></div></div>`:''}
+ ${true?`<div class="hero" data-a="refer" style="cursor:pointer"><div class="row"><b style="font-size:17px">Refer &amp; Earn</b><span class="chip" style="background:#fff;color:#0b4ea2">Level ${curLevel().n}</span></div><div style="font-size:13.5px;opacity:.92;margin-top:4px">${S.who==='omar'&&!S.o.orders.some(x=>x.status==='delivered')?'Unlocks after your first delivery. ':''}Give AED ${CFG.reward}, get AED ${CFG.reward}. ${progress()} of ${nl.target} friends toward Level ${nl.n}.</div><div class="pbar" style="margin:10px 0 0"><b style="width:${Math.min(100,progress()/nl.target*100)}%"></b></div></div>`:''}
  <div class="card"><div class="row"><b>Apartment</b><span class="chip blue">Default</span></div><div class="mute">Apartment - 515 - four points by Sheraton</div></div>
  <div class="card" style="padding:4px 14px">
   ${row('wallet','Wallet &amp; Saved Cards','Balance and history','wallet',`<span class="chip">${aed(bal(L))}</span>`)}
-  ${A?row('gift','Refer &amp; Earn','Levels, friends and rewards','refer',chev):''}
+  ${true?row('gift','Refer &amp; Earn','Levels, friends and rewards','refer',chev):''}
   ${row('clock','My Orders','Track, reorder, invoices','',chev)}
   ${row('pin','Saved Addresses','1 saved','',chev)}</div></div>
  <div class="gc"><div class="card" style="padding:4px 14px">
@@ -539,19 +565,19 @@ function walletView(){
   </div><div class="gc"><h3 style="margin-top:0">History</h3><div class="card" style="padding:4px 14px">${L.length?L.map(e=>`<div class="entry"><div class="row"><span>${e.t}</span><span class="a ${e.st==='pending'?'pen':e.amt<0?'neg':'pos'}">${e.amt<0?'-':'+'}${aed(Math.abs(e.amt))}</span></div><div class="small">${e.st==='pending'?'Pending · ':''}${e.note||''}</div></div>`).join(''):'<div class="mute" style="padding:10px 0">No transactions yet.</div>'}</div></div></div></div>`}
 
 function referView(){
-  const a=S.a,pr=progress(),nl=nextLevel(),cl=curLevel();
+  const a=R(),pr=progress(),nl=nextLevel(),cl=curLevel(),lock=S.who==='omar'&&!S.o.orders.some(x=>x.status==='delivered'),CL=S.who==='omar'?CONTACTS_O:CONTACTS,rv=S.who==='omar'?a.rrev:a.revealed;
   return `${appBar('Refer &amp; Earn',`<button class="iconbtn" data-a="info" aria-label="Info">${ic('info')}</button>`)}<div class="page"><div class="g2"><div class="gc">
   <div class="hero"><span class="fx f1">🎁</span><span class="fx f2">🪙</span><span class="fx f3">✨</span><div class="small" style="color:#cfe1ff;font-weight:700">YOU ARE AT LEVEL ${cl.n}</div><div class="big">Invite a friend, you both get AED ${CFG.reward}</div>
    <div class="lvls">${CFG.levels.map(l=>l.n===cl.n?`<div class="lvl"><div class="lh"><span>Level ${l.n}</span><span>${ic('check',15)} you are here</span></div><b style="font-size:17px">${l.title}</b><span class="tg">${l.line}</span></div>`:l.n<cl.n?'':`<button class="lvl lock" data-a="lvlprev" data-v="${l.n}"><div class="lh"><span>Level ${l.n}</span>${ic('lock',15)}</div><div class="blur">${l.hint}</div><div class="un">Unlock to know more</div><div class="tg">Refer ${l.target} friends</div></button>`).join('')}</div>
    <div class="pbar"><b style="width:${Math.min(100,pr/nl.target*100)}%"></b></div><div style="font-size:13px;color:#dbe8ff;margin-bottom:12px">${pr} of ${nl.target} friends toward Level ${nl.n}</div>
-   <button class="btn white" data-a="invite">${ic('chat',20)} Invite your friends</button>
+   ${lock?`<button class="btn white" disabled style="opacity:.8">🔒 Unlocks after your first delivery</button>`:`<button class="btn white" data-a="invite">${ic('chat',20)} Invite your friends</button>`}
    <div style="font-size:12.5px;color:#dbe8ff;text-align:center;margin-top:10px">1,240 people joined Carrefour with a friend's invite this month</div></div>
-  ${a.revealed?`<div class="won"><small>REWARD UNLOCKED</small><div class="wa">Earn AED <span data-count="${CFG.reward}" data-id="areveal">${CFG.reward}</span> per friend</div></div>`:`<button class="reveal" data-a="areveal"><small>REWARD UNLOCKED</small><div>tap to reveal</div></button>`}
+  ${rv?`<div class="won"><small>REWARD UNLOCKED</small><div class="wa">Earn AED <span data-count="${CFG.reward}" data-id="areveal">${CFG.reward}</span> per friend</div></div>`:`<button class="reveal" data-a="areveal"><small>REWARD UNLOCKED</small><div>tap to reveal</div></button>`}
   <h3>What you get / what your friend gets</h3><div class="card"><div style="font-size:21px;font-weight:800">Earn AED ${CFG.reward}</div><p style="margin:6px 0">Your friend gets AED ${CFG.reward} in their Carrefour Wallet when they join.</p><div class="mute">Paid into your Carrefour Wallet within ${CFG.holdWorkingDays} working days of your friend's first order.</div></div>
   </div><div class="gc">
-  <div class="stats"><div><b data-count="${a.friends.length}" data-id="st1_${a.friends.length}">${a.friends.length}</b><span>Invited</span></div><div><b data-count="${a.friends.filter(f=>f.s!=='invited').length}" data-id="st2_${a.friends.filter(f=>f.s!=='invited').length}">${a.friends.filter(f=>f.s!=='invited').length}</b><span>Joined</span></div><div><b>${aed(bal(a.ledger))}</b><span>Earned</span></div><div><b>${aed(pend(a.ledger))}</b><span>Pending</span></div></div>
+  <div class="stats"><div><b data-count="${a.friends.length}" data-id="st1_${a.friends.length}">${a.friends.length}</b><span>Invited</span></div><div><b data-count="${a.friends.filter(f=>f.s!=='invited').length}" data-id="st2_${a.friends.filter(f=>f.s!=='invited').length}">${a.friends.filter(f=>f.s!=='invited').length}</b><span>Joined</span></div><div><b>${aed(earnedR(a.ledger))}</b><span>Earned</span></div><div><b>${aed(pendR(a.ledger))}</b><span>Pending</span></div></div>
   <h3 style="margin-top:0">Your friends on Carrefour</h3><div class="card" style="padding:4px 14px">${a.friends.map(f=>`<div class="fl"><div><b>${f.n}</b><div class="mute" style="font-size:12px">${f.ph||'On Carrefour'}</div></div><span class="st ${f.s}">${STATUS[f.s]}</span></div>`).join('')}</div>
-  <h3>See who to invite</h3><div class="card">${a.contacts?`<div style="margin:-4px 0">${CONTACTS.map(n=>{const s=a.cst[n];return `<div class="fl"><b>${n}</b>${s==='invited'?'<span class="st paid">Invited</span>':s==='carrefour'?'<span class="small">On Carrefour</span>':`<button class="ibtn" data-a="cinvite" data-v="${n}">Invite</button>`}</div>`}).join('')}</div><div class="small" style="margin-top:8px">Optional. Rewards never depend on this.</div>`:`<div class="mute">Optional. Rewards never depend on this.</div><button class="btn sm ghost" style="margin-top:10px" data-a="contacts">Show my contacts</button>`}</div>
+  <h3>See who to invite</h3><div class="card">${lock?'<div class="mute">Inviting unlocks after your first delivery.</div>':a.contacts?`<div style="margin:-4px 0">${CL.map(n=>{const s=a.cst[n];return `<div class="fl"><b>${n}</b>${s==='invited'?'<span class="st paid">Invited</span>':s==='carrefour'?'<span class="small">On Carrefour</span>':`<button class="ibtn" data-a="cinvite" data-v="${n}">Invite</button>`}</div>`}).join('')}</div>`:`<button class="btn sm ghost" style="margin-top:10px" data-a="contacts">Show my contacts</button>`}</div>
   <h3>Fine print</h3><div class="card small" style="color:var(--ink);line-height:1.6"><ol style="margin-left:18px"><li>You earn AED ${CFG.reward} in your Carrefour Wallet within ${CFG.holdWorkingDays} working days of your friend placing their first order.</li><li>Your friend gets AED ${CFG.reward} in their Carrefour Wallet when they join.</li><li>Your friend can use up to AED ${CFG.maxUse} on their first order and keep the rest for their next order, within ${CFG.expiryDays} days.</li><li>The referral offer can't be combined with other offers.</li><li>New customers only.</li><li>Rewards can be held or reversed if an order is cancelled, returned or looks unusual.</li></ol></div></div></div></div>`}
 
 function omarFlow(){const o=S.o;
@@ -571,7 +597,7 @@ function screen(){
   if(S.who==='omar'&&S.o.stage!=='app')return omarFlow();
   if(S.sub==='welcome')return welcomeView();
   if(S.sub==='wallet')return walletView();
-  if(S.who==='aisha'&&S.sub==='refer')return referView();
+  if(S.sub==='refer')return referView();
   if(S.tab==='home')return S.who==='aisha'?aishaHome():omarHome();
   if(S.tab==='cat')return `<div class="page"><h2>Categories</h2><div class="card" style="padding:4px 14px">${['Grocery','Fresh','Household','Bulk','Appliances','Phones','Electronics'].map(x=>`<div class="fl"><b>${x}</b></div>`).join('')}</div></div>`;
   if(S.tab==='cart')return cartView();
@@ -585,8 +611,8 @@ function sheetView(){const s=S.sheet,d=S.sd;if(!s)return '';
   if(s==='nudge1')return `<div class="sheet">${X}<div class="art a1"><div class="road"></div><span class="tr">🚚</span><div class="okc">✓</div><span class="sp" style="left:18%;top:22px">✨</span><span class="sp" style="right:16%;top:38px;animation-delay:.8s">✨</span></div><div class="eyebrow">DELIVERED ON TIME</div><h2>Order delivered on time. Would you like to refer a friend?</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
   if(s==='nudge2')return `<div class="sheet">${X}<div class="art a2"><span class="sp" style="left:16%;top:24px">✨</span><span class="sp" style="right:14%;top:30px;animation-delay:.7s">✨</span><span class="sp" style="left:26%;bottom:20px;animation-delay:1.3s">✨</span><div><div class="big gold"><span data-count="${d}" data-id="n2${d}">${d}</span><small>%</small></div><div class="lb">SAVED ON THIS ORDER</div></div></div><h2>You saved ${d}%. Share the saving with a friend.</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
   if(s==='reward')return `<div class="sheet">${X}<div class="art a3"><span class="cn" style="left:14%">🪙</span><span class="cn" style="left:34%;animation-delay:.9s">🪙</span><span class="cn" style="left:62%;animation-delay:.4s">🪙</span><span class="cn" style="left:82%;animation-delay:1.3s">🪙</span><div><div class="big gold"><small style="margin:0 4px 0 0">+AED</small><span data-count="${CFG.reward}" data-id="rw${progress()}">${CFG.reward}</span></div><div class="lb">REWARD CREDITED</div></div></div><h2>AED ${CFG.reward} credited to your Carrefour Wallet. Invite another friend.</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="close">Maybe later</button></div></div>`;
-  if(s==='invite')return `<div class="sheet">${X}<div class="art a4"><span class="fe" style="left:10%;top:18px">🎉</span><span class="fe" style="right:12%;top:24px;animation-delay:.8s">💌</span><span class="fe" style="left:20%;bottom:16px;animation-delay:1.4s">🎁</span><span class="fe" style="right:22%;bottom:18px;font-size:22px;animation-delay:.4s">✨</span><div class="ttl"><b>Invite your friends</b><span>Share the love, you both win</span></div></div><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="chat"><div class="me"><i>A</i>You, to your friend</div><div class="tp"><b></b><b></b><b></b></div><div class="bb">${MSG}<br><span class="link">carrefour.digital/join/AISHA35</span><span class="tm">now ✓✓</span></div></div><div class="codechip"><div><span>Your code</span><br><b>AISHA35</b></div>${ic('check',18)}</div><b style="display:block;margin:12px 0 0">Send with</b>${sendRow('')}</div>`;
-  if(s==='contact')return `<div class="sheet">${X}<div class="art a4"><span class="fe" style="left:12%;top:20px">🎉</span><span class="fe" style="right:12%;top:26px;animation-delay:.8s">💌</span><div class="ttl"><div class="av2" style="margin:0 auto 6px">${d[0]}</div><b style="font-size:20px">Invite ${d}</b></div></div><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="chat"><div class="me"><i>A</i>You, to ${d}</div><div class="tp"><b></b><b></b><b></b></div><div class="bb">${MSG}<span class="tm">now ✓✓</span></div></div><b style="display:block;margin:8px 0 0">Send with</b>${sendRow(d)}</div>`;
+  if(s==='invite')return `<div class="sheet">${X}<div class="art a4"><span class="fe" style="left:10%;top:18px">🎉</span><span class="fe" style="right:12%;top:24px;animation-delay:.8s">💌</span><span class="fe" style="left:20%;bottom:16px;animation-delay:1.4s">🎁</span><span class="fe" style="right:22%;bottom:18px;font-size:22px;animation-delay:.4s">✨</span><div class="ttl"><b>Invite your friends</b><span>Share the love, you both win</span></div></div><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="chat"><div class="me"><i>${S.who==='omar'?'O':'A'}</i>You, to your friend</div><div class="tp"><b></b><b></b><b></b></div><div class="bb">${MSG()}<br><span class="link">carrefour.digital/join/${code()}</span><span class="tm">now ✓✓</span></div></div><div class="codechip"><div><span>Your code</span><br><b>${code()}</b></div>${ic('check',18)}</div><b style="display:block;margin:12px 0 0">Send with</b>${sendRow('')}</div>`;
+  if(s==='contact')return `<div class="sheet">${X}<div class="art a4"><span class="fe" style="left:12%;top:20px">🎉</span><span class="fe" style="right:12%;top:26px;animation-delay:.8s">💌</span><div class="ttl"><div class="av2" style="margin:0 auto 6px">${d[0]}</div><b style="font-size:20px">Invite ${d}</b></div></div><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="chat"><div class="me"><i>${S.who==='omar'?'O':'A'}</i>You, to ${d}</div><div class="tp"><b></b><b></b><b></b></div><div class="bb">${MSG()}<span class="tm">now ✓✓</span></div></div><b style="display:block;margin:8px 0 0">Send with</b>${sendRow(d)}</div>`;
   if(s==='confirm')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">${d} 🎉</h2><p class="mute" style="margin:6px 0 16px">Nice one! Your friend will show as Invited in your list.</p><button class="btn" data-a="done">Done</button></div>`;
   if(s==='lvl'){const l=CFG.levels.find(x=>x.n===d);return `<div class="sheet">${X}<h2>Level ${l.n}</h2><p class="mute" style="margin:6px 0 12px">Refer ${l.target} friends to unlock. We'll reveal what it includes when you get there.</p><div class="pbar dark"><b style="width:${Math.min(100,progress()/l.target*100)}%"></b></div><div class="small">${progress()} of ${l.target} friends so far</div></div>`}
   if(s==='info')return `<div class="sheet">${X}<h2>How it works</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>Share your link with a friend.</li><li>They join and get AED ${CFG.reward} in their wallet.</li><li>After their first delivered order, you get AED ${CFG.reward} within ${CFG.holdWorkingDays} working days.</li></ol></div>`;
@@ -616,13 +642,13 @@ function placeOmar(){const o=S.o,sub=subtotal(),used=o.sel||0,first=o.orders.len
   o.orders.push({id,status:'placed',sub});o.cart={};
   S.sheet='placed';S.sd={used,left:bal(o.ledger)};
   track(first?'first_order_placed':'second_order_placed','credit used '+used);
-  if(first){setFriend('Omar R.','way');S.a.ledger.unshift({id:'L2',t:'Referral reward · Omar R.',amt:CFG.reward,st:'pending',note:'Waiting for delivery and a short hold'});track('reward_pending','AED '+CFG.reward)}
+  if(first){setFriend('Omar R.','way');S.a.notice='Omar placed his first order. Your AED '+CFG.reward+' is on its way.';S.a.ledger.unshift({id:'L2',t:'Referral reward · Omar R.',amt:CFG.reward,st:'pending',note:'Waiting for delivery and a short hold'});track('reward_pending','AED '+CFG.reward)}
   else{o.orders[o.orders.length-1].status='delivered'}}
 function placeAisha(){const a=S.a,sub=subtotal(),was=wasTotal(),pct=was>0?Math.round((was-sub)/was*100):0;
   a.orders.push({id:2000+a.orders.length+1,status:'placed',pct});if(pct>=CFG.savingPct)a.nudge2=pct;else S.log.unshift({n:'Nudge 2: saving under '+CFG.savingPct+'%',ok:false,why:'saving was '+pct+'%'});a.cart={};S.sheet='placed';S.sd={aisha:true};track('aisha_order_placed','saving '+pct+'%')}
 function act(a,d){const A=S.a,O=S.o;
   switch(a){
-  case 'who':S.who=d.v;S.tab='home';S.sub=null;S.sheet=null;S.sd=null;if(d.v==='omar'){if(!A.friends.find(f=>f.n==='Omar R.'))setFriend('Omar R.','invited');if(O.stage==='landing')track('referral_link_opened','AISHA35')}maybePrompt();break;
+  case 'who':S.who=d.v;S.tab='home';S.sub=null;S.sheet=null;S.sd=null;if(d.v==='omar'){if(!A.friends.find(f=>f.n==='Omar R.'))setFriend('Omar R.','invited');if(O.stage==='landing')track('referral_link_opened','AISHA35')}maybePrompt();if(d.v==='aisha'&&A.notice){const n=A.notice;A.notice=null;setTimeout(()=>toast(n),700)}break;
   case 'tab':S.tab=d.v;S.sub=null;break;
   case 'back':if(S.sub==='wallet'||S.sub==='refer'){S.sub=null;S.tab='profile'}else if(S.who==='omar'&&O.stage==='signup')O.stage='landing';else if(S.who==='omar'&&O.stage==='otp')O.stage='signup';else S.sub=null;break;
   case 'story':S.sheet='story';break;
@@ -637,11 +663,11 @@ function act(a,d){const A=S.a,O=S.o;
   case 'wallet':S.sub='wallet';break;
   case 'lvlprev':S.sheet='lvl';S.sd=+d.v;break;
   case 'invite':S.sheet='invite';break;
-  case 'contacts':A.contacts=true;break;
+  case 'contacts':R().contacts=true;break;
   case 'cinvite':S.sheet='contact';S.sd=d.v;break;
-  case 'send':if(d.w)A.cst[d.w]='invited';S.omarInv=d.w==='Omar R.';if(S.omarInv)setFriend('Omar R.','invited');S.sheet='confirm';S.sd=d.v==='Copy link'?'Link copied':'Invite sent';track('invite_sent',d.v);break;
+  case 'send':if(d.w)R().cst[d.w]='invited';if(S.who==='omar'&&d.w&&!O.friends.find(f=>f.n===d.w))O.friends.push({n:d.w,s:'invited'});S.omarInv=S.who==='aisha'&&d.w==='Omar R.';if(S.omarInv)setFriend('Omar R.','invited');S.sheet='confirm';S.sd=d.v==='Copy link'?'Link copied':'Invite sent';track('invite_sent',d.v);break;
   case 'done':S.omarInv=false;S.sheet=null;S.sd=null;S.tab='home';S.sub=null;break;
-  case 'areveal':A.revealed=true;setTimeout(()=>burst(46),40);break;
+  case 'areveal':if(S.who==='omar')O.rrev=true;else A.revealed=true;setTimeout(()=>burst(46),40);break;
   case 'oreveal':O.revealed=true;setTimeout(()=>burst(46),40);break;
   case 'terms':S.sheet='terms';break;
   case 'join':O.stage='signup';break;
@@ -656,7 +682,7 @@ function act(a,d){const A=S.a,O=S.o;
   case 'checkout':if(S.who==='aisha')placeAisha();else placeOmar();break;
   case 'placedOk':S.sheet=null;S.sd=null;if(S.who==='omar')S.sub='welcome';else S.tab='home';maybePrompt();break;
   case 'wdone':S.sub=null;S.tab='home';break;
-  case 'deliver':{O.orders[O.orders.length-1].status='delivered';track('first_order_delivered','');const e=A.ledger.find(x=>x.id==='L2');if(e&&e.st==='pending'){e.st='ok';e.note="Friend's first order delivered";setFriend('Omar R.','paid');A.rewardPrompt=true;track('reward_credited','AED '+CFG.reward+' (hold cleared, demo)')}break}
+  case 'deliver':{O.orders[O.orders.length-1].status='delivered';track('first_order_delivered','');const e=A.ledger.find(x=>x.id==='L2');if(e&&e.st==='pending'){e.st='ok';e.note="Friend's first order delivered";setFriend('Omar R.','paid');A.rewardPrompt=true;setTimeout(()=>burst(40),60);track('reward_credited','AED '+CFG.reward+' (hold cleared, demo)')}break}
   case 'adeliver':{const l=A.orders[A.orders.length-1];l.status='delivered';
     maybePrompt();break}
   case 'reorder':O.cart={...STARTER};O.sel=null;S.tab='cart';track('reorder_one_tap','');break;
@@ -672,6 +698,8 @@ function countUps(){document.querySelectorAll('[data-count]').forEach(el=>{const
 setInterval(()=>{const b=document.querySelector('.lp .ban');if(!b||!b.firstElementChild)return;const w=b.firstElementChild.offsetWidth+12;b.scrollTo({left:(b.scrollLeft+w>b.scrollWidth-b.clientWidth+4)?0:b.scrollLeft+w,behavior:'smooth'})},3200);
 
 setInterval(()=>{const w=document.querySelector('.bnr');if(!w)return;const s=[...w.querySelectorAll('.banner')],d=[...w.querySelectorAll('.dots u')];let i=s.findIndex(x=>x.classList.contains('on'));i=(i+1)%s.length;S.bn=i;s.forEach((x,k)=>x.classList.toggle('on',k===i));d.forEach((x,k)=>x.classList.toggle('on',k===i))},3600);
+
+function toast(t){const h=$('#phone');if(!h)return;const d=document.createElement('div');d.className='toast';d.innerHTML=`<em>🎉</em><div><b>CARREFOUR</b>${t}</div>`;h.appendChild(d);setTimeout(()=>d.remove(),4700)}
 document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;e.preventDefault();act(el.dataset.a,el.dataset)});
 act('reset',{});
 </script>
