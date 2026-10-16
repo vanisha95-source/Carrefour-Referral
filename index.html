@@ -943,6 +943,7 @@ function profileView(){const A=S.who==='aisha',L=A?S.a.ledger:S.o.ledger,nm=A?'A
  <h3 style="margin-top:6px">My Addresses</h3><div class="card ad"><div class="top"><span class="i">🏢</span><div style="flex:1;min-width:0"><b>Apartment</b><div class="mute">Apartment - 515 - four points by Sheraton</div></div><span class="chip blue">Default</span></div><div class="btns"><button>View All</button><button>Add New</button></div></div>
  <div class="card" style="padding:4px 14px">
   ${row('wallet','Wallet &amp; Saved Cards','Balance and history','wallet',`<span class="chip">${aed(bal(L))}</span>`)}
+  ${row('gift','Refer &amp; Earn',lock?'Unlocks after your first delivery':'Give AED '+CFG.reward+', get AED '+CFG.reward,'refer',lock?'<span class="chip">🔒</span>':'<span class="chip blue">Level '+curLevel().n+'</span>')}
   ${row('bell','Notifications','Offers, delivery updates','',chev)}
   ${row('globe','Language','English','',chev)}
   ${row('help','Customer Service','Chat, call, help centre','',chev)}
