@@ -374,10 +374,10 @@ const X=`<button class="x" data-a="close" aria-label="Close">${ic('x')}</button>
 function sheetView(){const s=S.sheet,d=S.sd;if(!s)return '';
   if(s==='nudge1')return `<div class="sheet">${X}<h2>Order delivered on time. Would you like to refer a friend?</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
   if(s==='nudge2')return `<div class="sheet">${X}<h2>You saved ${d}%. Share the saving with a friend.</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
-  if(s==='reward')return `<div class="sheet">${X}<h2>AED ${CFG.reward} credited to your Carrefour Wallet. Invite another friend.</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="refer">Refer now</button><button class="btn ghost" data-a="close">Maybe later</button></div></div>`;
+  if(s==='reward')return `<div class="sheet">${X}<h2>AED ${CFG.reward} credited to your Carrefour Wallet. Invite another friend.</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="close">Maybe later</button></div></div>`;
   if(s==='invite')return `<div class="sheet">${X}<h2>Invite your friends</h2><div class="bubble">${MSG}<br><span class="link">carrefour.digital/join/AISHA35</span></div><b>Send with</b>${sendRow('')}</div>`;
   if(s==='contact')return `<div class="sheet">${X}<h2>Invite ${d}</h2><div class="bubble">${MSG}</div><b>Send with</b>${sendRow(d)}</div>`;
-  if(s==='confirm')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">${d}</h2><p class="mute" style="margin:6px 0 16px">Your friend will show as Invited in your list.</p>${S.omarInv?`<button class="btn ghost" style="margin-bottom:10px" data-a="who" data-v="omar">See what Omar sees</button>`:''}<button class="btn" data-a="done">Done</button></div>`;
+  if(s==='confirm')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">${d}</h2><p class="mute" style="margin:6px 0 16px">Your friend will show as Invited in your list.</p><button class="btn" data-a="done">Done</button></div>`;
   if(s==='lvl'){const l=CFG.levels.find(x=>x.n===d);return `<div class="sheet">${X}<h2>Level ${l.n}</h2><p class="mute" style="margin:6px 0 12px">Refer ${l.target} friends to unlock. We'll reveal what it includes when you get there.</p><div class="pbar dark"><b style="width:${Math.min(100,progress()/l.target*100)}%"></b></div><div class="small">${progress()} of ${l.target} friends so far</div></div>`}
   if(s==='info')return `<div class="sheet">${X}<h2>How it works</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>Share your link with a friend.</li><li>They join and get AED ${CFG.reward} in their wallet.</li><li>After their first delivered order, you get AED ${CFG.reward} within ${CFG.holdWorkingDays} working days.</li></ol></div>`;
   if(s==='inelig')return `<div class="sheet center"><div style="font-size:38px">👋</div><h2 style="padding:0">You're already with us</h2><p class="mute" style="margin:8px 0 16px">This referral is for new Carrefour customers, so the AED ${CFG.reward} credit isn't available on your account. You still get the standard welcome offer: ${CFG.welcomePct}% off your first order.</p><button class="btn" data-a="close">Continue</button></div>`;
@@ -403,7 +403,7 @@ function placeOmar(){const o=S.o,sub=subtotal(),used=o.sel||0,first=o.orders.len
   S.sheet='placed';S.sd={used,left:bal(o.ledger)};
   track(first?'first_order_placed':'second_order_placed','credit used '+used);
   if(first){setFriend('Omar R.','way');S.a.ledger.unshift({id:'L2',t:'Referral reward · Omar R.',amt:CFG.reward,st:'pending',note:'Waiting for delivery and a short hold'});track('reward_pending','AED '+CFG.reward)}
-  else{const e=S.a.ledger.find(x=>x.id==='L2');if(e&&e.st==='pending'){e.st='ok';e.note="Friend's first order delivered";setFriend('Omar R.','paid');S.a.rewardPrompt=true;track('reward_credited','AED '+CFG.reward+' (hold cleared, demo)')}o.orders[o.orders.length-1].status='delivered'}}
+  else{o.orders[o.orders.length-1].status='delivered'}}
 function placeAisha(){const a=S.a,sub=subtotal(),was=wasTotal(),pct=was>0?Math.round((was-sub)/was*100):0;
   a.orders.push({id:2000+a.orders.length+1,status:'placed',pct});if(pct>=CFG.savingPct)a.nudge2=pct;else S.log.unshift({n:'Nudge 2: saving under '+CFG.savingPct+'%',ok:false,why:'saving was '+pct+'%'});a.cart={};S.sheet='placed';S.sd={aisha:true};track('aisha_order_placed','saving '+pct+'%')}
 function act(a,d){const A=S.a,O=S.o;
@@ -417,7 +417,7 @@ function act(a,d){const A=S.a,O=S.o;
   case 'reset':S=seed();maybePrompt();break;
   case 'close':if(S.sheet==='nudge1'||S.sheet==='nudge2')A.dismiss++;if(S.sheet==='nudge1')A.nudge1=false;S.sheet=null;S.sd=null;break;
   case 'later':if(S.sheet==='nudge1')A.nudge1=false;S.sheet=null;A.dismiss++;break;
-  case 'nreferX':A.nudge1=false;A.dismiss=0;S.sheet=null;S.tab='profile';S.sub='refer';track('nudge_tapped','Refer now');break;
+  case 'nreferX':A.nudge1=false;A.dismiss=0;S.sheet='invite';S.sd=null;track('nudge_tapped','Refer now');break;
   case 'refer':S.sheet=null;S.tab='profile';S.sub='refer';break;
   case 'info':S.sheet='info';break;
   case 'wallet':S.sub='wallet';break;
@@ -435,13 +435,13 @@ function act(a,d){const A=S.a,O=S.o;
   case 'verify':O.stage='app';S.tab='home';track('signup_verified','');
     if(O.existing){O.revealed=true;S.sheet='inelig';track('referral_ineligible','existing customer')}
     else{O.ledger.unshift({id:'W1',t:'Referral welcome credit',amt:CFG.reward,st:'ok',exp:inDays(CFG.expiryDays),note:'Valid until '+inDays(CFG.expiryDays)});setFriend('Omar R.','joined');track('wallet_credited','AED '+CFG.reward)}break;
-  case 'starter':cur().cart={...STARTER};S.tab='home';break;
+  case 'starter':cur().cart={...STARTER};break;
   case 'inc':{const c=cur().cart;c[d.v]=(c[d.v]||0)+1;break}
   case 'dec':{const c=cur().cart;c[d.v]=(c[d.v]||0)-1;if(c[d.v]<=0)delete c[d.v];break}
   case 'sel':O.sel=+d.v;break;
   case 'checkout':if(S.who==='aisha')placeAisha();else placeOmar();break;
   case 'placedOk':S.sheet=null;S.sd=null;if(S.who==='omar'&&O.orders.length>=2)S.sub='welcome';else S.tab='home';maybePrompt();break;
-  case 'deliver':O.orders[O.orders.length-1].status='delivered';track('first_order_delivered','');break;
+  case 'deliver':{O.orders[O.orders.length-1].status='delivered';track('first_order_delivered','');const e=A.ledger.find(x=>x.id==='L2');if(e&&e.st==='pending'){e.st='ok';e.note="Friend's first order delivered";setFriend('Omar R.','paid');A.rewardPrompt=true;track('reward_credited','AED '+CFG.reward+' (hold cleared, demo)')}break}
   case 'adeliver':{const l=A.orders[A.orders.length-1];l.status='delivered';
     maybePrompt();break}
   case 'reorder':O.cart={...STARTER};O.sel=null;S.tab='cart';track('reorder_one_tap','');break;
