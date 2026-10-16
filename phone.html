@@ -190,6 +190,71 @@ h2{letter-spacing:-.02em;font-weight:800}
 .lp .trust span{display:inline-flex;gap:5px;align-items:center}
 @keyframes fl{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 .lp .gift{animation:fl 3.2s ease-in-out infinite;display:inline-block}
+
+/* ===== v8 motion and delight ===== */
+.sheet .x{z-index:6;background:rgba(255,255,255,.92);box-shadow:0 2px 8px rgba(0,0,0,.15)}.art{pointer-events:none}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes sheetin{0%{transform:translateY(60px) scale(.96);opacity:0}100%{transform:none;opacity:1}}
+@keyframes popin{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1)}}
+@keyframes shine{0%,55%{left:-60%}100%{left:140%}}
+@keyframes grow{from{width:0}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(240,195,84,.55)}50%{box-shadow:0 0 0 12px rgba(240,195,84,0)}}
+@keyframes drift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(8px,-10px) rotate(8deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes coin{0%{transform:translateY(-40px) rotate(0);opacity:0}15%{opacity:1}100%{transform:translateY(190px) rotate(360deg);opacity:0}}
+@keyframes truck{0%{left:-14%}100%{left:112%}}
+@keyframes ring{0%{transform:scale(.8);opacity:.7}100%{transform:scale(1.9);opacity:0}}
+@keyframes cfly{0%{opacity:1;transform:translate(0,0) rotate(0)}70%{opacity:1}100%{opacity:0;transform:translate(var(--dx),calc(var(--dy) + 280px)) rotate(var(--r))}}
+@keyframes sparkle{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.15)}}
+.cf{position:absolute;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+.cf i{position:absolute;left:50%;top:36%;width:var(--w);height:calc(var(--w)*1.6);background:var(--c);border-radius:2px;opacity:0;animation:cfly var(--t) cubic-bezier(.15,.7,.3,1) var(--dl) forwards}
+.enter .gc>*,.enter .page>.card,.enter .page>.hero,.enter .sect,.enter .page>.stats,.enter .page>h2{animation:up .6s cubic-bezier(.2,.8,.2,1) both}
+.enter .gc>*:nth-child(2),.enter .sect:nth-of-type(2){animation-delay:.07s}.enter .gc>*:nth-child(3),.enter .sect:nth-of-type(3){animation-delay:.14s}.enter .gc>*:nth-child(4){animation-delay:.21s}.enter .gc>*:nth-child(5){animation-delay:.28s}.enter .gc>*:nth-child(6){animation-delay:.35s}.enter .gc>*:nth-child(n+7){animation-delay:.42s}
+#overlay.fresh{animation:fade .25s both}
+#overlay.fresh .sheet{animation:sheetin .6s cubic-bezier(.2,.9,.25,1.12) both}
+#overlay.fresh .tick,.enter .tick{animation:popin .6s .1s cubic-bezier(.2,1.3,.4,1) both}
+.tick{position:relative}.tick::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--green);opacity:0}
+#overlay.fresh .tick::after,.enter .tick::after{animation:ring 1.2s .3s ease-out}
+.btn.cta{position:relative;overflow:hidden}
+.btn.cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:shine 3.4s ease-in-out infinite}
+.btn:hover{filter:brightness(1.05)}
+.shareorb{position:relative}.shareorb::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #e8458a;animation:ring 2.6s ease-out infinite}
+/* premium nudge sheets */
+.art{position:relative;height:156px;margin:-20px calc(var(--gut)*-1) 16px;border-radius:24px 24px 0 0;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}
+.art.a1{background:radial-gradient(80% 90% at 80% 0,#35c27a 0,transparent 60%),linear-gradient(135deg,#0b7f48,#0a3d8f)}
+.art.a2{background:radial-gradient(80% 90% at 85% 0,#ffb347 0,transparent 60%),linear-gradient(135deg,#c4125c,#4b2a9a)}
+.art.a3{background:radial-gradient(80% 90% at 15% 0,#5aa2ff 0,transparent 60%),linear-gradient(135deg,#0a3d8f,#5b2aa8)}
+.art .road{position:absolute;left:0;right:0;bottom:22px;height:2px;background:rgba(255,255,255,.35)}
+.art .tr{position:absolute;bottom:26px;font-size:30px;animation:truck 3.6s linear infinite}
+.art .okc{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:40px;animation:popin .7s .15s both;position:relative;top:-8px}
+.art .big{font-size:58px;font-weight:900;letter-spacing:-.04em;line-height:1;text-shadow:0 6px 18px rgba(0,0,0,.3)}
+.art .big small{font-size:20px;font-weight:800;margin-left:4px;letter-spacing:0}
+.art .lb{font-size:12px;letter-spacing:.2em;font-weight:800;opacity:.9;text-align:center;margin-top:6px}
+.art .gold{background:linear-gradient(180deg,#fff4c8,#f0c354 65%,#e1a62b);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+.art .cn{position:absolute;top:-30px;font-size:26px;animation:coin 2.6s ease-in infinite}
+.art .sp{position:absolute;font-size:18px;animation:sparkle 2s ease-in-out infinite}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;font-weight:800;color:var(--blue);margin-bottom:6px}
+.pair{display:flex;align-items:center;gap:8px;margin:14px 0 4px}
+.pair>div{flex:1;background:var(--blue-l);border-radius:14px;padding:10px 12px;text-align:center}.pair small{display:block;font-size:10.5px;letter-spacing:.12em;font-weight:800;color:var(--mute)}.pair b{font-size:20px;letter-spacing:-.02em;color:var(--blue)}.pair>span{font-weight:800;color:var(--mute)}
+/* reveal and won */
+.reveal{position:relative;overflow:hidden;box-shadow:0 10px 26px rgba(196,18,92,.32);animation:glow 2.4s ease-in-out infinite}
+.reveal::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite}
+.won{position:relative;overflow:hidden;text-align:center;border-radius:20px;padding:18px 16px;margin-bottom:12px;background:linear-gradient(135deg,#fff8e1,#ffe9a8 55%,#fbd774);border:1px solid #f0c354;box-shadow:0 12px 28px rgba(225,166,43,.3);animation:popin .6s cubic-bezier(.2,1.2,.4,1) both;color:#4a3000}
+.won small{display:block;letter-spacing:.18em;font-weight:800;font-size:11px;color:#8a5d00}
+.won .wa{font-size:34px;font-weight:900;letter-spacing:-.03em;line-height:1.15;margin:4px 0}
+.won::before{content:"✨";position:absolute;left:14px;top:10px;animation:sparkle 2s infinite}.won::after{content:"✨";position:absolute;right:16px;bottom:10px;animation:sparkle 2s 1s infinite}
+/* referral page */
+.hero .fx{position:absolute;font-size:30px;opacity:.9;animation:drift 5s ease-in-out infinite;pointer-events:none}
+.hero .f1{right:14px;top:10px}.hero .f2{right:56px;top:58px;font-size:22px;animation-delay:1.2s}.hero .f3{right:20px;top:104px;font-size:18px;animation-delay:2s}
+.hero{position:relative}.hero::before{content:"";position:absolute;width:240px;height:240px;right:-70px;top:-90px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.2),transparent 65%);animation:drift 8s ease-in-out infinite}
+.pbar b{transition:width 1s cubic-bezier(.2,.8,.2,1)}.enter .pbar b{animation:grow 1.2s .35s cubic-bezier(.2,.8,.2,1) both}
+.lvl.lock{position:relative;overflow:hidden}.lvl.lock::after{content:"";position:absolute;top:0;left:-60%;width:30%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-20deg);animation:shine 4.5s ease-in-out infinite}
+/* Omar landing stagger */
+.enter .lp .from,.enter .lp .gift,.enter .lp .amt,.enter .lp .sub,.enter .lp .fine{animation:up .7s cubic-bezier(.2,.8,.2,1) both}
+.enter .lp .from{animation-delay:.05s}.enter .lp .gift{animation:popin .8s .15s both,fl 3.2s 1s ease-in-out infinite}.enter .lp .amt{animation-delay:.3s}.enter .lp .sub{animation-delay:.42s}.enter .lp .fine{animation-delay:.5s}
+.enter .lp .tkt{animation:up .8s .55s cubic-bezier(.2,.8,.2,1) both}.enter .lp .ban{animation:up .8s .8s both}.enter .lp .trust{animation:fade 1s 1.1s both}
+.lp .conf g>*{animation:sparkle 2.6s ease-in-out infinite}.lp .conf g>*:nth-child(2n){animation-delay:.7s}.lp .conf g>*:nth-child(3n){animation-delay:1.4s}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></head>
 <body>
@@ -210,7 +275,7 @@ const CFG={
     {n:3,target:6,hint:'Something special for top referrers'},
     {n:4,target:10,hint:'Our biggest referrer perks'}]
 };
-const REDEEM="Use your remaining credit on your next order or within 30 days, whichever comes first.";
+const REDEEM="Use your remaining credit on your next order within 30 days.";
 const MSG=`Hey! I shop for my groceries on the Carrefour app and love it. Join with my code AISHA35 and get AED ${CFG.reward} in your Carrefour Wallet. Min basket AED ${CFG.minBasket}. T&Cs apply.`;
 const PRODUCTS=[
   {id:1,n:'Basmati rice 5kg',p:44.5,w:59.9},{id:2,n:'Fresh tomatoes 1kg',p:5.5,w:6.5},
@@ -243,7 +308,7 @@ const ic=(n,s)=>`<svg viewBox="0 0 24 24"${s?` style="font-size:${s}px"`:''} ari
 const today=()=>new Date();
 const fmtDate=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
 const inDays=n=>fmtDate(new Date(Date.now()+n*864e5));
-function seed(){return{
+function seed(){return{anim:{},
  who:'aisha',tab:'home',sub:null,sheet:null,sd:null,issue:false,log:[],events:[],
  a:{cart:{},orders:[],ledger:[{id:'L1',t:'Referral reward · Sara K.',amt:CFG.reward,st:'ok',note:'Friend\'s first order delivered'}],
     friends:[{n:'Sara K.',s:'paid',ph:'+971 50 ••• 2193'},{n:'Noor A.',s:'way',ph:'+971 52 ••• 7745'},{n:'Rashid M.',s:'joined',ph:'+971 55 ••• 3306'},{n:'Layla H.',s:'invited',ph:'+971 56 ••• 9120'}],
@@ -311,7 +376,7 @@ function aishaHome(){const a=S.a,l=a.orders[a.orders.length-1];
  return homeHeader()+orderCard(a.orders,'adeliver')+(l&&l.status==='delivered'?`<div class="sect"><div class="card row"><div><b>✓ Delivered ${S.issue?'with an issue reported':'on time'}</b><div class="mute">Order #${l.id}</div></div></div></div>`:'')+`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList()}
 function omarHome(){const o=S.o,l=o.orders[o.orders.length-1];let h=homeHeader()+'<div class="sect">';
   if(!o.existing){if(!o.revealed)h+=`<button class="reveal" data-a="oreveal"><small>REWARD UNLOCKED</small><div>tap to reveal</div></button>`;
-    else h+=`<div class="revealed">AED ${CFG.reward} added to your Carrefour Wallet.<div class="small" style="color:#175f2d;margin-top:3px">${REDEEM}</div></div>`}
+    else h+=`<div class="won"><small>REWARD UNLOCKED</small><div class="wa">AED <span data-count="${CFG.reward}" data-id="oreveal">${CFG.reward}</span></div><div>added to your Carrefour Wallet.</div><div class="small" style="color:#7a5a10;margin-top:4px">${REDEEM}</div></div>`}
   h+='</div>'+orderCard(o.orders,'deliver');
   if(l&&l.status==='delivered'&&o.orders.length===1)h+=`<div class="sect"><div class="card"><b>✓ Delivered</b><div class="mute" style="margin:2px 0 10px">${bal(o.ledger)>=CFG.minUse?`You still have ${aedI(bal(o.ledger))}. ${REDEEM}`:'Thanks for ordering with us.'}</div><button class="btn" data-a="reorder">Reorder in one tap</button></div></div>`;
   h+=`<div class="sect"><button class="btn white" style="border:1.5px solid var(--line);margin-bottom:12px" data-a="starter">${S.who==='aisha'?'Add my usual order':'Add starter basket'}</button></div>`+productList();return h}
@@ -369,22 +434,22 @@ function walletView(){
 function referView(){
   const a=S.a,pr=progress(),nl=nextLevel(),cl=curLevel();
   return `${appBar('Refer &amp; Earn',`<button class="iconbtn" data-a="info" aria-label="Info">${ic('info')}</button>`)}<div class="page"><div class="g2"><div class="gc">
-  <div class="hero"><div class="small" style="color:#cfe1ff;font-weight:700">YOU ARE AT LEVEL ${cl.n}</div><div class="big">Invite a friend, you both get AED ${CFG.reward}</div>
+  <div class="hero"><span class="fx f1">🎁</span><span class="fx f2">🪙</span><span class="fx f3">✨</span><div class="small" style="color:#cfe1ff;font-weight:700">YOU ARE AT LEVEL ${cl.n}</div><div class="big">Invite a friend, you both get AED ${CFG.reward}</div>
    <div class="lvls">${CFG.levels.map(l=>l.n===cl.n?`<div class="lvl"><div class="lh"><span>Level ${l.n}</span><span>${ic('check',15)} you are here</span></div><b style="font-size:17px">${l.title}</b><span class="tg">${l.line}</span></div>`:l.n<cl.n?'':`<button class="lvl lock" data-a="lvlprev" data-v="${l.n}"><div class="lh"><span>Level ${l.n}</span>${ic('lock',15)}</div><div class="blur">${l.hint}</div><div class="un">Unlock to know more</div><div class="tg">Refer ${l.target} friends</div></button>`).join('')}</div>
    <div class="pbar"><b style="width:${Math.min(100,pr/nl.target*100)}%"></b></div><div style="font-size:13px;color:#dbe8ff;margin-bottom:12px">${pr} of ${nl.target} friends toward Level ${nl.n}</div>
    <button class="btn white" data-a="invite">${ic('chat',20)} Invite your friends</button>
    <div style="font-size:12.5px;color:#dbe8ff;text-align:center;margin-top:10px">1,240 people joined Carrefour with a friend's invite this month</div></div>
-  <button class="reveal" data-a="areveal"><small>REWARD UNLOCKED</small><div>${a.revealed?`Earn AED ${CFG.reward} per friend`:'tap to reveal'}</div></button>
+  ${a.revealed?`<div class="won"><small>REWARD UNLOCKED</small><div class="wa">Earn AED <span data-count="${CFG.reward}" data-id="areveal">${CFG.reward}</span> per friend</div></div>`:`<button class="reveal" data-a="areveal"><small>REWARD UNLOCKED</small><div>tap to reveal</div></button>`}
   <h3>What you get / what your friend gets</h3><div class="card"><div style="font-size:21px;font-weight:800">Earn AED ${CFG.reward}</div><p style="margin:6px 0">Your friend gets AED ${CFG.reward} in their Carrefour Wallet when they join.</p><div class="mute">Paid into your Carrefour Wallet within ${CFG.holdWorkingDays} working days of your friend's first order.</div></div>
   </div><div class="gc">
-  <div class="stats"><div><b>${a.friends.length}</b><span>Invited</span></div><div><b>${a.friends.filter(f=>f.s!=='invited').length}</b><span>Joined</span></div><div><b>${aed(bal(a.ledger))}</b><span>Earned</span></div><div><b>${aed(pend(a.ledger))}</b><span>Pending</span></div></div>
+  <div class="stats"><div><b data-count="${a.friends.length}" data-id="st1_${a.friends.length}">${a.friends.length}</b><span>Invited</span></div><div><b data-count="${a.friends.filter(f=>f.s!=='invited').length}" data-id="st2_${a.friends.filter(f=>f.s!=='invited').length}">${a.friends.filter(f=>f.s!=='invited').length}</b><span>Joined</span></div><div><b>${aed(bal(a.ledger))}</b><span>Earned</span></div><div><b>${aed(pend(a.ledger))}</b><span>Pending</span></div></div>
   <h3 style="margin-top:0">Your friends on Carrefour</h3><div class="card" style="padding:4px 14px">${a.friends.map(f=>`<div class="fl"><div><b>${f.n}</b><div class="mute" style="font-size:12px">${f.ph||'On Carrefour'}</div></div><span class="st ${f.s}">${STATUS[f.s]}</span></div>`).join('')}</div>
   <h3>See who to invite</h3><div class="card">${a.contacts?`<div style="margin:-4px 0">${CONTACTS.map(n=>{const s=a.cst[n];return `<div class="fl"><b>${n}</b>${s==='invited'?'<span class="st paid">Invited</span>':s==='carrefour'?'<span class="small">On Carrefour</span>':`<button class="ibtn" data-a="cinvite" data-v="${n}">Invite</button>`}</div>`}).join('')}</div><div class="small" style="margin-top:8px">Optional. Rewards never depend on this.</div>`:`<div class="mute">Optional. Rewards never depend on this.</div><button class="btn sm ghost" style="margin-top:10px" data-a="contacts">Show my contacts</button>`}</div>
   <h3>Fine print</h3><div class="card small" style="color:var(--ink);line-height:1.6"><ol style="margin-left:18px"><li>You earn AED ${CFG.reward} in your Carrefour Wallet within ${CFG.holdWorkingDays} working days of your friend placing their first order.</li><li>Your friend gets AED ${CFG.reward} in their Carrefour Wallet when they join.</li><li>Your friend can use up to AED ${CFG.maxUse} on their first order and keep the rest for their next order, within ${CFG.expiryDays} days.</li><li>The referral offer can't be combined with other offers.</li><li>New customers only.</li><li>Rewards can be held or reversed if an order is cancelled, returned or looks unusual.</li></ol></div></div></div></div>`}
 
 function omarFlow(){const o=S.o;
   if(o.stage==='landing')return `<div class="lp"><div class="top"><svg class="conf" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" style="font-size:inherit"><g stroke="none"><circle cx="40" cy="50" r="5" fill="#f0c354"/><circle cx="330" cy="40" r="4" fill="#fff" opacity=".7"/><rect x="300" y="110" width="10" height="10" rx="2" fill="#e8458a" transform="rotate(25 300 110)"/><rect x="60" y="140" width="8" height="8" rx="2" fill="#6fd1ff" transform="rotate(-20 60 140)"/><circle cx="370" cy="170" r="6" fill="#f0c354"/><rect x="200" y="30" width="9" height="9" rx="2" fill="#fff" opacity=".6" transform="rotate(40 200 30)"/><circle cx="150" cy="200" r="3.5" fill="#e8458a"/><rect x="20" y="230" width="9" height="9" rx="2" fill="#f0c354" transform="rotate(15 20 230)"/></g></svg>
-   <div class="from"><span class="av">A</span>Aisha invited you</div><div class="gift">🎁</div><div class="amt"><small>AED</small>${CFG.reward}</div><div class="sub">in your Carrefour Wallet</div><div class="fine">Min basket ${aedI(CFG.minBasket)} · New customers only</div></div>
+   <div class="from"><span class="av">A</span>Aisha invited you</div><div class="gift">🎁</div><div class="amt"><small>AED</small><span data-count="${CFG.reward}" data-id="land">${CFG.reward}</span></div><div class="sub">in your Carrefour Wallet</div><div class="fine">Min basket ${aedI(CFG.minBasket)} · New customers only</div></div>
   <div class="tkt"><div class="code"><div><div class="small" style="margin-bottom:2px">Your invite code</div><b>AISHA35</b></div><span>${ic('check',13)} Applied</span></div>
   <div class="steps"><div class="st"><i>📲</i>Join in a minute</div><div class="st"><i>🛒</i>Fill your basket</div><div class="st"><i>💳</i>Credit applies at checkout</div></div>
   <button class="btn cta" data-a="join">Join and claim AED ${CFG.reward}</button><div class="center" style="margin-top:12px"><button class="lnk" style="color:var(--blue)" data-a="terms">Terms</button></div></div>
@@ -393,7 +458,7 @@ function omarFlow(){const o=S.o;
   if(o.stage==='signup')return `${appBar('Create your account')}<div class="page narrow"><div class="card"><div class="mute">Mobile number</div><div style="font-size:19px;font-weight:700;margin:4px 0 12px">+971 50 123 4567</div><span class="chip">${ic('check',14)} Code applied: AISHA35</span></div><button class="btn" data-a="otp">Send verification code</button></div>`;
   if(o.stage==='otp')return `${appBar('Verify your phone')}<div class="page narrow"><div class="card center"><div class="mute">Code sent to +971 50 123 4567</div><div style="font-size:32px;letter-spacing:.5em;margin:14px 0 6px;font-weight:800;padding-left:.5em">1234</div></div><button class="btn" data-a="verify">Verify and continue</button></div>`;
   return ''}
-function welcomeView(){const b=bal(S.o.ledger);return `<div class="page narrow center" style="padding-top:70px"><div class="tick">${ic('check',32)}</div><h2>Welcome to Carrefour</h2><p class="mute" style="margin:6px 0 20px">Thanks for ordering again, Omar.</p><div class="card"><div class="mute">Wallet balance</div><b style="font-size:24px">${aed(b)}</b></div></div>`}
+function welcomeView(){const b=bal(S.o.ledger),first=S.o.orders.length<2;return `<div class="page narrow center" style="padding-top:64px"><div class="tick">${ic('check',32)}</div><h2>${first?'Welcome to Carrefour':'Hope you like your journey'}</h2><p class="mute" style="margin:6px 0 20px">${first?'Your first order is on its way, Omar.':'Continue shopping with us, Omar.'}</p><div class="card"><div class="mute">Wallet balance</div><b style="font-size:24px">${aed(b)}</b></div><button class="btn" style="margin-top:6px" data-a="wdone">${first?'Continue':'Continue shopping'}</button></div>`}
 
 function screen(){
   if(S.who==='omar'&&S.o.stage!=='app')return omarFlow();
@@ -410,18 +475,18 @@ function screen(){
 function sendRow(who){return `<div class="send">${[['WhatsApp','#25a244','chat'],['SMS','#1c3a8a','sms'],['Copy link','#4b5a78','link']].map(([l,c,i])=>`<button class="sendb" data-a="send" data-v="${l}" data-w="${who}"><i style="background:${c}">${ic(i)}</i>${l}</button>`).join('')}</div>`}
 const X=`<button class="x" data-a="close" aria-label="Close">${ic('x')}</button>`;
 function sheetView(){const s=S.sheet,d=S.sd;if(!s)return '';
-  if(s==='nudge1')return `<div class="sheet">${X}<h2>Order delivered on time. Would you like to refer a friend?</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
-  if(s==='nudge2')return `<div class="sheet">${X}<h2>You saved ${d}%. Share the saving with a friend.</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
-  if(s==='reward')return `<div class="sheet">${X}<h2>AED ${CFG.reward} credited to your Carrefour Wallet. Invite another friend.</h2><div class="row" style="gap:10px;margin-top:16px"><button class="btn" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="close">Maybe later</button></div></div>`;
+  if(s==='nudge1')return `<div class="sheet">${X}<div class="art a1"><div class="road"></div><span class="tr">🚚</span><div class="okc">✓</div><span class="sp" style="left:18%;top:22px">✨</span><span class="sp" style="right:16%;top:38px;animation-delay:.8s">✨</span></div><div class="eyebrow">DELIVERED ON TIME</div><h2>Order delivered on time. Would you like to refer a friend?</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
+  if(s==='nudge2')return `<div class="sheet">${X}<div class="art a2"><span class="sp" style="left:16%;top:24px">✨</span><span class="sp" style="right:14%;top:30px;animation-delay:.7s">✨</span><span class="sp" style="left:26%;bottom:20px;animation-delay:1.3s">✨</span><div><div class="big gold"><span data-count="${d}" data-id="n2${d}">${d}</span><small>%</small></div><div class="lb">SAVED ON THIS ORDER</div></div></div><h2>You saved ${d}%. Share the saving with a friend.</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="later">Maybe later</button></div></div>`;
+  if(s==='reward')return `<div class="sheet">${X}<div class="art a3"><span class="cn" style="left:14%">🪙</span><span class="cn" style="left:34%;animation-delay:.9s">🪙</span><span class="cn" style="left:62%;animation-delay:.4s">🪙</span><span class="cn" style="left:82%;animation-delay:1.3s">🪙</span><div><div class="big gold"><small style="margin:0 4px 0 0">+AED</small><span data-count="${CFG.reward}" data-id="rw${progress()}">${CFG.reward}</span></div><div class="lb">REWARD CREDITED</div></div></div><h2>AED ${CFG.reward} credited to your Carrefour Wallet. Invite another friend.</h2><div class="pair"><div><small>YOU GET</small><b>AED ${CFG.reward}</b></div><span>+</span><div><small>YOUR FRIEND GETS</small><b>AED ${CFG.reward}</b></div></div><div class="row" style="gap:10px;margin-top:16px"><button class="btn cta" data-a="nreferX">Refer now</button><button class="btn ghost" data-a="close">Maybe later</button></div></div>`;
   if(s==='invite')return `<div class="sheet">${X}<h2>Invite your friends</h2><div class="bubble">${MSG}<br><span class="link">carrefour.digital/join/AISHA35</span></div><b>Send with</b>${sendRow('')}</div>`;
   if(s==='contact')return `<div class="sheet">${X}<h2>Invite ${d}</h2><div class="bubble">${MSG}</div><b>Send with</b>${sendRow(d)}</div>`;
   if(s==='confirm')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">${d}</h2><p class="mute" style="margin:6px 0 16px">Your friend will show as Invited in your list.</p><button class="btn" data-a="done">Done</button></div>`;
   if(s==='lvl'){const l=CFG.levels.find(x=>x.n===d);return `<div class="sheet">${X}<h2>Level ${l.n}</h2><p class="mute" style="margin:6px 0 12px">Refer ${l.target} friends to unlock. We'll reveal what it includes when you get there.</p><div class="pbar dark"><b style="width:${Math.min(100,progress()/l.target*100)}%"></b></div><div class="small">${progress()} of ${l.target} friends so far</div></div>`}
   if(s==='info')return `<div class="sheet">${X}<h2>How it works</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>Share your link with a friend.</li><li>They join and get AED ${CFG.reward} in their wallet.</li><li>After their first delivered order, you get AED ${CFG.reward} within ${CFG.holdWorkingDays} working days.</li></ol></div>`;
   if(s==='inelig')return `<div class="sheet center"><div style="font-size:38px">👋</div><h2 style="padding:0">You're already with us</h2><p class="mute" style="margin:8px 0 16px">This referral is for new Carrefour customers, so the AED ${CFG.reward} credit isn't available on your account. You still get the standard welcome offer: ${CFG.welcomePct}% off your first order.</p><button class="btn" data-a="close">Continue</button></div>`;
-  if(s==='terms')return `<div class="sheet">${X}<h2>Terms</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>You get AED ${CFG.reward} in your Carrefour Wallet when you join.</li><li>Use AED 10, 25 or 35 on one order, up to AED ${CFG.maxUse}; keep the rest for your next order.</li><li>${REDEEM}</li><li>AED ${CFG.minBasket} minimum basket each time you use it.</li><li>The referral offer replaces the welcome offer and can't be combined with other offers.</li><li>New customers only.</li><li>Rewards can be held or reversed if an order is cancelled, returned or looks unusual.</li></ol></div>`;
+  if(s==='terms')return `<div class="sheet">${X}<h2>Terms</h2><ol style="margin:8px 0 0 18px;line-height:1.7"><li>You get AED ${CFG.reward} in your Carrefour Wallet when you join.</li><li>Use AED 10 to ${CFG.maxUse} on one order with the slider; keep the rest for your next order.</li><li>${REDEEM}</li><li>AED ${CFG.minBasket} minimum basket each time you use it.</li><li>The referral offer replaces the welcome offer and can't be combined with other offers.</li><li>New customers only.</li><li>Rewards can be held or reversed if an order is cancelled, returned or looks unusual.</li></ol></div>`;
   if(s==='placed')return `<div class="sheet center"><div class="tick">${ic('check',30)}</div><h2 style="padding:0">Order placed</h2>${d.aisha?'':`<div class="card sum" style="text-align:left;margin-top:12px"><div class="l"><span>Credit used</span><b>${aedI(d.used)}</b></div><div class="l"><span>Credit left</span><b>${aedI(d.left)}</b></div></div>${d.left>=CFG.minUse?`<p class="mute" style="margin-bottom:12px">${REDEEM}</p>`:d.left>0?`<p class="mute" style="margin-bottom:12px">Credit under AED ${CFG.minUse} can't be redeemed.</p>`:''}`}<button class="btn" style="margin-top:12px" data-a="placedOk">Continue</button></div>`;
-  if(s==='story')return `<div class="sheet">${X}<h2>Story</h2><b>Aisha, referrer</b><ol style="margin:6px 0 12px 18px;line-height:1.6"><li>Nudge 1 on Home: order delivered on time.</li><li>Nudge 2: after an order with a saving of ${CFG.savingPct}% or more.</li><li>Refer &amp; Earn: levels, friends, invite, contacts.</li><li>Her reward is Pending, then AED ${CFG.reward} in her wallet.</li><li>Nudge 3: reward credited, invite another friend.</li></ol><b>Omar, invitee</b><ol style="margin:6px 0 12px 18px;line-height:1.6"><li>Link and landing.</li><li>Sign-up and phone verification.</li><li>AED ${CFG.reward} in his wallet.</li><li>Basket of AED ${CFG.minBasket} or more.</li><li>Credit choice: 10, 25 or 35.</li><li>Order placed: used and left.</li><li>Delivered: Reorder in one tap.</li><li>Second order follows the live balance.</li><li>Welcome to Carrefour.</li></ol>
+  if(s==='story')return `<div class="sheet">${X}<h2>Story</h2><b>Aisha, referrer</b><ol style="margin:6px 0 12px 18px;line-height:1.6"><li>Nudge 1 on Home: order delivered on time.</li><li>Nudge 2: after an order with a saving of ${CFG.savingPct}% or more.</li><li>Refer &amp; Earn: levels, friends, invite, contacts.</li><li>Her reward is Pending, then AED ${CFG.reward} in her wallet.</li><li>Nudge 3: reward credited, invite another friend.</li></ol><b>Omar, invitee</b><ol style="margin:6px 0 12px 18px;line-height:1.6"><li>Link and landing.</li><li>Sign-up and phone verification.</li><li>AED ${CFG.reward} in his wallet.</li><li>Basket of AED ${CFG.minBasket} or more.</li><li>Credit slider: 10 to 35.</li><li>Order placed: used and left.</li><li>Delivered: Reorder in one tap.</li><li>Second order follows the live balance.</li><li>Welcome to Carrefour after the first order; a thank-you after the second.</li></ol>
    <b>Demo controls</b><div class="opts"><button class="opt ${S.issue?'on':''}" data-a="tglIssue">Order had an issue: ${S.issue?'ON':'OFF'}</button><button class="opt ${S.o.existing?'on':''}" data-a="tglExisting">Omar is an existing customer: ${S.o.existing?'ON':'OFF'}</button></div>
    <b>Nudge log</b><div class="log" style="margin:4px 0 12px">${S.log.length?S.log.map(l=>`<span class="${l.ok?'yes':'no'}">${l.ok?'✓ shown':'✗ suppressed'}</span> · ${l.n}${l.ok?'':' ('+l.why+')'}`).join('<br>'):'Nothing fired yet.'}</div>
    <b>Event log</b><div class="log" style="margin-top:4px">${S.events.length?S.events.slice(0,14).map(e=>`${e.name}${e.props?' · '+e.props:''}`).join('<br>'):'No events yet.'}</div></div>`;
@@ -430,9 +495,12 @@ function sheetView(){const s=S.sheet,d=S.sd;if(!s)return '';
 /* ============ RENDER ============ */
 function render(){
   $('#top').innerHTML=topBar();const nb=navBar();$('#nav').innerHTML=nb;$('#nav').style.display=nb?'flex':'none';
-  const m=$('#main'),st=m.scrollTop,key=S.who+S.tab+S.sub+(S.o.stage);
-  m.innerHTML=screen();if(render.k!==key){m.scrollTop=0;render.k=key}else m.scrollTop=st;
-  const ov=$('#overlay'),sv=sheetView();ov.style.display=sv?'flex':'none';ov.innerHTML=sv}
+  const m=$('#main'),st=m.scrollTop,key=S.who+S.tab+S.sub+(S.o.stage),newKey=render.k!==key;
+  m.innerHTML=screen();if(newKey){m.scrollTop=0;render.k=key;m.classList.remove('enter');void m.offsetWidth;m.classList.add('enter')}else m.scrollTop=st;
+  const ov=$('#overlay'),sv=sheetView(),sk=S.sheet?S.sheet+(S.sd||''):'',fresh=!!sk&&render.sk!==sk;render.sk=sk;
+  ov.style.display=sv?'flex':'none';ov.innerHTML=sv;ov.classList.toggle('fresh',fresh);
+  if(fresh&&S.sheet==='reward')burst(64);if(fresh&&S.sheet==='confirm')burst(34);if(newKey&&S.sub==='welcome')burst(54);
+  countUps()}
 
 /* ============ ACTIONS ============ */
 function placeOmar(){const o=S.o,sub=subtotal(),used=o.sel||0,first=o.orders.length===0,id=1000+o.orders.length+1;
@@ -465,8 +533,8 @@ function act(a,d){const A=S.a,O=S.o;
   case 'cinvite':S.sheet='contact';S.sd=d.v;break;
   case 'send':if(d.w)A.cst[d.w]='invited';S.omarInv=d.w==='Omar R.';if(S.omarInv)setFriend('Omar R.','invited');S.sheet='confirm';S.sd=d.v==='Copy link'?'Link copied':'Invite sent';track('invite_sent',d.v);break;
   case 'done':S.omarInv=false;S.sheet=null;S.sd=null;S.tab='home';S.sub=null;break;
-  case 'areveal':A.revealed=true;break;
-  case 'oreveal':O.revealed=true;break;
+  case 'areveal':A.revealed=true;setTimeout(()=>burst(46),40);break;
+  case 'oreveal':O.revealed=true;setTimeout(()=>burst(46),40);break;
   case 'terms':S.sheet='terms';break;
   case 'join':O.stage='signup';break;
   case 'otp':O.stage='otp';break;
@@ -478,7 +546,8 @@ function act(a,d){const A=S.a,O=S.o;
   case 'dec':{const c=cur().cart;c[d.v]=(c[d.v]||0)-1;if(c[d.v]<=0)delete c[d.v];break}
   case 'sel':O.sel=+d.v;break;
   case 'checkout':if(S.who==='aisha')placeAisha();else placeOmar();break;
-  case 'placedOk':S.sheet=null;S.sd=null;if(S.who==='omar'&&O.orders.length>=2)S.sub='welcome';else S.tab='home';maybePrompt();break;
+  case 'placedOk':S.sheet=null;S.sd=null;if(S.who==='omar')S.sub='welcome';else S.tab='home';maybePrompt();break;
+  case 'wdone':S.sub=null;S.tab='home';break;
   case 'deliver':{O.orders[O.orders.length-1].status='delivered';track('first_order_delivered','');const e=A.ledger.find(x=>x.id==='L2');if(e&&e.st==='pending'){e.st='ok';e.note="Friend's first order delivered";setFriend('Omar R.','paid');A.rewardPrompt=true;track('reward_credited','AED '+CFG.reward+' (hold cleared, demo)')}break}
   case 'adeliver':{const l=A.orders[A.orders.length-1];l.status='delivered';
     maybePrompt();break}
@@ -489,6 +558,10 @@ function act(a,d){const A=S.a,O=S.o;
 function credSteps(){const b=bal(S.o.ledger),m=Math.min(b,CFG.maxUse);if(subtotal()<CFG.minBasket||m<CFG.minUse)return[];const s=CFG.options.filter(v=>v<=m);if(!s.includes(m))s.push(m);return s.sort((a,c)=>a-c)}
 document.addEventListener('input',e=>{if(e.target.id!=='crd')return;const ops=credSteps(),i=+e.target.value;S.o.sel=ops[i];const v=$('#slv');if(v)v.textContent='AED '+S.o.sel;e.target.style.setProperty('--p',(ops.length>1?i/(ops.length-1)*100:100)+'%');document.querySelectorAll('.slide .tk span').forEach((x,j)=>x.classList.toggle('on',j===i))});
 document.addEventListener('change',e=>{if(e.target.id==='crd')render()});
+
+function burst(n){const h=$('#phone');if(!h||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const c=document.createElement('div');c.className='cf';const cols=['#f0c354','#ffffff','#e8458a','#6fd1ff','#7bd88f','#a78bfa'];let s='';for(let i=0;i<(n||46);i++){const a=Math.random()*Math.PI*2,d=90+Math.random()*200;s+=`<i style="--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d-90}px;--r:${Math.random()*720-360}deg;--c:${cols[i%6]};--w:${5+Math.random()*7}px;--t:${1.2+Math.random()*.9}s;--dl:${Math.random()*.18}s"></i>`}c.innerHTML=s;h.appendChild(c);setTimeout(()=>c.remove(),2600)}
+function countUps(){document.querySelectorAll('[data-count]').forEach(el=>{const id=el.dataset.id;if(id){if(S.anim[id])return;S.anim[id]=1}const to=+el.dataset.count,t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/1000),e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e);if(k<1)requestAnimationFrame(f)};el.textContent=0;requestAnimationFrame(f)})}
+setInterval(()=>{const b=document.querySelector('.lp .ban');if(!b||!b.firstElementChild)return;const w=b.firstElementChild.offsetWidth+12;b.scrollTo({left:(b.scrollLeft+w>b.scrollWidth-b.clientWidth+4)?0:b.scrollLeft+w,behavior:'smooth'})},3200);
 document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;e.preventDefault();act(el.dataset.a,el.dataset)});
 act('reset',{});
 </script>
