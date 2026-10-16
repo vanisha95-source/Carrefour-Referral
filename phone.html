@@ -586,6 +586,29 @@ input,.search{transition:box-shadow .2s,border-color .2s}.search:focus-within{bo
 .totop{position:absolute;right:14px;bottom:128px;z-index:12;width:42px;height:42px;border:0;border-radius:50%;font-size:20px;cursor:pointer;background:#fff;box-shadow:0 10px 24px rgba(15,27,51,.25);opacity:0;transform:translateY(16px) scale(.8);pointer-events:none;transition:all .3s}
 .totop.show{opacity:1;transform:none;pointer-events:auto;animation:mfloat 2.4s ease-in-out infinite}
 @media(prefers-reduced-motion:reduce){.hx .hxm{transform:none}.fav.on,.totop.show{animation:none}}
+
+/* ===== v23 final up: scooter fix, animated banners ===== */
+.rap em{transform:none!important}
+.fpb{height:150px;background:linear-gradient(135deg,#0f9d58,#0a5a8f 60%,#143a78)}
+.fpb::before{content:"";position:absolute;right:-30px;top:-30px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,224,120,.85),rgba(255,224,120,0) 68%);z-index:1;animation:glow 3s ease-in-out infinite}
+.fpb .fl{position:absolute;z-index:2;font-size:30px;filter:drop-shadow(0 5px 6px rgba(0,0,0,.35));animation:fdrift 6s ease-in-out infinite}
+.fpb .fl:nth-of-type(1){left:6%;top:12%}.fpb .fl:nth-of-type(2){left:30%;top:6%;animation-delay:-1.5s}.fpb .fl:nth-of-type(3){left:58%;top:16%;animation-delay:-3s}.fpb .fl:nth-of-type(4){left:80%;top:42%;animation-delay:-4.5s}
+@keyframes fdrift{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-14px) rotate(9deg)}}
+.fpb b{font-size:21px;line-height:1.15;z-index:3;max-width:70%}.fpb span{z-index:3;animation:tgp 2.4s ease-in-out infinite}
+.fpb img{animation:kb 16s ease-in-out infinite alternate}@keyframes kb{to{transform:scale(1.12) translate(-2%,-2%)}}
+.cbn img{animation:kb 16s ease-in-out infinite alternate}
+.dbn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}
+.dbn div{position:relative;overflow:hidden;border-radius:18px;height:112px;padding:12px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 12px 24px rgba(15,27,51,.18);transition:transform .25s}
+.dbn div:hover{transform:translateY(-3px) scale(1.02)}
+.dbn .a{background:linear-gradient(135deg,#e8913a,#c4125c)}.dbn .b{background:linear-gradient(135deg,#7a3fe0,#143a78)}
+.dbn img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;transition:transform .8s}.dbn div:hover img{transform:scale(1.1)}
+.dbn div::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.6))}
+.dbn em{position:absolute;right:10px;top:6px;font-style:normal;font-size:34px;z-index:2;animation:mfloat 3s ease-in-out infinite}
+.dbn b,.dbn small{position:relative;z-index:2}.dbn b{font-family:Georgia,serif;font-size:16px;line-height:1.15;text-shadow:0 2px 8px rgba(0,0,0,.4)}.dbn small{font-size:11px;font-weight:800;margin-top:4px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);padding:3px 9px;border-radius:99px;align-self:flex-start;animation:tgp 2.6s ease-in-out infinite}
+.bnr::before,.bnr::after{content:"\2726";position:absolute;color:#fff;z-index:6;pointer-events:none;text-shadow:0 0 10px rgba(255,255,255,.9);animation:sparkle 2.4s ease-in-out infinite}
+.bnr::before{right:34%;top:12px;font-size:16px}.bnr::after{right:10%;bottom:36px;font-size:12px;animation-delay:.9s}
+.dl,.ct{animation-name:up}.dl:nth-child(odd) em b{animation:mfloat 3.4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.fpb .fl,.fpb img,.cbn img,.dbn em,.dbn small,.fpb::before,.fpb span,.bnr::before,.bnr::after{animation:none!important}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></head>
 <body><div id="splash" aria-hidden="true"><b>Carrefour</b><i></i><small>REFER &amp; EARN</small></div>
@@ -717,7 +740,7 @@ function homeHeader(){const modes=[['Scheduled','🚐','','',1],['NOW','🛵','6
  ${S.who==='aisha'?`<div class="banner s3 ${S.bn===2?'on':''}" data-a="refer"><em class="svg">${ILL.gift}</em>${PH("friends,celebration",33,600,300,"bimg")}<b>Invite a friend.<br>You both get AED ${CFG.reward}.</b><span>Tap to open Refer &amp; Earn</span></div>`:`<div class="banner s3 ${S.bn===2?'on':''}"><em class="svg">${ILL.basket}</em>${PH("grocery,basket",34,600,300,"bimg")}<b>Reorder your<br>favourites in one tap.</b><span>After your first order</span></div>`}
  <div class="dots"><u class="${(S.bn||0)===0?'on':''}"></u><u class="${S.bn===1?'on':''}"></u><u class="${S.bn===2?'on':''}"></u></div></div>`+homeExtras()}
 const ORG={1:'🇮🇳 India',2:'🇦🇪 United Arab Emirates',3:'🇦🇪 United Arab Emirates',4:'🇪🇸 Spain',5:'🇧🇷 Brazil',6:'🇦🇪 United Arab Emirates',7:'🇵🇭 Philippines',8:'🇦🇪 United Arab Emirates'};
-function productList(){const c=cur().cart;return `<div class="sect"><div class="fpb">${PH("farm,vegetables",65,1000,400)}<b>Farm-fresh, picked this morning</b><span>Today</span></div><div class="sh2"><b>Fresh picks for you</b><span>Handpicked</span></div><div class="card plist">${PRODUCTS.map(p=>`<div class="prod pc">${p.w>p.p?`<i class="tg">-${Math.round((p.w-p.p)/p.w*100)}%</i>`:(p.id===2||p.id===7?'<i class="tg f">Fresh</i>':'')}<button class="fav${FAVS.has(p.id)?' on':''}" data-fav="${p.id}" aria-label="Favourite">♥</button><span class="pe"><b>${EMO[p.id]}</b>${PH(PK[p.id],p.id,320,240)}</span><div class="pn"><div class="org">${ORG[p.id]}</div>${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty">${c[p.id]?`<button data-a="dec" data-v="${p.id}" aria-label="Remove one">\u2212</button><b>${c[p.id]}</b>`:''}<button data-a="inc" data-v="${p.id}" aria-label="Add one">+</button></div></div>`).join('')}</div></div>`}
+function productList(){const c=cur().cart;return `<div class="sect"><div class="mq" style="margin:0 calc(-1*var(--gx)) 12px"><div class="mqi">${"FRESH EVERY DAY ✦ RAPID IN 24 MINS ✦ REFER & EARN AED "+CFG.reward+" ✦ ".repeat(6)}</div></div><div class="dbn"><div class="a">${PH("bakery,bread",70,600,400)}<em>🥐</em><b>Fresh from the bakery</b><small>Shop now</small></div><div class="b">${PH("fruit,basket",71,600,400)}<em>🍇</em><b>Fruit fiesta</b><small>Shop now</small></div></div><div class="fpb">${PH("farm,vegetables",65,1000,400)}<i class="fl">🥬</i><i class="fl">🍅</i><i class="fl">🥕</i><i class="fl">🍎</i><b>Farm-fresh, picked this morning</b><span>Today</span></div><div class="sh2"><b>Fresh picks for you</b><span>Handpicked</span></div><div class="card plist">${PRODUCTS.map(p=>`<div class="prod pc">${p.w>p.p?`<i class="tg">-${Math.round((p.w-p.p)/p.w*100)}%</i>`:(p.id===2||p.id===7?'<i class="tg f">Fresh</i>':'')}<button class="fav${FAVS.has(p.id)?' on':''}" data-fav="${p.id}" aria-label="Favourite">♥</button><span class="pe"><b>${EMO[p.id]}</b>${PH(PK[p.id],p.id,320,240)}</span><div class="pn"><div class="org">${ORG[p.id]}</div>${p.n}<div class="mute">${aed(p.p)}${p.w>p.p?`<s>${aed(p.w)}</s>`:''}</div></div><div class="qty">${c[p.id]?`<button data-a="dec" data-v="${p.id}" aria-label="Remove one">\u2212</button><b>${c[p.id]}</b>`:''}<button data-a="inc" data-v="${p.id}" aria-label="Add one">+</button></div></div>`).join('')}</div></div>`}
 function homeTail(){const n=cartCount();return `<div class="perks"><h3>Why shoppers love Carrefour</h3><div class="pg"><div class="pk"><em>🚚</em><b>Fast delivery</b>Rapid in 24 mins</div><div class="pk"><em>🥬</em><b>Farm fresh</b>Picked daily</div><div class="pk"><em>🔒</em><b>Secure pay</b>Wallet and cards</div><div class="pk"><em>🎁</em><b>Refer and earn</b>AED ${CFG.reward} each</div></div></div><div class="ftr"><b>Carrefour</b> · Fresh, every day</div><div class="pb"><em class="gem" style="font-style:normal">💳</em><span><b>20% off</b> up to AED 100 with covered cards</span></div>${n?`<div class="mc" data-a="tab" data-v="cart"><i class="n">${n}</i><span>View cart</span><b>${aed(subtotal())}</b><i>›</i>${S.who==='omar'&&bal(S.o.ledger)>0&&subtotal()<CFG.minBasket?`<div class="pg"><u style="width:${Math.min(100,subtotal()/CFG.minBasket*100)}%"></u></div>`:''}</div>`:''}`}
 const CK=['vegetables','fruits','dairy,milk','meat','rice,pantry','juice','cleaning,supplies','baby,toys'];
 function homeExtras(){const cats=[['🥬','Fresh Food','#e5f6ea'],['🍎','Fruits & Veg','#ffeaea'],['🥛','Dairy & Eggs','#e8f0fb'],['🍗','Meat & Fish','#fff1e6'],['🍚','Pantry','#fff8dd'],['🥤','Beverages','#e6f6fa'],['🧴','Household','#efe9ff'],['👶','Baby','#ffe9f3']];
@@ -951,6 +974,9 @@ if(main&&ph){const bar=document.createElement('div');bar.className='spr';ph.appe
  up.onclick=()=>main.scrollTo({top:0,behavior:'smooth'})}
 if(matchMedia('(hover:hover)').matches&&!red){let last=0;document.addEventListener('pointermove',e=>{const n=Date.now();if(n-last<70)return;last=n;const s=document.createElement('i');s.className='trail';s.style.cssText='left:'+e.clientX+'px;top:'+e.clientY+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),700)})}
 })();
+
+(function(){let hold=0;const d=()=>document.querySelector('.dls');document.addEventListener('pointerdown',e=>{if(e.target.closest&&e.target.closest('.dls'))hold=Date.now()+6000});
+setInterval(()=>{const x=d();if(!x||!x.firstElementChild||Date.now()<hold||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const w=x.firstElementChild.offsetWidth+12;x.scrollTo({left:(x.scrollLeft+w>x.scrollWidth-x.clientWidth+4)?0:x.scrollLeft+w,behavior:'smooth'})},3000)})();
 </script>
 </body>
 </html>
