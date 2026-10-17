@@ -875,6 +875,7 @@ img:not(.ld){background:linear-gradient(100deg,#eef1f6 30%,#f8fafd 50%,#eef1f6 7
 #main.skl>*>*,#main.skl>*>* *{visibility:hidden}
 #main.skl>*>*{visibility:visible}
 @media(prefers-reduced-motion:reduce){.lvls .lvl::before,.coins i,.wcpulse{animation:none!important}}
+.pf .pic.ai{color:#7b3fe4!important;background:linear-gradient(135deg,#f3eaff,#e6d7ff)!important}.pf .pic.ai svg{stroke:#7b3fe4;fill:#7b3fe4}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></head>
 <body><div id="splash" aria-hidden="true"><b>Carrefour</b><i></i><small>REFER &amp; EARN</small></div>
@@ -913,6 +914,7 @@ const CONTACT0={'Fatima A.':'invited','Leena C.':'carrefour','Zainab F.':'carref
 const IC={
  gift:'<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M12 8c-2-4-6-3-5 0 .5 1.500 5 0 5 0zM12 8c2-4 6-3 5 0-.5 1.500-5 0-5 0z"/>',
  bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/>',
+ spark:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
  help:'<circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 1 1 3.500 2.300c-.7.400-1 .9-1 1.700M12 17h.01"/>',
  home:'<path d="M3 10.5 12 3l9 7.5V21H3z"/><path d="M9 21v-6h6v6"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
@@ -1068,7 +1070,7 @@ window.NRS=window.NRS||{};const nsig=()=>notifItems().filter(x=>x.n).map(x=>x.t)
 function notifCount(){return notifItems().filter(x=>x.n).length}
 function notifView(){const L=notifItems().filter(x=>!(S.nd||[]).includes(x.t));return `${appBar('Notifications')}<div class="page nf">${L.length?'<div class="hint">Swipe a card sideways to dismiss</div>':'<div class="empty"><b>🔔</b>You are all caught up</div>'}${L.map((x,i)=>`<div class="it ${x.c} ${x.n&&!nUnread()?'new':''}" data-nt="${String(x.t).replace(/"/g,'&quot;')}" style="animation-delay:${i*.06}s"><span class="ico">${x.e}</span><div><b>${x.t}</b><p>${x.p}</p></div><time>${x.tm}</time></div>`).join('')}</div>`}
 function profileView(){const A=S.who==='aisha',L=A?S.a.ledger:S.o.ledger,nm=A?'Aisha':'Omar';
- const row=(icn,t,sub,act,right)=>`<div class="fl" ${act?`data-a="${act}" style="cursor:pointer"`:''}><div style="display:flex;gap:12px;align-items:center;min-width:0"><span class="pic">${ic(icn)}</span><div style="min-width:0"><b>${t}</b>${sub?`<div class="mute" style="font-size:12.5px">${sub}</div>`:''}</div></div>${right||''}</div>`;
+ const row=(icn,t,sub,act,right)=>`<div class="fl" ${act?`data-a="${act}" style="cursor:pointer"`:''}><div style="display:flex;gap:12px;align-items:center;min-width:0"><span class="pic${icn==='spark'?' ai':''}">${ic(icn)}</span><div style="min-width:0"><b>${t}</b>${sub?`<div class="mute" style="font-size:12.5px">${sub}</div>`:''}</div></div>${right||''}</div>`;
  const chev=ic('back').replace('<svg','<svg style="transform:rotate(180deg)"');
  const nl=nextLevel(),lock=S.who==='omar'&&!S.o.orders.some(x=>x.status==='delivered');
  return `<div class="page pf"><div class="ph"><div class="pt"><h1>Profile</h1><span class="en">🇦🇪 EN</span><button class="bell" data-a="notif" aria-label="Notifications">${ic('bell',22)}${nUnread()||!notifCount()?'':`<b>${notifCount()}</b>`}</button></div>
@@ -1081,7 +1083,7 @@ function profileView(){const A=S.who==='aisha',L=A?S.a.ledger:S.o.ledger,nm=A?'A
  <div class="card" style="padding:4px 14px">
   ${row('wallet','Wallet &amp; Saved Cards',A&&wExp()!=null?aedI(wExpAmt())+' expires '+wIn(wExp()):'Balance and history','wallet',`<span class="chip">${aed(bal(L))}</span>`)}
   ${row('gift','Refer &amp; Earn',lock?'Unlocks after your first delivery':'Give AED '+CFG.reward+', get AED '+CFG.reward,'refer',lock?'<span class="chip">🔒</span>':'<span class="chip blue">Level '+curLevel().n+'</span>')}
-  ${row('bell','Notifications','Offers, delivery updates','',chev)}
+  ${row('spark','Tala AI','Your shopping assistant','',chev)}
   ${row('globe','Language','English','',chev)}
   ${row('help','Customer Service','Chat, call, help centre','',chev)}
   ${row('lock','Reset Password','','',chev)}
